@@ -1,0 +1,8 @@
+https://www.youtube.com/watch?v=LiMT6vFtcmU 
+
+https://devnotez.com/laravel-admin-user-login-multi-auth-in-laravel-10/
+
+
+Admin login url: /admin/login
+Admin email: admin@gmail.com
+Admin password: shuvo123
