@@ -10,14 +10,23 @@
                     </div>
                     <div class="col-md-6 col-12">
                         <ul class="d-flex account_login-area">
+                            @auth
                             <li>
                                 <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown_style">
-                                    <li><a href="login.html">Dashboard</a></li>
-                                    <li><a href="register.html">Log Out</a></li>
+                                    <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                            this.closest('form').submit();">Logout</a>
+                                        </form>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="register.html"> Login/Register </a></li>
+                            @else
+                            <li><a href="{{url('/login')}}"> Login/Register </a></li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
