@@ -45,18 +45,25 @@
                                     <p class="text-muted">Sign in to continue to {{config('app.name')}}.</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="https://themesbrand.com/velzon/html/material/index.html">
+                                    <form method="POST" action="{{route('admin.login')}}">
+                                        @csrf
 
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Enter email">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                                            @error('email')
+                                            <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password-input">
+                                                <input type="password" name="password" id="password" class="form-control pe-5 password-input" placeholder="Enter password">
                                                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                @error('password')
+                                                <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                                @enderror
                                             </div>
                                         </div>
 
