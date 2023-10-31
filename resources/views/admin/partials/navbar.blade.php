@@ -700,7 +700,7 @@
 
                         <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
-                        <a class="dropdown-item" href="{{route('admin.logout')}}" onclick="event.preventDefault();
+                        <a class="dropdown-item" id="logout" href="{{route('admin.logout')}}" onclick="event.preventDefault();
                         this.closest('form').submit();"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Log Out</span></a>
                         </form>
                     </div>
