@@ -40,9 +40,13 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
-
+        
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        $notification=array('messege' => 'You are logged out!', 'alert-type' => 'info');
+
+        // return redirect('/')->with($notification);
+
+        return redirect()->route('admin.login')->with($notification);
     }
 }

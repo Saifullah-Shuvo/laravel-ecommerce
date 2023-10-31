@@ -35,6 +35,13 @@
     <link href="{{asset('admins')}}/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 
     @stack('style')
+    {{-- Alert Css --}}
+    <link href="{{asset('admins')}}/assets/css/sweetalert.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admins')}}/assets/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+
+
 
 </head>
 
@@ -67,6 +74,76 @@
 
     <!-- App js -->
     <script src="{{asset('admins')}}/assets/js/app.js"></script>
+
+    {{-- Alert js --}}
+    <script src="{{asset('admins')}}/assets/js/toastr.min.js"></script>
+    <script src="{{asset('admins')}}/assets/js/sweetalert.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+
+    <script>  
+        $(document).on("click", "#delete", function(e){
+            e.preventDefault();
+            var link = $(this).attr("href");
+               swal({
+                 title: "Are you Want to delete?",
+                 text: "Once Delete, This will be Permanently Delete!",
+                 icon: "warning",
+                 buttons: true,
+                 dangerMode: true,
+               })
+               .then((willDelete) => {
+                 if (willDelete) {
+                      window.location.href = link;
+                 } else {
+                   swal("Safe Data!");
+                 }
+               });
+           });
+   </script>
+  {{-- before  logout showing alert message --}}
+    <script>  
+        $(document).on("click", "#logout", function(e){
+            e.preventDefault();
+            var link = $(this).attr("href");
+               swal({
+                 title: "Are you Want to logout?",
+                 text: "",
+                 icon: "warning",
+                 buttons: true,
+                 dangerMode: true,
+               })
+               .then((willDelete) => {
+                 if (willDelete) {
+                      window.location.href = link;
+                 } else {
+                   swal("Not Logout!");
+                 }
+               });
+           });
+   </script>
+
+
+   <script>
+       @if(Session::has('messege'))
+         var type="{{Session::get('alert-type','info')}}"
+         switch(type){
+             case 'info':
+                  toastr.info("{{ Session::get('messege') }}");
+                  break;
+             case 'success':
+                 toastr.success("{{ Session::get('messege') }}");
+                 break;
+             case 'warning':
+                toastr.warning("{{ Session::get('messege') }}");
+                 break;
+             case 'error':
+                 toastr.error("{{ Session::get('messege') }}");
+                 break;
+               }
+       @endif
+     </script>
 
     @stack('script')
 

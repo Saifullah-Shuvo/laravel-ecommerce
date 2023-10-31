@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.home');
 });
-Route::get('/test', function () {
-    return view('admin.dashboard');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
