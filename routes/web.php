@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,11 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
-
 require __DIR__.'/adminauth.php';
+
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
+    // Route::patch('/profile', [CategoryController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [CategoryController::class, 'destroy'])->name('profile.destroy');
+});
+
