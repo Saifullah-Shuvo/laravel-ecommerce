@@ -31,6 +31,8 @@ require __DIR__.'/adminauth.php';
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
+    Route::get('/category/store', [CategoryController::class, 'store'])->name('category.store');
+
     // Route::patch('/profile', [CategoryController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [CategoryController::class, 'destroy'])->name('profile.destroy');
 });
