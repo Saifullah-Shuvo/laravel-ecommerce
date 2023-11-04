@@ -8,12 +8,16 @@ use App\Models\Admin\Category;
 
 class CategoryController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $categories = Category::orderBy('id', 'DESC')->get();
-        return view('admin.categories.index',compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
-    public function store(Request $request){
+    //Category Store Method
+
+    public function store(Request $request)
+    {
         $request->validate([
             'category_name' => 'required|min:5',
             'category_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -21,9 +25,9 @@ class CategoryController extends Controller
         $categories = new Category();
         $categories->category_name = $request->category_name;
 
-        // image store in public folder
+                // image store in public folder
         $image = $request->category_image;
-        if($image){
+        if ($image) {
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $request->category_image->move('admins/categoryimage', $imageName);
             $categories->category_image = $imageName;
@@ -33,9 +37,12 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function destroy($id){
+    // Category Destroy method
+
+    public function destroy($id)
+    {
         $categories = Category::findOrFail($id);
-        //delete image
+                //delete image
         $image_path = public_path('admins/categoryimage/' . $categories->category_image);
         if (file_exists($image_path)) {
             unlink($image_path);
@@ -45,27 +52,26 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function edit($id){
+    // Category Edit method
+
+    public function edit($id)
+    {
         $data = Category::findorFail($id);
+        $data->image_path =asset('admins/categoryimage/' . $data->category_image);
+
         return response()->json($data);
     }
 
+    // Category Update method
+    
     public function update(Request $request){
         $request->validate([
             'category_name' => 'required|min:5',
-            'category_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $category = Category::findOrFail($id);
+        $category = Category::where('id',$request->id)->first();
         $category->category_name = $request->category_name;
-
-        // image store in public folder
-        $image = $request->category_image;
-        if($image){
-            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $request->category_image->move('admins/categoryimage', $imageName);
-            $categories->category_image = $imageName;
-        }
 
         //image store in public folder
         $image = $request->category_image;
@@ -76,9 +82,10 @@ class CategoryController extends Controller
             }
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $request->category_image->move('admins/categoryimage', $imageName);
+            $category->category_image = $imageName;
         }
         //end
-        $category->image = $imageName;
+
         $category->save();
 
         $notification = array('message' => "Category Updated!", 'alert-type' => 'success');
@@ -86,13 +93,15 @@ class CategoryController extends Controller
     }
 
     // Category status
-    public function status_enable($id){
+    public function status_enable($id)
+    {
         $data = Category::find($id);
         $data->status = 1;
         $data->save();
         return redirect()->back();
     }
-    public function status_disable($id){
+    public function status_disable($id)
+    {
         $data = Category::find($id);
         $data->status = 0;
         $data->save();
@@ -100,13 +109,15 @@ class CategoryController extends Controller
     }
 
     //Category feature
-    public function feature_enable($id){
+    public function feature_enable($id)
+    {
         $data = Category::find($id);
         $data->is_featured = 1;
         $data->save();
         return redirect()->back();
     }
-    public function feature_disable($id){
+    public function feature_disable($id)
+    {
         $data = Category::find($id);
         $data->is_featured = 0;
         $data->save();

@@ -25,19 +25,6 @@
 
     <div class="container">
 
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        @if (session()->has('danger'))
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                {{ session()->get('danger') }}
-            </div>
-        @endif
-
         <div class="table-responsive table-card">
             <table class="table table-nowrap table-striped-columns mb-0">
                 <thead class="table-light">
@@ -83,7 +70,7 @@
                                     </button>
                                     <div class="dropdown-menu">
 
-                                        <a href="" class="dropdown-item text-info edit" data-id = "{{ $category->id }}"
+                                        <a class="dropdown-item text-info edit" data-id = "{{ $category->id }}"
                                         data-bs-toggle="modal" data-bs-target="#category_edit" href="">
                                                 <i class="ri-pencil-fill"></i> Edit</a>
 
@@ -159,7 +146,7 @@
                             <div class="col-lg-12">
                                 <div class="hstack gap-2 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Create</button>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
@@ -178,7 +165,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('category.update')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
                             <div class="col-xxl-12">
@@ -201,10 +188,13 @@
                                 <div class="error"><span class="text-danger">{{ $message }}</span></div>
                                 @enderror
                             </div><!--end col-->
+
+                            <img id="preview"/>
+
                             <div class="col-lg-12">
                                 <div class="hstack gap-2 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
@@ -221,7 +211,9 @@
         $(document).ready(function() {
             $('body').on('click', '.edit', function() {
                 let cat_id = $(this).data('id');
-                $.get("category/edit/" + cat_id, function(data) {
+                let url="{{route('category.edit',':id')}}"
+                $.get(url.replace(':id',cat_id), function(data) {
+                    $("#preview").attr('src',data.image_path)
                     $('#e_category_name').val(data.category_name);
                     $('#e_category_id').val(data.id);
                 })
