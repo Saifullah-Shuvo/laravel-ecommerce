@@ -24,7 +24,6 @@
     </div>
 
     <div class="container">
-
         @if (session()->has('success'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -37,7 +36,7 @@
                 {{ session()->get('danger') }}
             </div>
         @endif
-
+        
         <div class="table-responsive table-card">
             <table class="table table-nowrap table-striped-columns mb-0">
                 <thead class="table-light">
@@ -54,13 +53,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($categories as $key => $category)
+                    @forelse (@$categories as $key => $category)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $category->category_name }}</td>
                             <td><img src="{{ asset('admins/categoryimage/' . $category->category_image) }}" alt=""
                                     class="rounded avatar-xs shadow"></td>
-                            <td>{{ $category->created_at->format('Y-m-d h:i:s') }}</td>
+                            <td>{{ @$category->created_at->format('Y-m-d h:i:s') }}</td>
                             <td>
                                 @if ($category->status == 1)
                                     <span class="badge rounded-pill bg-success-subtle text-success">ENABLED</span>
@@ -83,9 +82,13 @@
                                     </button>
                                     <div class="dropdown-menu">
 
-                                        <a href="" class="dropdown-item text-info edit" data-id = "{{ $category->id }}"
-                                        data-bs-toggle="modal" data-bs-target="#category_edit" href="">
-                                                <i class="ri-pencil-fill"></i> Edit</a>
+                                        @php
+                                            $categoryImage = asset('admins/categoryimage/' . $category->category_image);
+                                        @endphp
+
+                                        <button class="dropdown-item text-info editBtn" data-category="{{ $category }}" data-image="{{$categoryImage}}" data-action="{{route('category.edit', $category->id)}}">
+                                            <i class="ri-pencil-fill"></i> Edit
+                                        </button>
 
                                         @if ($category->status == 1)
                                             <a class="dropdown-item text-danger"
@@ -107,9 +110,9 @@
                                                     class="bx bx-task"></i> Feature</a>
                                         @endif
 
-                                        <a class="dropdown-item text-danger" id="delete"
+                                        <a class="dropdown-item text-danger"
                                             href="{{ route('category.delete', ['id' => $category->id]) }}"
-                                            onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
+                                            onclick="return myFunction();"><i class="ri-close-circle-fill"></i> Delete</a>
                                     </div>
                                 </div>
                             </td>
@@ -156,6 +159,12 @@
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
                                 @enderror
                             </div><!--end col-->
+                            {{-- <div class="col-xxl-12">
+                            <div>
+                                <!-- Responsive Images -->
+                                <img src="{{asset('admins/categoryimage/'.$category->category_image)}}" class="img-fluid" alt="category image">
+                            </div>
+                        </div><!--end col--> --}}
                             <div class="col-lg-12">
                                 <div class="hstack gap-2 justify-content-end">
                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -170,11 +179,11 @@
     </div>
 
     {{-- Category Edit Modal  --}}
-    <div class="modal fade edit" id="category_edit">
+    <div class="modal fade" id="category_edit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalgridLabel">Edit Category</h5>
+                    <h5 class="modal-title text-center" id="title">Edit Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -184,7 +193,8 @@
                             <div class="col-xxl-12">
                                 <div>
                                     <label for="category_name" class="form-label">Category Name</label>
-                                    <input type="text" name="category_name" class="form-control" id="e_category_name">
+                                    <input type="text" name="category_name" class="form-control"
+                                        id="e_category_name">
                                     <input type="hidden" name="id" class="form-control" id="e_category_id">
                                 </div>
                                 @error('category_name')
@@ -198,8 +208,14 @@
                                     <input type="file" id="category_image" name="category_image">
                                 </div>
                                 @error('category_image')
-                                <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                    <div class="error"><span class="text-danger">{{ $message }}</span></div>
                                 @enderror
+                            </div><!--end col-->
+                            <div class="col-xxl-12">
+                                <div>
+                                    <!-- Responsive Images -->
+                                    <img src="" class="img-fluid modalImage" alt="category image">
+                                </div>
                             </div><!--end col-->
                             <div class="col-lg-12">
                                 <div class="hstack gap-2 justify-content-end">
@@ -216,33 +232,12 @@
 @endsection
 
 @push('script')
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('body').on('click', '.edit', function() {
-                let cat_id = $(this).data('id');
-                $.get("category/edit/" + cat_id, function(data) {
-                    $('#e_category_name').val(data.category_name);
-                    $('#e_category_id').val(data.id);
-                })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX request failed: " + textStatus, errorThrown);
-                    // Handle the error, e.g., display an error message.
-                });
-            });
-        });
-    </script>
-
-
     <script>
         function myFunction() {
-            // onclick="return myFunction();"
-            if (!confirm("Are You Sure to delete this?"))
+            if (!confirm("Are You Sure to delete this"))
                 event.preventDefault();
         }
-    </script>
 
-    {{-- <script>
         $(document).ready(function() {
             "use strict";
 
@@ -256,16 +251,17 @@
                 modal.modal('show');
             });
 
-            $('.addBtn').on('click', function() {
-                let data = $(this).data();
-                let modal = $('#category_edit');
+            // $('.addBtn').on('click', function() {
+            //     let data = $(this).data();
+            //     let modal = $('#category_edit');
 
-                modal.find('input[name="category_name"]').val('');
-                modal.find('.modalImage').attr('scr', '');
-                modal.find('form').attr('action', data.action);
-                modal.modal('show');
-            });
+            //     modal.find('input[name="category_name"]').val('');
+            //     modal.find('.modalImage').attr('scr', '');
+            //     modal.find('form').attr('action', data.action);
+            //     modal.modal('show');
+            // });
+
+
         });
-    </script> --}}
-
+    </script>
 @endpush

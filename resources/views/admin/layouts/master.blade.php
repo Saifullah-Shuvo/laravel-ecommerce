@@ -51,6 +51,9 @@
     @stack('script-lib')
 
     <!-- JAVASCRIPT -->
+    {{--JQuery/Ajax cdn--}}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <script src="{{asset('admins')}}/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('admins')}}/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="{{asset('admins')}}/assets/libs/node-waves/waves.min.js"></script>
@@ -81,15 +84,12 @@
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
-    {{--JQuery/Ajax cdn--}}
-    <script src="jquery-3.7.1.min.js"></script>
-
-    <script>  
+    <script>
         $(document).on("click", "#delete", function(e){
             e.preventDefault();
             var link = $(this).attr("href");
                swal({
-                 title: "Are you Want to delete?",
+                 title: "Do you Want to delete?",
                  text: "Once Delete, This will be Permanently Delete!",
                  icon: "warning",
                  buttons: true,
@@ -105,12 +105,12 @@
            });
    </script>
   {{-- before  logout showing alert message --}}
-    <script>  
-        $(document).on("click", "#logout", function(e){
+    <script>
+        $(document).on("click", "#userlogout", function(e){
             e.preventDefault();
             var link = $(this).attr("href");
                swal({
-                 title: "Are you Want to logout?",
+                 title: "Do you Want to logout?",
                  text: "",
                  icon: "warning",
                  buttons: true,
@@ -128,20 +128,20 @@
 
 
    <script>
-       @if(Session::has('messege'))
+       @if(Session::has('message'))
          var type="{{Session::get('alert-type','info')}}"
          switch(type){
              case 'info':
-                  toastr.info("{{ Session::get('messege') }}");
+                  toastr.info("{{ Session::get('message') }}");
                   break;
              case 'success':
-                 toastr.success("{{ Session::get('messege') }}");
+                 toastr.success("{{ Session::get('message') }}");
                  break;
              case 'warning':
-                toastr.warning("{{ Session::get('messege') }}");
+                toastr.warning("{{ Session::get('message') }}");
                  break;
              case 'error':
-                 toastr.error("{{ Session::get('messege') }}");
+                 toastr.error("{{ Session::get('message') }}");
                  break;
                }
        @endif

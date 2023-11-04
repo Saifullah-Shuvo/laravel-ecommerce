@@ -29,7 +29,8 @@ class CategoryController extends Controller
             $categories->category_image = $imageName;
         }
         $categories->save();
-        return redirect()->back();
+        $notification = array('message' => "Category Created Successfully!", 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 
     public function destroy($id){
@@ -40,7 +41,48 @@ class CategoryController extends Controller
             unlink($image_path);
         }
         $categories->delete();
-        return redirect()->back();
+        $notification = array('message' => "Category Deleted!", 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    public function edit($id){
+        $data = Category::findorFail($id);
+        return response()->json($data);
+    }
+
+    public function update(Request $request){
+        $request->validate([
+            'category_name' => 'required|min:5',
+            'category_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->category_name = $request->category_name;
+
+        // image store in public folder
+        $image = $request->category_image;
+        if($image){
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $request->category_image->move('admins/categoryimage', $imageName);
+            $categories->category_image = $imageName;
+        }
+
+        //image store in public folder
+        $image = $request->category_image;
+        if ($image) {
+            $image_path = public_path('admins/categoryimage/' . $category->category_image);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $request->category_image->move('admins/categoryimage', $imageName);
+        }
+        //end
+        $category->image = $imageName;
+        $category->save();
+
+        $notification = array('message' => "Category Updated!", 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 
     // Category status

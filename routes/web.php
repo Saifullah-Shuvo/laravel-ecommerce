@@ -30,17 +30,15 @@ Route::get('/admin/dashboard', function () {
 require __DIR__.'/adminauth.php';
 
 Route::middleware('auth:admin')->group(function () {
+
     //category crud
     Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-    
-    
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
-    // Route::patch('/profile', [CategoryController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [CategoryController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
+    Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
     //category status
     Route::get('/category/status/enable/{id}',[CategoryController::class, 'status_enable'])->name('category.status.enable');
@@ -49,5 +47,6 @@ Route::middleware('auth:admin')->group(function () {
     //category feature
     Route::get('/category/feature/enable/{id}',[CategoryController::class, 'feature_enable'])->name('category.feature.enable');
     Route::get('/category/feature/disable/{id}',[CategoryController::class, 'feature_disable'])->name('category.feature.disable');
+
 });
 
