@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|min:5',
+            'category_name' => 'required|min:2',
             'category_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $categories = new Category();
@@ -63,10 +63,10 @@ class CategoryController extends Controller
     }
 
     // Category Update method
-    
+
     public function update(Request $request){
         $request->validate([
-            'category_name' => 'required|min:5',
+            'category_name' => 'required|min:2',
             'category_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
