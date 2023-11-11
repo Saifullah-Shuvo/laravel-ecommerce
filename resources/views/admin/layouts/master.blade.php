@@ -39,7 +39,7 @@
     <link href="{{asset('admins')}}/assets/css/sweetalert.min.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('admins')}}/assets/css/toastr.min.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css"> --}}
 
 
 </head>
@@ -81,8 +81,8 @@
     <script src="{{asset('admins')}}/assets/js/toastr.min.js"></script>
     <script src="{{asset('admins')}}/assets/js/sweetalert.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script> --}}
 
     <script>
         $(document).on("click", "#delete", function(e){
