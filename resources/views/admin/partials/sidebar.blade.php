@@ -135,7 +135,7 @@
                     <div class="collapse menu-dropdown" id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="landing.html" class="nav-link" data-key="t-one-page"> All products </a>
+                                <a href="{{route('product.all')}}" class="nav-link" data-key="t-one-page"> All products </a>
                             </li>
                             <li class="nav-item">
                                 <a href="nft-landing.html" class="nav-link" data-key="t-nft-landing"> Hot deals </a>

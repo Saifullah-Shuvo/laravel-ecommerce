@@ -49,3 +49,29 @@ Route::middleware('auth:admin')->group(function () {
 
 });
 
+Route::middleware('auth:admin')->group(function () {
+
+    Route::get('/product/all', function () {
+        return view('admin.products.index');
+    })->name('product.all');
+    Route::get('/product/add', function () {
+        return view('admin.products.add');
+    })->name('product.add');
+    //category crud
+    // Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
+    // Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    // Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+
+    // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    // Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
+
+    // //category status
+    // Route::get('/category/status/enable/{id}',[CategoryController::class, 'status_enable'])->name('category.status.enable');
+    // Route::get('/category/status/disable/{id}',[CategoryController::class, 'status_disable'])->name('category.status.disable');
+
+    // //category feature
+    // Route::get('/category/feature/enable/{id}',[CategoryController::class, 'feature_enable'])->name('category.feature.enable');
+    // Route::get('/category/feature/disable/{id}',[CategoryController::class, 'feature_disable'])->name('category.feature.disable');
+
+});
+

@@ -16,101 +16,148 @@
         </div>
     </div>
 
-    <div class="mt-3 mb-3 d-flex justify-content-end">
-        <a href="" type="submit" class="btn btn-md btn-outline-secondary custom-toggle mb-3 float-right"
-            data-bs-toggle="modal" data-bs-target="#category_add">
-            <span class="icon-on"><i class="ri-add-line align-bottom me-1"></i> Add New</span>
-        </a>
-    </div>
-
-    <div class="container">
-
-        <div class="table-responsive table-card">
-            <table class="table table-nowrap table-striped-columns mb-0">
-                <thead class="table-light">
-                    <tr>
-
-                        <th scope="col">No</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Is Featured</th>
-                        <th scope="col">Action</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($categories as $key => $category)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $category->category_name }}</td>
-                            <td><img src="{{ asset('admins/categoryimage/' . $category->category_image) }}" alt=""
-                                    class="rounded avatar-xs shadow"></td>
-                            <td>{{ $category->created_at->format('Y-m-d h:i:s') }}</td>
-                            <td>
-                                @if ($category->status == 1)
-                                    <span class="badge rounded-pill bg-success-subtle text-success">ENABLED</span>
-                                @else
-                                    <span class="badge rounded-pill bg-danger-subtle text-danger">DISABLED</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($category->is_featured == 1)
-                                    <span class="badge bg-success">YES</span>
-                                @else
-                                    <span class="badge bg-warning">NO</span>
-                                @endif
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu">
-
-                                        <a class="dropdown-item text-info edit" data-id = "{{ $category->id }}"
-                                        data-bs-toggle="modal" data-bs-target="#category_edit" href="">
-                                                <i class="ri-pencil-fill"></i> Edit</a>
-
-                                        @if ($category->status == 1)
-                                            <a class="dropdown-item text-danger"
-                                                href="{{ route('category.status.disable', ['id' => $category->id]) }}"><i
-                                                    class="bx bx-rotate-right"></i> Disable</a>
-                                        @else
-                                            <a class="dropdown-item text-success"
-                                                href="{{ route('category.status.enable', ['id' => $category->id]) }}"><i
-                                                    class="bx bx-rotate-right"></i> Enable</a>
-                                        @endif
-
-                                        @if ($category->is_featured == 1)
-                                            <a class="dropdown-item text-warning"
-                                                href="{{ route('category.feature.disable', ['id' => $category->id]) }}"><i
-                                                    class="bx bx-task"></i> Unfeature</a>
-                                        @else
-                                            <a class="dropdown-item text-success"
-                                                href="{{ route('category.feature.enable', ['id' => $category->id]) }}"><i
-                                                    class="bx bx-task"></i> Feature</a>
-                                        @endif
-
-                                        <a class="dropdown-item text-danger" id="delete"
-                                            href="{{ route('category.delete', ['id' => $category->id]) }}"
-                                            onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
+    <div class="row">
+        <div class="col-xl-12 col-lg-8">
+            <div>
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div class="row g-4">
+                            <div class="col-sm-auto">
+                                <div>
+                                    <a href="{{route('product.add')}}" 
+                                    class="btn btn-success" id="addproduct-btn"
+                                    data-bs-toggle="modal" data-bs-target="#category_add"><i 
+                                    class="ri-add-line align-bottom me-1"></i> Add New</a>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="d-flex justify-content-sm-end">
+                                    <div class="search-box ms-2">
+                                        <input type="text" class="form-control" id="searchProductList" placeholder="Search Category...">
+                                        <i class="ri-search-line search-icon"></i>
                                     </div>
                                 </div>
-                            </td>
+                            </div>
+                        </div>
+                    </div>
 
-                        </tr>
-                    @empty
-                        <h3 class="text-center">No categories data found! </h3>
-                    @endforelse
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">
+                                            All <span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $categories->count() }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card header -->
 
-                </tbody>
-            </table>
+                    <div class="card-body">
 
+                        <div class="tab-content text-muted">
+                            <div class="tab-pane active" id="productnav-all" role="tabpanel">
+                                <div class="table-responsive table-card">
+                                    <table class="table table-nowrap mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                        
+                                                <th scope="col">No</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Created At</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Is Featured</th>
+                                                <th scope="col">Action</th>
+                        
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($categories as $key => $category)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $category->category_name }}</td>
+                                                    <td><img src="{{ asset('admins/categoryimage/' . $category->category_image) }}" alt=""
+                                                            class="rounded avatar-xs shadow"></td>
+                                                    <td>{{ $category->created_at->format('Y-m-d h:i:s') }}</td>
+                                                    <td>
+                                                        @if ($category->status == 1)
+                                                            <span class="badge rounded-pill bg-success-subtle text-success">ENABLED</span>
+                                                        @else
+                                                            <span class="badge rounded-pill bg-danger-subtle text-danger">DISABLED</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($category->is_featured == 1)
+                                                            <span class="badge bg-success">YES</span>
+                                                        @else
+                                                            <span class="badge bg-warning">NO</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                        
+                                                                <a class="dropdown-item text-info edit" data-id = "{{ $category->id }}"
+                                                                data-bs-toggle="modal" data-bs-target="#category_edit" href="">
+                                                                        <i class="ri-pencil-fill"></i> Edit</a>
+                        
+                                                                @if ($category->status == 1)
+                                                                    <a class="dropdown-item text-danger"
+                                                                        href="{{ route('category.status.disable', ['id' => $category->id]) }}"><i
+                                                                            class="bx bx-rotate-right"></i> Disable</a>
+                                                                @else
+                                                                    <a class="dropdown-item text-success"
+                                                                        href="{{ route('category.status.enable', ['id' => $category->id]) }}"><i
+                                                                            class="bx bx-rotate-right"></i> Enable</a>
+                                                                @endif
+                        
+                                                                @if ($category->is_featured == 1)
+                                                                    <a class="dropdown-item text-warning"
+                                                                        href="{{ route('category.feature.disable', ['id' => $category->id]) }}"><i
+                                                                            class="bx bx-task"></i> Unfeature</a>
+                                                                @else
+                                                                    <a class="dropdown-item text-success"
+                                                                        href="{{ route('category.feature.enable', ['id' => $category->id]) }}"><i
+                                                                            class="bx bx-task"></i> Feature</a>
+                                                                @endif
+                        
+                                                                <a class="dropdown-item text-danger" id="delete"
+                                                                    href="{{ route('category.delete', ['id' => $category->id]) }}"
+                                                                    onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                        
+                                                </tr>
+                                            @empty
+                                                <h3 class="text-center">No categories data found! </h3>
+                                            @endforelse
+                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end tab pane -->
+                        </div>
+                        <!-- end tab content -->
+
+                    </div>
+                    <!-- end card body -->
+                </div>
+                <!-- end card -->
+            </div>
         </div>
+        <!-- end col -->
     </div>
+    <!-- end row -->
 
     {{-- Category Insert Modal --}}
     <div class="modal fade edit" id="category_add">
