@@ -29,15 +29,12 @@
                         </div>
                         <div>
                             <label>Product Description</label>
-
+                            
                             <div id="ckeditor-classic">
-                                <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                                <ul>
-                                    <li>Full Sleeve</li>
-                                    <li>Cotton</li>
-                                    <li>All Sizes available</li>
-                                    <li>4 Different Color</li>
-                                </ul>
+                                {{-- <input type="text" class="form-control" id="product-title-input" rows="4" columns="50" value="" placeholder="Enter product description" required> --}}
+                                <div>
+                                    <textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,24 +260,10 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Publish Schedule</h5>
-                    </div>
-                    <!-- end card body -->
-                    <div class="card-body">
-                        <div>
-                            <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                            <input type="text" id="datepicker-publish-input" class="form-control" placeholder="Enter publish date" data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
                         <h5 class="card-title mb-0">Product Categories</h5>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
+                        <p class="text-muted mb-2"> <a href="{{route('category.all')}}" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
                         <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
                             <option value="Appliances">Appliances</option>

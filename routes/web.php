@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,13 +52,10 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
 
-    Route::get('/product/all', function () {
-        return view('admin.products.index');
-    })->name('product.all');
-    Route::get('/product/add', function () {
-        return view('admin.products.add');
-    })->name('product.add');
-    //category crud
+    //product crud
+    Route::get('/product/all', [ProductController::class, 'index'])->name('product.all');
+    Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
+
     // Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
     // Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     // Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
