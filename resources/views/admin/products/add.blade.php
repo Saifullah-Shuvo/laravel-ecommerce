@@ -4,6 +4,15 @@
     Add Products
 @endsection
 
+@push('style')
+    <!-- dropzone css -->
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/dropzone/dropzone.css" type="text/css" />
+
+    <!-- Filepond css -->
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/filepond/filepond.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
+@endpush
+
 @section('panel')
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
         <h4 class="mb-sm-0">Add Products</h4>
@@ -24,17 +33,23 @@
                             <label class="form-label" for="product-title-input">Product Title</label>
                             <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
                             <input type="text" class="form-control d-none" id="product-id-input">
-                            <input type="text" class="form-control" id="product-title-input" value="" placeholder="Enter product title" required>
-                            <div class="invalid-feedback">Please Enter a product title.</div>
+                            <input type="text" name="name" class="form-control" id="product-title-input" value="" placeholder="Enter product title" required>
+                            <div class="invalid-feedback">
+                                @error('name')
+                                    <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                @enderror
+                            </div>
                         </div>
                         <div>
                             <label>Product Description</label>
-                            
+
                             <div id="ckeditor-classic">
-                                {{-- <input type="text" class="form-control" id="product-title-input" rows="4" columns="50" value="" placeholder="Enter product description" required> --}}
                                 <div>
-                                    <textarea class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                                    <textarea name="description" class="form-control" id="exampleFormControlTextarea5" rows="5" placeholder="Enter product description" required></textarea>
                                 </div>
+                                @error('name')
+                                    <div class="error mt-1"><span class="text-danger">{{ $message }}</span></div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -48,30 +63,19 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <h5 class="fs-14 mb-1">Product Image</h5>
-                            <p class="text-muted">Add Product main Image.</p>
-                            <div class="text-center">
-                                <div class="position-relative d-inline-block">
-                                    <div class="position-absolute top-100 start-100 translate-middle">
-                                        <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
-                                            <div class="avatar-xs">
-                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
-                                                    <i class="ri-image-fill"></i>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <input class="form-control d-none" value="" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
-                                    </div>
-                                    <div class="avatar-lg">
-                                        <div class="avatar-title bg-light rounded">
-                                            <img src="#" id="product-img" class="avatar-md h-auto" />
-                                        </div>
-                                    </div>
+                            <p class="text-muted">Add Product thumbnail Image.</p>
+                            <div class="col-xxl-12">
+                                <div>
+                                    <input type="file" id="category_image" name="category_image">
                                 </div>
-                            </div>
+                                @error('category_image')
+                                    <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                @enderror
+                            </div><!--end col-->
                         </div>
                         <div>
                             <h5 class="fs-14 mb-1">Product Gallery</h5>
-                            <p class="text-muted">Add Product Gallery Images.</p>
+                            <p class="text-muted">Add Product other Images.</p>
 
                             <div class="dropzone">
                                 <div class="fallback">
@@ -124,11 +128,6 @@
                                     General Info
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                    Meta Data
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <!-- end card header -->
@@ -138,14 +137,14 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
-                                            <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Enter manufacturer name">
+                                            <label class="form-label" for="manufacturer-name-input">Product Unit</label>
+                                            <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Put product unit">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Enter manufacturer brand">
+                                            <label class="form-label" for="manufacturer-brand-input">Product Code</label>
+                                            <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Put product code">
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +160,18 @@
                                     </div>
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="product-price-input">Price</label>
+                                            <label class="form-label" for="product-price-input">Purchase Price</label>
+                                            <div class="input-group has-validation mb-3">
+                                                <span class="input-group-text" id="product-price-addon">$</span>
+                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                <div class="invalid-feedback">Please Enter a product price.</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-price-input">Selling Price</label>
                                             <div class="input-group has-validation mb-3">
                                                 <span class="input-group-text" id="product-price-addon">$</span>
                                                 <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
@@ -175,15 +185,8 @@
                                             <label class="form-label" for="product-discount-input">Discount</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text" class="form-control" id="product-discount-input" placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
+                                                <input type="text" class="form-control" id="product-discount-input" placeholder="discount" aria-label="discount" aria-describedby="product-discount-addon">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="orders-input">Orders</label>
-                                            <input type="text" class="form-control" id="orders-input" placeholder="Orders" required>
-                                            <div class="invalid-feedback">Please Enter a product orders.</div>
                                         </div>
                                     </div>
                                     <!-- end col -->
@@ -191,33 +194,6 @@
                                 <!-- end row -->
                             </div>
                             <!-- end tab-pane -->
-
-                            <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="meta-title-input">Meta title</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta title" id="meta-title-input">
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta keywords" id="meta-keywords-input">
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-
-                                <div>
-                                    <label class="form-label" for="meta-description-input">Meta Description</label>
-                                    <textarea class="form-control" id="meta-description-input" placeholder="Enter meta description" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <!-- end tab pane -->
                         </div>
                         <!-- end tab content -->
                     </div>
@@ -240,17 +216,32 @@
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 
                             <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                <option value="Published" selected>Published</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Draft">Draft</option>
+                                <option value="1" selected>Published</option>
+                                <option value="0">Unpublished</option>
                             </select>
                         </div>
 
-                        <div>
-                            <label for="choices-publish-visibility-input" class="form-label">Visibility</label>
+                        <div class="mb-3">
+                            <label for="choices-publish-visibility-input" class="form-label">Hot Deal</label>
                             <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
-                                <option value="Public" selected>Public</option>
-                                <option value="Hidden">Hidden</option>
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="choices-publish-visibility-input" class="form-label">Featured Product</label>
+                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="choices-publish-visibility-input" class="form-label">Popular product</label>
+                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                     </div>
@@ -266,14 +257,11 @@
                         <p class="text-muted mb-2"> <a href="{{route('category.all')}}" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
                         <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
-                            <option value="Appliances">Appliances</option>
-                            <option value="Automotive Accessories">Automotive Accessories</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Fashion">Fashion</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Grocery">Grocery</option>
-                            <option value="Kids">Kids</option>
-                            <option value="Watches">Watches</option>
+
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                            @endforeach
+
                         </select>
                     </div>
                     <!-- end card body -->
@@ -314,10 +302,20 @@
     </form>
 @endsection
 
+@push('script')
+    <!-- dropzone min -->
+    <script src="{{asset('admins')}}/assets/libs/dropzone/dropzone-min.js"></script>
+    <!-- filepond js -->
+    <script src="{{asset('admins')}}/assets/libs/filepond/filepond.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
+    <script src="{{asset('admins')}}/assets/js/pages/form-file-upload.init.js"></script>
+    <script src="{{asset('admins')}}/assets/js/app.js"></script>
+@endpush
 
 
 
 
 
-
-    
