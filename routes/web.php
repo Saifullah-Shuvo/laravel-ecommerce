@@ -55,6 +55,7 @@ Route::middleware('auth:admin')->group(function () {
     //product crud
     Route::get('/product/all', [ProductController::class, 'index'])->name('product.all');
     Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
 
     // Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
     // Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');

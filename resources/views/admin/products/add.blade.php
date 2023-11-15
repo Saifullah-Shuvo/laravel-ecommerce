@@ -24,7 +24,8 @@
             </ol>
         </div>
     </div>
-    <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
+    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
@@ -33,7 +34,7 @@
                             <label class="form-label" for="product-title-input">Product Title</label>
                             <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
                             <input type="text" class="form-control d-none" id="product-id-input">
-                            <input type="text" name="name" class="form-control" id="product-title-input" value="" placeholder="Enter product title" required>
+                            <input type="text" name="name" class="form-control" id="product-title-input" value="" placeholder="Enter product title">
                             <div class="invalid-feedback">
                                 @error('name')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
@@ -45,7 +46,7 @@
 
                             <div id="ckeditor-classic">
                                 <div>
-                                    <textarea name="description" class="form-control" id="exampleFormControlTextarea5" rows="5" placeholder="Enter product description" required></textarea>
+                                    <textarea name="description" class="form-control" id="exampleFormControlTextarea5" rows="5" placeholder="Enter product description"></textarea>
                                 </div>
                                 @error('name')
                                     <div class="error mt-1"><span class="text-danger">{{ $message }}</span></div>
@@ -66,9 +67,9 @@
                             <p class="text-muted">Add Product thumbnail Image.</p>
                             <div class="col-xxl-12">
                                 <div>
-                                    <input type="file" id="category_image" name="category_image">
+                                    <input type="file" id="category_image" name="thambnail">
                                 </div>
-                                @error('category_image')
+                                @error('thambnail')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
                                 @enderror
                             </div><!--end col-->
@@ -79,7 +80,7 @@
 
                             <div class="dropzone">
                                 <div class="fallback">
-                                    <input name="file" type="file" multiple="multiple">
+                                    <input name="images[]" type="file" multiple="multiple">
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
@@ -138,13 +139,13 @@
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="manufacturer-name-input">Product Unit</label>
-                                            <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Put product unit">
+                                            <input type="text" name="unit" class="form-control" id="manufacturer-name-input" placeholder="Put product unit">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="manufacturer-brand-input">Product Code</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Put product code">
+                                            <input type="text" name="code" class="form-control" id="manufacturer-brand-input" placeholder="Put product code">
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +155,7 @@
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="stocks-input">Stocks</label>
-                                            <input type="text" class="form-control" id="stocks-input" placeholder="Stocks" required>
+                                            <input type="text" name="stock_quantity" class="form-control" id="stocks-input" placeholder="Stocks">
                                             <div class="invalid-feedback">Please Enter a product stocks.</div>
                                         </div>
                                     </div>
@@ -163,7 +164,7 @@
                                             <label class="form-label" for="product-price-input">Purchase Price</label>
                                             <div class="input-group has-validation mb-3">
                                                 <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                <input type="text" name="purchase_price" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon">
                                                 <div class="invalid-feedback">Please Enter a product price.</div>
                                             </div>
 
@@ -174,7 +175,7 @@
                                             <label class="form-label" for="product-price-input">Selling Price</label>
                                             <div class="input-group has-validation mb-3">
                                                 <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                <input type="text" name="selling_price" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon">
                                                 <div class="invalid-feedback">Please Enter a product price.</div>
                                             </div>
 
@@ -185,7 +186,7 @@
                                             <label class="form-label" for="product-discount-input">Discount</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text" class="form-control" id="product-discount-input" placeholder="discount" aria-label="discount" aria-describedby="product-discount-addon">
+                                                <input type="text" name="discount_price" class="form-control" id="product-discount-input" placeholder="discount" aria-label="discount" aria-describedby="product-discount-addon">
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +216,7 @@
                         <div class="mb-3">
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 
-                            <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
+                            <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
                                 <option value="1" selected>Published</option>
                                 <option value="0">Unpublished</option>
                             </select>
@@ -223,7 +224,7 @@
 
                         <div class="mb-3">
                             <label for="choices-publish-visibility-input" class="form-label">Hot Deal</label>
-                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                            <select class="form-select" name="hot_deal" id="choices-publish-visibility-input" data-choices data-choices-search-false>
                                 <option value="1" selected>Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -231,7 +232,7 @@
 
                         <div class="mb-3">
                             <label for="choices-publish-visibility-input" class="form-label">Featured Product</label>
-                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                            <select class="form-select" name="featured" id="choices-publish-visibility-input" data-choices data-choices-search-false>
                                 <option value="1" selected>Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -239,7 +240,7 @@
 
                         <div class="mb-3">
                             <label for="choices-publish-visibility-input" class="form-label">Popular product</label>
-                            <select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
+                            <select class="form-select" name="popular_product" id="choices-publish-visibility-input" data-choices data-choices-search-false>
                                 <option value="1" selected>Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -256,7 +257,7 @@
                     <div class="card-body">
                         <p class="text-muted mb-2"> <a href="{{route('category.all')}}" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
-                        <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
+                        <select class="form-select" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
 
                             @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -274,7 +275,7 @@
                     <div class="card-body">
                         <div class="hstack gap-3 align-items-start">
                             <div class="flex-grow-1">
-                                <input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" value="Cotton" />
+                                <input class="form-control" name="tags" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" />
                             </div>
                         </div>
                     </div>
