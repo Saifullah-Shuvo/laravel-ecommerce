@@ -80,7 +80,7 @@
 
                             <div class="dropzone">
                                 <div class="fallback">
-                                    <input name="images[]" type="file" multiple="multiple">
+                                    <input accept="image/*" name="images[]" type="file" multiple>
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
