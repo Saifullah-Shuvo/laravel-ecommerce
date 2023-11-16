@@ -41,6 +41,13 @@
 
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css"> --}}
 
+    <!-- dropzone css -->
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/dropzone/dropzone.css" type="text/css" />
+
+    <!-- Filepond css -->
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/filepond/filepond.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('admins')}}/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
+
 
 </head>
 
@@ -83,6 +90,17 @@
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script> --}}
+
+    <!-- dropzone min -->
+    <script src="{{asset('admins')}}/assets/libs/dropzone/dropzone-min.js"></script>
+    <!-- filepond js -->
+    <script src="{{asset('admins')}}/assets/libs/filepond/filepond.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="{{asset('admins')}}/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
+    <script src="{{asset('admins')}}/assets/js/pages/form-file-upload.init.js"></script>
+    <script src="{{asset('admins')}}/assets/js/app.js"></script>
 
     <script>
         $(document).on("click", "#delete", function(e){

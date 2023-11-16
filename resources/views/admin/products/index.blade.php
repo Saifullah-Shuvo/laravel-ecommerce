@@ -95,6 +95,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            
                                             <tr>
                                                 <td>
                                                     <div class="form-check">
@@ -111,22 +112,7 @@
                                                     <button type="button" class="btn btn-sm btn-light">Details</button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="cardtableCheck02">
-                                                        <label class="form-check-label" for="cardtableCheck02"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="#" class="fw-semibold">#VL2109</a></td>
-                                                <td>Georgie Winters</td>
-                                                <td>07 Oct, 2021</td>
-                                                <td>$26.15</td>
-                                                <td><span class="badge bg-success">Paid</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-light">Details</button>
-                                                </td>
-                                            </tr>
+                                            
                                             <tr>
                                                 <td>
                                                     <div class="form-check">
@@ -143,22 +129,7 @@
                                                     <button type="button" class="btn btn-sm btn-light">Details</button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="cardtableCheck04">
-                                                        <label class="form-check-label" for="cardtableCheck04"></label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="#" class="fw-semibold">#VL2107</a></td>
-                                                <td>Justin Maier</td>
-                                                <td>05 Oct, 2021</td>
-                                                <td>$25.03</td>
-                                                <td><span class="badge bg-success">Paid</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-light">Details</button>
-                                                </td>
-                                            </tr>
+                                    
                                         </tbody>
                                     </table>
                                 </div>

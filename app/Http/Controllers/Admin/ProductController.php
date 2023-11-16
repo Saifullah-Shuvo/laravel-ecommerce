@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -26,6 +27,7 @@ class ProductController extends Controller
             'description' => 'required|max:200',
             // 'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        dd($request->all());
         $products = new Product();
         $products->category_id = $request->category_id;
         $products->name = $request->name;
@@ -45,28 +47,25 @@ class ProductController extends Controller
         $products->unit = $request->unit;
         $products->tags = $request->tags;
 
-                // image store in public folder
+                // thambnail image store in public folder
         $image = $request->thambnail;
         if ($image) {
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $request->thambnail->move('admins/productimage', $imageName);
             $products->thambnail = $imageName;
         }
-
                 // multiple image store
         $images = array();
         if($request->hasFile('images')){
             foreach ($request->file('images') as $key => $image) {
-                $imageName= uniqid().'.'.$image->getClientOriginalExtension();
-                // $request->images->move('admins/productimage/'.$imageName);
+                $imageName= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
                 // Image::make($image)->resize(600,600)->save('public/files/product/'.$imageName);
-                $request->images->save('admins/productname'.$imageName);
-
-                // $request->images->move('admins/productimage', $imageName);
+                $request->images->move('admins/productimage', $imageName);
                 array_push($images, $imageName);
             }
             $products->images = json_encode($images);
         }
+        // DB::table('products')->insert($data);
 
         $products->save();
         $notification = array('message' => "Products Created Successfully!", 'alert-type' => 'success');

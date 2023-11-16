@@ -24,7 +24,7 @@
             </ol>
         </div>
     </div>
-    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data" id="image-upload" class="dropzone">
         @csrf
         <div class="row">
             <div class="col-lg-8">
@@ -62,25 +62,29 @@
                         <h5 class="card-title mb-0">Product Gallery</h5>
                     </div>
                     <div class="card-body">
+
+                                {{-- Product thumbnail image  --}}
                         <div class="mb-4">
                             <h5 class="fs-14 mb-1">Product Image</h5>
                             <p class="text-muted">Add Product thumbnail Image.</p>
                             <div class="col-xxl-12">
                                 <div>
-                                    <input type="file" id="category_image" name="thambnail">
+                                    <input name="thambnail" class="form-control" type="file" id="formFileMultiple" multiple>
                                 </div>
                                 @error('thambnail')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
                                 @enderror
                             </div><!--end col-->
                         </div>
+
+                                {{-- Product Multiple image  --}}
                         <div>
                             <h5 class="fs-14 mb-1">Product Gallery</h5>
                             <p class="text-muted">Add Product other Images.</p>
 
                             <div class="dropzone">
                                 <div class="fallback">
-                                    <input accept="image/*" name="images[]" type="file" multiple>
+                                    <input name="images" type="file" multiple="multiple">
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
@@ -283,7 +287,7 @@
                 </div>
                 <!-- end card -->
 
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h5 class="card-title mb-0">Product Short Description</h5>
                     </div>
@@ -292,7 +296,7 @@
                         <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                     </div>
                     <!-- end card body -->
-                </div>
+                </div> --}}
                 <!-- end card -->
 
             </div>
