@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 
 @section('title')
-    Category All
+    Hot Deals 
 @endsection
 
 @section('panel')
     {{-- @dd($products) --}}
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-        <h4 class="mb-sm-0">Products List</h4>
+        <h4 class="mb-sm-0">Popular Products</h4>
 
         <div class="page-title-right">
             <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="javascript: void(0);">{{ config('app.name') }}</a></li>
-                <li class="breadcrumb-item active">Products List</li>
+                <li class="breadcrumb-item active">Popular Products</li>
             </ol>
         </div>
     </div>
@@ -33,7 +33,7 @@
                                 <div class="d-flex justify-content-sm-end">
                                     <div class="search-box ms-2">
                                         <input type="text" class="form-control" id="searchProductList"
-                                            placeholder="Search Products...">
+                                            placeholder="Search Popular Products...">
                                         <i class="ri-search-line search-icon"></i>
                                     </div>
                                 </div>
@@ -49,20 +49,7 @@
                                         <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all"
                                             role="tab">
                                             All <span
-                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $products->count() }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published"
-                                            role="tab">
-                                            Published <span
-                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $published->count() }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft"
-                                            role="tab">
-                                            Draft
+                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $popular->count() }}</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -108,7 +95,7 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($products as $product)
+                                            @foreach ($popular as $product)
                                                 <tr>
                                                     <td>
                                                         <div class="form-check">
@@ -140,21 +127,21 @@
                                                                 <ul class="dropdown-menu dropdown-menu-end"
                                                                     style="">
                                                                     <li><a class="dropdown-item"
-                                                                            href="{{ route('product.edit', ['id' => $product->id]) }}"><i
+                                                                            href="apps-ecommerce-product-details.html"><i
+                                                                                class="ri-eye-fill align-bottom me-2 text-muted"></i>
+                                                                            View</a></li>
+                                                                    <li><a class="dropdown-item edit-list"
+                                                                            data-edit-id="1"
+                                                                            href="apps-ecommerce-add-product.html"><i
                                                                                 class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                                             Edit</a></li>
-                                                                    <li><a class="dropdown-item edit-list" id="delete"
-                                                                            data-edit-id="1"
-                                                                            href="{{ route('product.delete', ['id' => $product->id]) }}"><i
-                                                                                class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                            Delete</a></li>
                                                                     <li class="dropdown-divider"></li>
-                                                                    {{-- <li><a class="dropdown-item remove-list"
+                                                                    <li><a class="dropdown-item remove-list"
                                                                             href="#" data-id="1"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#removeItemModal"><i
                                                                                 class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                            Delete</a></li> --}}
+                                                                            Delete</a></li>
                                                                 </ul>
                                                             </div>
                                                         </span>
@@ -168,77 +155,6 @@
                             </div>
                             <!-- end tab pane -->
 
-                            <div class="tab-pane" id="productnav-published" role="tabpanel">
-                                <div class="table-responsive table-card">
-                                    <table class="table table-nowrap mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th scope="col">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="cardtableCheck">
-                                                        <label class="form-check-label" for="cardtableCheck"></label>
-                                                    </div>
-                                                </th>
-                                                <th scope="col">Product Code</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Thambnail</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Discount Price</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach ($published as $product)
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="" id="cardtableCheck01">
-                                                            <label class="form-check-label"
-                                                                for="cardtableCheck01"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td><a href="#" class="fw-semibold">{{ $product->code }}</a>
-                                                    </td>
-                                                    <td>{{ $product->name }}</td>
-                                                    <td><img src=" {{ asset('admins/productimage/' . $product->thambnail) }}"
-                                                            alt="" class="rounded avatar-xs shadow"></td>
-                                                    <td>{{ $product->created_at->format('Y-m-d h:i:s') }}</td>
-                                                    <td>{{ $product->category->category_name }}</td>
-                                                    <td>{{ $product->selling_price }}</td>
-                                                    <td>{{ $product->discount_price }}</td>
-                                                    @if ($product->status == 1)
-                                                        <td><span class="badge bg-success">Published</span></td>
-                                                    @else
-                                                        <td><span class="badge bg-danger">Unpublished</span></td>
-                                                    @endif
-                                                    <td>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-light">Details</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- end tab pane -->
-
-                            <div class="tab-pane" id="productnav-draft" role="tabpanel">
-                                <div class="py-4 text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                                        colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px">
-                                    </lord-icon>
-                                    <h5 class="mt-4">Sorry! No Result Found</h5>
-                                </div>
-                            </div>
-                            <!-- end tab pane -->
                         </div>
                         <!-- end tab content -->
 

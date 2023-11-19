@@ -53,21 +53,14 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/product/all', [ProductController::class, 'index'])->name('product.all');
     Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
-    // Route::get('/category/all', [CategoryController::class, 'index'])->name('category.all');
-    // Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-    // Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-
-    // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    // Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
-
-    // //category status
-    // Route::get('/category/status/enable/{id}',[CategoryController::class, 'status_enable'])->name('category.status.enable');
-    // Route::get('/category/status/disable/{id}',[CategoryController::class, 'status_disable'])->name('category.status.disable');
-
-    // //category feature
-    // Route::get('/category/feature/enable/{id}',[CategoryController::class, 'feature_enable'])->name('category.feature.enable');
-    // Route::get('/category/feature/disable/{id}',[CategoryController::class, 'feature_disable'])->name('category.feature.disable');
+    Route::get('/product/hotdeal', [ProductController::class, 'hotDeals'])->name('product.hotdeal');
+    Route::get('/product/featured',[ProductController::class, 'featured'])->name('product.featured');
+    Route::get('/product/popular',[ProductController::class, 'popular'])->name('product.popular');
 
 });
 

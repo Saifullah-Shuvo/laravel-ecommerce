@@ -135,16 +135,16 @@
                     <div class="collapse menu-dropdown" id="sidebarLanding">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('product.all')}}" class="nav-link" data-key="t-one-page"> All products </a>
+                                <a href="{{ route('product.all') }}" class="nav-link" data-key="t-one-page"> All products </a>
                             </li>
                             <li class="nav-item">
-                                <a href="nft-landing.html" class="nav-link" data-key="t-nft-landing"> Hot deals </a>
+                                <a href="{{ route('product.hotdeal') }}" class="nav-link" data-key="t-nft-landing"> Hot deals </a>
                             </li>
                             <li class="nav-item">
-                                <a href="job-landing.html" class="nav-link" data-key="t-job">Featured Products</a>
+                                <a href="{{ route('product.featured') }}" class="nav-link" data-key="t-job">Featured Products</a>
                             </li>
                             <li class="nav-item">
-                                <a href="job-landing.html" class="nav-link" data-key="t-job">Popular Products</a>
+                                <a href=" {{route('product.popular')}} " class="nav-link" data-key="t-job">Popular Products</a>
                             </li>
                         </ul>
                     </div>
