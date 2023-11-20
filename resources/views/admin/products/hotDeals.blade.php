@@ -127,21 +127,21 @@
                                                                 <ul class="dropdown-menu dropdown-menu-end"
                                                                     style="">
                                                                     <li><a class="dropdown-item"
-                                                                            href="apps-ecommerce-product-details.html"><i
-                                                                                class="ri-eye-fill align-bottom me-2 text-muted"></i>
-                                                                            View</a></li>
-                                                                    <li><a class="dropdown-item edit-list"
-                                                                            data-edit-id="1"
-                                                                            href="apps-ecommerce-add-product.html"><i
+                                                                            href="{{ route('product.edit', ['id' => $product->id]) }}"><i
                                                                                 class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                                             Edit</a></li>
+                                                                    <li><a class="dropdown-item edit-list" id="delete"
+                                                                            data-edit-id="1"
+                                                                            href="{{ route('product.delete', ['id' => $product->id]) }}"><i
+                                                                                class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                                            Delete</a></li>
                                                                     <li class="dropdown-divider"></li>
-                                                                    <li><a class="dropdown-item remove-list"
+                                                                    {{-- <li><a class="dropdown-item remove-list"
                                                                             href="#" data-id="1"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#removeItemModal"><i
                                                                                 class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                            Delete</a></li>
+                                                                            Delete</a></li> --}}
                                                                 </ul>
                                                             </div>
                                                         </span>
