@@ -80,11 +80,15 @@
                                 {{-- Product Multiple image  --}}
                         <div>
                             <h5 class="fs-14 mb-1">Product Gallery</h5>
-                            <p class="text-muted">Add Product other Images.</p>
+                            <p class="text-muted">Add Product other Images. <b>[Drag & Drop Multiple Images below]</b> </p>
 
-                            <div class="dropzone">
+                            <div class="form-group">
+                                <input type="file" name="images[]" id="images" class="form-control" multiple>
+                            </div>
+
+                            {{-- <div class="dropzone">
                                 <div class="fallback">
-                                    <input name="images" type="file" multiple="multiple">
+                                    <input type="file" name="images[]" id="images" multiple>
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
@@ -93,6 +97,10 @@
 
                                     <h5>Drop files here or click to upload.</h5>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="file" name="images[]" id="images" class="form-control" multiple>
                             </div>
 
                             <ul class="list-unstyled mb-0" id="dropzone-preview">
@@ -118,9 +126,11 @@
                                         </div>
                                     </div>
                                 </li>
-                            </ul>
+                            </ul> --}}
+
                             <!-- end dropzon-preview -->
                         </div>
+
                     </div>
                 </div>
                 <!-- end card -->

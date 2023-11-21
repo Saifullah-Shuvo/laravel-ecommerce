@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Admin\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
 class ProductController extends Controller
-{               
+{
                 // All Products
     public function index(){
         $products = Product::latest()->get();
@@ -61,14 +62,25 @@ class ProductController extends Controller
         $images = array();
         if($request->hasFile('images')){
             foreach ($request->file('images') as $key => $image) {
-                $imageName= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                $imageName= uniqid().'.'.$image->getClientOriginalExtension();
                 // Image::make($image)->resize(600,600)->save('public/files/product/'.$imageName);
-                $request->images->move('admins/productimage', $imageName);
+                $image->move('admins/productimage/multiImage', $imageName);
                 array_push($images, $imageName);
             }
             $products->images = json_encode($images);
         }
-        // DB::table('products')->insert($data);
+
+        // foreach ($request->file('images') as $image) {
+        //     $imageName = time().'.'.$image->getClientOriginalExtension();
+        //     $image->move(public_path('admins/productimage/multiImage'), $imageName);
+
+        //     // ProductImage::create([
+        //     //     'product_id' => $productId,
+        //     //     'image_path' => $imageName,
+        //     // ]);
+        //     $products->images = $imageName;
+        // }
+        // dd($request->all());
 
         $products->save();
         $notification = array('message' => "Products Created Successfully!", 'alert-type' => 'success');
@@ -80,7 +92,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $product = Product::findorFail($id);
         return view('admin.products.edit',compact('product','categories'));
-    }  
+    }
 
                 // Update Products
     public function update(Request $request, $id){
@@ -137,6 +149,7 @@ class ProductController extends Controller
         //     }
         //     $products->images = json_encode($images);
         // }
+
         // DB::table('products')->insert($data);
 
         $products->save();
