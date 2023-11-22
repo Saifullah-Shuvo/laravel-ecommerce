@@ -31,7 +31,7 @@
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('admin.dashboard')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}" href="{{route('admin.dashboard')}}" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                         <i class="mdi mdi-speedometer"></i> <span data-key="t-dashboards"><b>Dashboard</b></span>
                     </a>
                 </li> <!-- end Dashboard Menu -->
@@ -110,7 +110,7 @@
                 </li> <!-- end Dashboard Menu -->
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('category.all')}}">
+                    <a class="nav-link menu-link {{ Request::is('category/*') ? 'active' : '' }} " href="{{route('category.all')}}">
                         <i class="mdi mdi-puzzle-outline"></i> <span data-key="t-widgets">Manage Categories</span>
                     </a>
                 </li>
@@ -129,7 +129,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
+                    <a class="nav-link menu-link {{ Request::is('product/*') ? 'active' : '' }} " href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
                         <i class="ri-rocket-line"></i> <span data-key="t-landing">Manage Products</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLanding">

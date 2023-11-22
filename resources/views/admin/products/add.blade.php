@@ -69,7 +69,7 @@
                             <p class="text-muted">Add Product thumbnail Image.</p>
                             <div class="col-xxl-12">
                                 <div>
-                                    <input name="thambnail" class="form-control" type="file" id="formFileMultiple" multiple>
+                                    <input name="thambnail" class="form-control" type="file" id="formFileMultiple">
                                 </div>
                                 @error('thambnail')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
@@ -80,7 +80,7 @@
                                 {{-- Product Multiple image  --}}
                         <div>
                             <h5 class="fs-14 mb-1">Product Gallery</h5>
-                            <p class="text-muted">Add Product other Images. <b>[Drag & Drop Multiple Images below]</b> </p>
+                            <p class="text-muted">Add Product other Images. <b>[Drag n Drop or Add Multiple Images Here]</b> </p>
 
                             <div class="form-group">
                                 <input type="file" name="images[]" id="images" class="form-control" multiple>
@@ -289,7 +289,7 @@
                     <div class="card-body">
                         <div class="hstack gap-3 align-items-start">
                             <div class="flex-grow-1">
-                                <input class="form-control" name="tags" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" />
+                                <input class="form-control" name="tags" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" data-role="tagsinput"/>
                             </div>
                         </div>
                     </div>

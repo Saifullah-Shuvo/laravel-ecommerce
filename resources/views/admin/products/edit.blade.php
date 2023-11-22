@@ -14,6 +14,7 @@
 @endpush
 
 @section('panel')
+    {{-- @dd($product->product_images()); --}}
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
         <h4 class="mb-sm-0">Edit Products</h4>
 
@@ -69,7 +70,10 @@
                             <p class="text-muted">Add Product thumbnail Image.</p>
                             <div class="col-xxl-12">
                                 <div>
-                                    <input name="thambnail" class="form-control" type="file" id="formFileMultiple" multiple>
+                                    <input name="thambnail" class="form-control" type="file" id="formFileMultiple">
+                                    <br>
+                                    <p class="text-muted">Thumbnail Image Preview</p>
+                                    <img class="rounded shadow" alt="Thambnai Image" width="300" src={{ asset('admins/productimage/'.$product->thambnail) }}>
                                 </div>
                                 @error('thambnail')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
@@ -80,9 +84,22 @@
                                 {{-- Product Multiple image  --}}
                         <div>
                             <h5 class="fs-14 mb-1">Product Gallery</h5>
-                            <p class="text-muted">Add Product other Images.</p>
+                            <p class="text-muted">Add Product other Images. <b>[Drag n Drop or Add Multiple Images Here]</b> </p>
 
-                            <div class="dropzone">
+                            <div class="form-group">
+                                <input type="file" name="images[]" id="images" class="form-control" multiple>
+                                <br>
+                                <p class="text-muted">Mutlitple Images Preview</p>
+
+                                @forelse($product->product_images as $image)
+                                <img class="rounded shadow" alt="" width="200" src={{ asset('admins/productimage/multiImage/'.$image->image_path) }}>
+                                @empty 
+                                <p>No images available for this product.</p>
+                                @endforelse
+
+                            </div>
+
+                            {{-- <div class="dropzone">
                                 <div class="fallback">
                                     <input name="images" type="file" multiple="multiple">
                                 </div>
@@ -118,7 +135,7 @@
                                         </div>
                                     </div>
                                 </li>
-                            </ul>
+                            </ul> --}}
                             <!-- end dropzon-preview -->
                         </div>
                     </div>

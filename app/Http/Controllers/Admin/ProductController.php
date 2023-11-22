@@ -7,16 +7,15 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\ProductImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\FuncCall;
 
 class ProductController extends Controller
 {
                 // All Products
     public function index(){
-        $products = Product::latest()->get();
+        $productcount = Product::get();
+        $products = Product::latest()->paginate(10);
         $published = Product::where('status','=',1)->latest()->get();
-        return view('admin.products.index',compact('products','published'));
+        return view('admin.products.index',compact('products','published','productcount'));
     }
                 // Create Products
     public function add(){
@@ -58,31 +57,20 @@ class ProductController extends Controller
             $request->thambnail->move('admins/productimage', $imageName);
             $products->thambnail = $imageName;
         }
-                // multiple image store
-        $images = array();
-        if($request->hasFile('images')){
-            foreach ($request->file('images') as $key => $image) {
-                $imageName= uniqid().'.'.$image->getClientOriginalExtension();
-                // Image::make($image)->resize(600,600)->save('public/files/product/'.$imageName);
-                $image->move('admins/productimage/multiImage', $imageName);
-                array_push($images, $imageName);
-            }
-            $products->images = json_encode($images);
-        }
-
-        // foreach ($request->file('images') as $image) {
-        //     $imageName = time().'.'.$image->getClientOriginalExtension();
-        //     $image->move(public_path('admins/productimage/multiImage'), $imageName);
-
-        //     // ProductImage::create([
-        //     //     'product_id' => $productId,
-        //     //     'image_path' => $imageName,
-        //     // ]);
-        //     $products->images = $imageName;
-        // }
-        // dd($request->all());
 
         $products->save();
+                // multiple image store in the different database table
+        if($request->file('images')){
+            foreach ($request->file('images') as $image) {
+                $imageName = uniqid().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('admins/productimage/multiImage'), $imageName);
+    
+                ProductImage::create([
+                    'product_id' => $products->id,
+                    'image_path' => $imageName,
+                ]);
+            }
+        }
         $notification = array('message' => "Products Created Successfully!", 'alert-type' => 'success');
         return redirect()->route('product.all')->with($notification);
     }
@@ -90,8 +78,9 @@ class ProductController extends Controller
                 // Edit Products
     public function edit($id){
         $categories = Category::all();
-        $product = Product::findorFail($id);
-        return view('admin.products.edit',compact('product','categories'));
+        $product = Product::with('product_images')->findorFail($id);
+        $productImage = ProductImage::get();
+        return view('admin.products.edit',compact('product','categories','productImage'));
     }
 
                 // Update Products
@@ -104,7 +93,7 @@ class ProductController extends Controller
 
         $imageName = '';
 
-        $products = Product::findOrFail($id);
+        $products = Product::with('product_images')->findorFail($id);
 
         $products->category_id = $request->category_id;
         $products->name = $request->name;
@@ -132,27 +121,37 @@ class ProductController extends Controller
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
-            // $imageName = time().'.'.$request->image->getClientOriginalExtension();
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
             $request->thambnail->move('admins/productimage', $imageName);
             $products->thambnail = $imageName;
         }
 
-                // multiple image store
-        // $images = array();
-        // if($request->hasFile('images')){
-        //     foreach ($request->file('images') as $key => $image) {
-        //         $imageName= hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        //         // Image::make($image)->resize(600,600)->save('public/files/product/'.$imageName);
-        //         $request->images->move('admins/productimage', $imageName);
-        //         array_push($images, $imageName);
-        //     }
-        //     $products->images = json_encode($images);
-        // }
-
-        // DB::table('products')->insert($data);
-
         $products->save();
+        
+        // multiple image Update
+        if($request->file('images')){
+            
+            $products->product_images()->delete();
+            foreach ($request->file('images') as $image) {
+
+                $oldImage = $products->product_images;
+                foreach($oldImage as $row){
+                    $oldImagePath = public_path('admins/productimage/multiImage/' . $row->image_path);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $imageName = uniqid().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('admins/productimage/multiImage'), $imageName);
+                
+                ProductImage::create([
+                    'product_id' => $products->id,
+                    'image_path' => $imageName,
+                ]);
+            }
+        }
+        
         $notification = array('message' => "Products Updated Successfully!", 'alert-type' => 'success');
         return redirect()->route('product.all')->with($notification);
     }
@@ -161,11 +160,20 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $products = Product::findOrFail($id);
-                //delete image
+                // Delete image
         $image_path = public_path('admins/productimage/' . $products->thambnail);
         if (file_exists($image_path)) {
             unlink($image_path);
         }
+
+        $oldImage = $products->product_images;
+        foreach($oldImage as $row){
+            $oldImagePath = public_path('admins/productimage/multiImage/' . $row->image_path);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
         $products->delete();
         $notification = array('message' => "Products Deleted!", 'alert-type' => 'success');
         return redirect()->back()->with($notification);

@@ -49,7 +49,7 @@
                                         <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all"
                                             role="tab">
                                             All <span
-                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $products->count() }}</span>
+                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $productcount->count() }}</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -266,11 +266,11 @@
                             <!-- end tab pane -->
                         </div>
                         <!-- end tab content -->
-
                     </div>
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
+                {{ $products ->links() }}
             </div>
         </div>
         <!-- end col -->
