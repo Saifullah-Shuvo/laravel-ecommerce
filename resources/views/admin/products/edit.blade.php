@@ -222,9 +222,6 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-                <div class="text-end mb-3">
-                    <button type="submit" class="btn btn-success w-sm">Submit</button>
-                </div>
             </div>
             <!-- end col -->
 
@@ -303,6 +300,10 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
+
+                <div class="text-center mb-3">
+                    <button type="submit" class="btn btn-success w-100">Submit</button>
+                </div>
 
                 {{-- <div class="card">
                     <div class="card-header">

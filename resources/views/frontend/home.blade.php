@@ -12,7 +12,7 @@ Home Page
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide overlay">
-                    <div class="single-slider slide-inner slide-inner1">
+                    <div class="single-slider slide-inner slide-inner1" style="background-image: url('assets/images/slider/1.jpg');">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-12 col-lg-9 col-12">

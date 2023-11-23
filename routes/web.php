@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,3 +65,9 @@ Route::middleware('auth:admin')->group(function () {
 
 });
 
+Route::middleware('auth:admin')->group(function () {
+
+    Route::get('/slider/all', [SlierController::class, 'index'])->name('slider.all');
+    Route::get('/slider/add', [SlierController::class, 'add'])->name('slider.add');
+    Route::post('/slider/store', [SlierController::class, 'store'])->name('slider.store');
+});
