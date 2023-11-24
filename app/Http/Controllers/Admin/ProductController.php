@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function add(){
         $categories = Category::all();
         return view('admin.products.add',compact('categories'));
-    }
+    } 
                 // Store Product
     public function store(Request $request)
     {
@@ -64,7 +64,7 @@ class ProductController extends Controller
             foreach ($request->file('images') as $image) {
                 $imageName = uniqid().'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('admins/productimage/multiImage'), $imageName);
-    
+
                 ProductImage::create([
                     'product_id' => $products->id,
                     'image_path' => $imageName,
@@ -127,10 +127,10 @@ class ProductController extends Controller
         }
 
         $products->save();
-        
+
         // multiple image Update
         if($request->file('images')){
-            
+
             $products->product_images()->delete();
             foreach ($request->file('images') as $image) {
 
@@ -144,14 +144,14 @@ class ProductController extends Controller
 
                 $imageName = uniqid().'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('admins/productimage/multiImage'), $imageName);
-                
+
                 ProductImage::create([
                     'product_id' => $products->id,
                     'image_path' => $imageName,
                 ]);
             }
         }
-        
+
         $notification = array('message' => "Products Updated Successfully!", 'alert-type' => 'success');
         return redirect()->route('product.all')->with($notification);
     }

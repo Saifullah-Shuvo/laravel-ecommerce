@@ -3,12 +3,18 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('frontend.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+
+Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
+Route::get('/shop/{category_id}', [HomeController::class, 'categoryProduct'])->name('home.shop.category');
+
+Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -70,4 +76,12 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/slider/all', [SlierController::class, 'index'])->name('slider.all');
     Route::get('/slider/add', [SlierController::class, 'add'])->name('slider.add');
     Route::post('/slider/store', [SlierController::class, 'store'])->name('slider.store');
+
+    Route::get('/slider/edit/{id}', [SlierController::class, 'edit'])->name('slider.edit');
+    Route::post('/slider/update/{id}', [SlierController::class, 'update'])->name('slider.update');
+    Route::get('/slider/delete/{id}', [SlierController::class, 'destroy'])->name('slider.delete');
+
+    //Slider status
+    Route::get('/slider/status/enable/{id}',[SlierController::class, 'status_enable'])->name('slider.status.enable');
+    Route::get('/slider/status/disable/{id}',[SlierController::class, 'status_disable'])->name('slider.status.disable');
 });

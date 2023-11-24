@@ -5,6 +5,9 @@
 @endsection
 
 @section('panel')
+    @php
+    use Illuminate\Support\Str;
+    @endphp
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
         <h4 class="mb-sm-0">Sliders List</h4>
 
@@ -24,8 +27,8 @@
                         <div class="row g-4">
                             <div class="col-sm-auto">
                                 <div>
-                                    <a href="{{route('slider.add')}}" 
-                                    class="btn btn-success" id="addproduct-btn"><i 
+                                    <a href="{{route('slider.add')}}"
+                                    class="btn btn-success" id="addproduct-btn"><i
                                     class="ri-add-line align-bottom me-1"></i> Add New</a>
                                 </div>
                             </div>
@@ -63,7 +66,7 @@
                                     <table class="table table-nowrap mb-0">
                                         <thead class="table-light">
                                             <tr>
-                        
+
                                                 <th scope="col">No</th>
                                                 <th scope="col">Title</th>
                                                 <th scope="col">Image</th>
@@ -71,17 +74,19 @@
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Created At</th>
                                                 <th scope="col">Action</th>
-                        
+
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                             @forelse ($sliders as $key => $slider)
                                                 <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $slider->title }}</td>
-                                                    <td><img src="{{ asset('admins/sliderimage/' . $slider->image) }}" alt=""
-                                                        class="rounded avatar-xs shadow"></td>
-                                                    <td>{{ $slider->description }}</td>
+                                                    <td> {{ $key + 1 }} </td>
+                                                    <td> {{ Str::limit($slider->title, $limit = 15, $end = '...') }} </td>
+                                                    <td> <img src="{{ asset('admins/sliderimage/' . $slider->image) }}" alt=""
+                                                        class="rounded avatar-xs shadow">
+                                                    </td>
+                                                    <td> {{ Str::limit($slider->description, $limit = 15, $end = '...') }} </td>
                                                     <td>
                                                         @if ($slider->status == 1)
                                                         <span class="badge rounded-pill bg-success-subtle text-success">ENABLED</span>
@@ -96,22 +101,34 @@
                                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 Action
                                                             </button>
-                                                            {{-- <div class="dropdown-menu">
-                        
-                                                                <a class="dropdown-item text-info edit" href="">
+                                                            <div class="dropdown-menu">
+
+                                                                <a class="dropdown-item text-info edit" href="{{ route('slider.edit', ['id' => $slider->id]) }}">
                                                                         <i class="ri-pencil-fill"></i> Edit</a>
+
+                                                                    @if ($slider->status == 1)
+                                                                        <a class="dropdown-item text-danger"
+                                                                            href="{{ route('slider.status.disable', ['id' => $slider->id]) }}"><i
+                                                                                class="bx bx-rotate-right"></i> Disable</a>
+                                                                    @else
+                                                                        <a class="dropdown-item text-success"
+                                                                            href="{{ route('slider.status.enable', ['id' => $slider->id]) }}"><i
+                                                                                class="bx bx-rotate-right"></i> Enable</a>
+                                                                    @endif
+
                                                                 <a class="dropdown-item text-danger" id="delete"
-                                                                    href="{{ route('category.delete', ['id' => $category->id]) }}"
+                                                                    href="{{ route('slider.delete', ['id' => $slider->id]) }}"
                                                                     onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
-                                                            </div> --}}
+
+                                                            </div>
                                                         </div>
                                                     </td>
-                        
+
                                                 </tr>
                                             @empty
-                                                <h3 class="text-center">No categories data found! </h3>
+                                                <h3 class="text-center">No slider data found! </h3>
                                             @endforelse
-                        
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -130,60 +147,3 @@
     </div>
     <!-- end row -->
 @endsection
-
-@push('script')
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('body').on('click', '.edit', function() {
-                let cat_id = $(this).data('id');
-                let url="{{route('category.edit',':id')}}"
-                $.get(url.replace(':id',cat_id), function(data) {
-                    $("#preview").attr('src',data.image_path)
-                    $('#e_category_name').val(data.category_name);
-                    $('#e_category_id').val(data.id);
-                })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX request failed: " + textStatus, errorThrown);
-                    // Handle the error, e.g., display an error message.
-                });
-            });
-        });
-    </script>
-
-
-    <script>
-        function myFunction() {
-            // onclick="return myFunction();"
-            if (!confirm("Are You Sure to delete this?"))
-                event.preventDefault();
-        }
-    </script>
-
-    {{-- <script>
-        $(document).ready(function() {
-            "use strict";
-
-            $('.editBtn').on('click', function() {
-                let data = $(this).data();
-                let category = data.category;
-                let modal = $('#category_edit');
-                modal.find('input[name="category_name"]').val(category.category_name);
-                modal.find('.modalImage').attr('scr', data.image);
-                modal.find('form').attr('action', data.action);
-                modal.modal('show');
-            });
-
-            $('.addBtn').on('click', function() {
-                let data = $(this).data();
-                let modal = $('#category_edit');
-
-                modal.find('input[name="category_name"]').val('');
-                modal.find('.modalImage').attr('scr', '');
-                modal.find('form').attr('action', data.action);
-                modal.modal('show');
-            });
-        });
-    </script> --}}
-
-@endpush

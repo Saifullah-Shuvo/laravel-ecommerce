@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 
+@section('title')
+Contact Page
+@endsection
+
 @section('panel')
 
     <!-- .breadcumb-area start -->

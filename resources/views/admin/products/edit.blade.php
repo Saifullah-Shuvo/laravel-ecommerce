@@ -93,50 +93,11 @@
 
                                 @forelse($product->product_images as $image)
                                 <img class="rounded shadow" alt="" width="200" src={{ asset('admins/productimage/multiImage/'.$image->image_path) }}>
-                                @empty 
+                                @empty
                                 <p>No images available for this product.</p>
                                 @endforelse
 
                             </div>
-
-                            {{-- <div class="dropzone">
-                                <div class="fallback">
-                                    <input name="images" type="file" multiple="multiple">
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3">
-                                        <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                    </div>
-
-                                    <h5>Drop files here or click to upload.</h5>
-                                </div>
-                            </div>
-
-                            <ul class="list-unstyled mb-0" id="dropzone-preview">
-                                <li class="mt-2" id="dropzone-preview-list">
-                                    <!-- This is used as the file preview template -->
-                                    <div class="border rounded">
-                                        <div class="d-flex p-2">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar-sm bg-light rounded">
-                                                    <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Product-Image" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="pt-1">
-                                                    <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
-                                                    <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                                                    <strong class="error text-danger" data-dz-errormessage></strong>
-                                                </div>
-                                            </div>
-                                            <div class="flex-shrink-0 ms-3">
-                                                <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul> --}}
-                            <!-- end dropzon-preview -->
                         </div>
                     </div>
                 </div>
@@ -276,11 +237,11 @@
                         <p class="text-muted mb-2"> <a href="{{route('category.all')}}" class="float-end text-decoration-underline">Add
                                 New</a>Select product category</p>
                         <select class="form-select" id="choices-category-input" name="category_id" data-choices data-choices-search-false>
-                            
+
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->category_name }}</option>
                             @endforeach
-                            
+
                         </select>
                     </div>
                     <!-- end card body -->
