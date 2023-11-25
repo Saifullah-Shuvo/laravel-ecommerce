@@ -7,14 +7,21 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+        // Frontend Routes
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 
 Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
 Route::get('/shop/{category_id}', [HomeController::class, 'categoryProduct'])->name('home.shop.category');
 
+Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('home.product.details');
+
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+
+
+        // User Routes
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,6 +34,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+        // Admins Routes
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');

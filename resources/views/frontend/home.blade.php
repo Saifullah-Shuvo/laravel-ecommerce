@@ -38,6 +38,7 @@ Home Page
     </div>
     <!-- slider-area end -->
     <!-- featured-area start -->
+    {{-- @dd($featuredProduct) --}}
     <div class="featured-area featured-area2">
         <div class="container">
             <div class="row">
@@ -48,7 +49,7 @@ Home Page
                             <div class="featured-img">
                                 <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
                                 <div class="featured-content">
-                                    <a href="shop.html">{{ $data->name }}</a>
+                                    <a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +109,7 @@ Home Page
                             </div>
                         </div>
                         <div class="product-content">
-                            <h3><a href="single-product.html">{{ $data->name }}</a></h3>
+                            <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
                             <p class="pull-left">${{ $data->selling_price }}
 
                             </p>
@@ -156,7 +157,7 @@ Home Page
                             </div>
                         </div>
                         <div class="product-content">
-                            <h3><a href="single-product.html">{{ $data->name }}</a></h3>
+                            <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
                             <p class="pull-left">${{ $data->selling_price }}
 
                             </p>

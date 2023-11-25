@@ -10,7 +10,7 @@ use Intervention\Image\Image;
 class SlierController extends Controller
 {
     public function index(){
-        $sliders = Slider::where('status','=',1)->latest()->get();
+        $sliders = Slider::latest()->get();
         return view('admin.sliders.index',compact('sliders'));
     }
 
@@ -65,7 +65,7 @@ class SlierController extends Controller
         $sliders->description = $request->description;
         $sliders->status = $request->status;
 
-                // slider image store in public folder
+                // slider image update in public folder
         if ($request->image) {
             $image=$request->image;
 

@@ -35,15 +35,15 @@ Shop Page
                                 <a class="{{ Route::is('home.shop') ? 'active' : '' }}" href="{{ route('home.shop')}}">All product</a>
                             </li>
                             <li>
-                                @php
+                                {{-- @php
                                     foreach ($categoryProduct->products as $row){
                                         $cat_id = $row->category_id;
                                     }
-                                @endphp
+                                @endphp --}}
 
                                 {{-- count($categoryProduct->products) --}}
                                 @foreach ($category as $data)
-                                <a class="{{$data->id == $cat_id ? 'active' : ''}}"
+                                <a class="{{--{{$data->id == $cat_id ? 'active' : ''}}--}}"
                                     href="{{ route('home.shop.category',['category_id' => $data->id]) }}">
                                     {{ $data->category_name }}</a>
                                 @endforeach

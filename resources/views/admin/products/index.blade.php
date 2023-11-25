@@ -56,7 +56,7 @@
                                         <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published"
                                             role="tab">
                                             Published <span
-                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $published->count() }}</span>
+                                                class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">{{ $publishedproductcount->count() }}</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -165,6 +165,8 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <br>
+                                {{ $products ->links() }}
                             </div>
                             <!-- end tab pane -->
 
@@ -252,7 +254,10 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <br>
+                                {{ $published ->links() }}
                             </div>
+                            
                             <!-- end tab pane -->
 
                             <div class="tab-pane" id="productnav-draft" role="tabpanel">
@@ -270,7 +275,7 @@
                     <!-- end card body -->
                 </div>
                 <!-- end card -->
-                {{ $products ->links() }}
+                {{-- {{ $products ->links() }} --}}
             </div>
         </div>
         <!-- end col -->

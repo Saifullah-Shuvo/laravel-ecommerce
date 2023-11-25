@@ -13,9 +13,10 @@ class ProductController extends Controller
                 // All Products
     public function index(){
         $productcount = Product::get();
+        $publishedproductcount = Product::where('status','=',1)->latest()->get();
         $products = Product::latest()->paginate(10);
-        $published = Product::where('status','=',1)->latest()->get();
-        return view('admin.products.index',compact('products','published','productcount'));
+        $published = Product::where('status','=',1)->latest()->paginate(10);
+        return view('admin.products.index',compact('products','published','productcount','publishedproductcount'));
     }
                 // Create Products
     public function add(){
@@ -54,16 +55,19 @@ class ProductController extends Controller
         $image = $request->thambnail;
         if ($image) {
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $request->thambnail->move('admins/productimage', $imageName);
+            $imageResize = new \Intervention\Image\ImageManager();
+            $imageResize->make($image)->resize(600,622)->save('admins/productimage/'.$imageName);
             $products->thambnail = $imageName;
         }
 
         $products->save();
+
                 // multiple image store in the different database table
         if($request->file('images')){
             foreach ($request->file('images') as $image) {
-                $imageName = uniqid().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('admins/productimage/multiImage'), $imageName);
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $imageResize = new \Intervention\Image\ImageManager();
+                $imageResize->make($image)->resize(600,622)->save('admins/productimage/multiImage/'.$imageName);
 
                 ProductImage::create([
                     'product_id' => $products->id,
@@ -122,7 +126,8 @@ class ProductController extends Controller
                 unlink($image_path);
             }
             $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $request->thambnail->move('admins/productimage', $imageName);
+            $imageResize = new \Intervention\Image\ImageManager();
+            $imageResize->make($image)->resize(600,622)->save('admins/productimage/'.$imageName);
             $products->thambnail = $imageName;
         }
 
@@ -142,8 +147,9 @@ class ProductController extends Controller
                     }
                 }
 
-                $imageName = uniqid().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('admins/productimage/multiImage'), $imageName);
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $imageResize = new \Intervention\Image\ImageManager();
+                $imageResize->make($image)->resize(600,622)->save('admins/productimage/multiImage/'.$imageName);
 
                 ProductImage::create([
                     'product_id' => $products->id,

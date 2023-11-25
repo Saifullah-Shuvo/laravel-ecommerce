@@ -35,6 +35,20 @@ class HomeController extends Controller
         return view('frontend.sections.shopCategory',compact('categoryProduct','category'));
     }
 
+    public function productDetails($id){
+        $productDetails = Product::findOrFail($id);
+        $productMultiImage = Product::with('product_images')->findOrFail($id);
+        $productCategory = Product::with('category')->findOrFail($id);
+
+        $relatedProducts = Product::where('category_id', $productDetails->category_id)
+            ->where('id', '!=', $productDetails->id)
+            ->limit(4)
+            ->get();
+        
+        return view('frontend.sections.product_details',compact('productDetails',
+        'productMultiImage','productCategory','relatedProducts'));
+    }
+
     public function blog(){
         return view('frontend.sections.blog');
     }

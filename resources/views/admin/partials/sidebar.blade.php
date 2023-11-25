@@ -132,17 +132,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarPages" role="button" aria-expanded="false" aria-controls="sidebarPages">
-                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Brands</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('slider/*') ? 'active' : '' }} " href="{{ route('slider.all') }}" role="button" aria-expanded="false" aria-controls="sidebarAuth">
                         <i class="mdi mdi-account-circle-outline"></i> <span data-key="t-authentication">Manage Sliders</span>
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarPages" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Blogs</span>
+                    </a>
+                </li>
 
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Settings</span></li>
