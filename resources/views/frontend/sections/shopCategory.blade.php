@@ -35,15 +35,9 @@ Shop Page
                                 <a class="{{ Route::is('home.shop') ? 'active' : '' }}" href="{{ route('home.shop')}}">All product</a>
                             </li>
                             <li>
-                                {{-- @php
-                                    foreach ($categoryProduct->products as $row){
-                                        $cat_id = $row->category_id;
-                                    }
-                                @endphp --}}
 
-                                {{-- count($categoryProduct->products) --}}
                                 @foreach ($category as $data)
-                                <a class="{{--{{$data->id == $cat_id ? 'active' : ''}}--}}"
+                                <a class="{{$data->id == $categoryProduct->id ? 'active' : ''}}"
                                     href="{{ route('home.shop.category',['category_id' => $data->id]) }}">
                                     {{ $data->category_name }}</a>
                                 @endforeach
@@ -73,7 +67,7 @@ Shop Page
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="single-product.html">{{ $data->name }}</a></h3>
+                                    <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
                                     <p class="pull-left">${{ $data->selling_price }}
                                     </p>
                                     <ul class="pull-right d-flex">
@@ -87,7 +81,11 @@ Shop Page
                             </div>
                         </li>
                         @empty
-                            <h3 class="text-center">No Products Found! </h3>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                <h5>No Products found in this Category!</h5>
+                                </div>
+                            </div>
                         @endforelse
 
                         <li class="col-12 text-center">

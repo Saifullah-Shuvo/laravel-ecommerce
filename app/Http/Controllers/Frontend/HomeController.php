@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function shop(){
         $latestProduct = Product::where('status','=',1)->with('category')->latest()->get();
-        $category = Category::where('status','=',1)->with('products')->latest()->get();
+        $category = Category::where('status','=',1)->latest()->get();
         return view('frontend.sections.shop',compact('latestProduct','category'));
     }
 
@@ -36,6 +36,7 @@ class HomeController extends Controller
     }
 
     public function productDetails($id){
+
         $productDetails = Product::findOrFail($id);
         $productMultiImage = Product::with('product_images')->findOrFail($id);
         $productCategory = Product::with('category')->findOrFail($id);
@@ -44,7 +45,7 @@ class HomeController extends Controller
             ->where('id', '!=', $productDetails->id)
             ->limit(4)
             ->get();
-        
+
         return view('frontend.sections.product_details',compact('productDetails',
         'productMultiImage','productCategory','relatedProducts'));
     }

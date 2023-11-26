@@ -39,7 +39,7 @@ Products Details
                             <img src="{{asset('admins')}}/productimage/multiImage/{{ $image->image_path }}" alt="">
                             @empty
                             @endforelse
-                            
+
                         </div>
                         <div class="product-thumbnil-active  owl-carousel">
                             <div class="item">
@@ -49,7 +49,7 @@ Products Details
                             <img src="{{asset('admins')}}/productimage/multiImage/{{ $image->image_path }}" alt="">
                             @empty
                             @endforelse
-                            
+
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@ Products Details
                 </div>
             </div>
             <div class="row">
-            
+
                 @forelse($relatedProducts as $data)
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="featured-product-wrap">
@@ -318,7 +318,7 @@ Products Details
                     <div class="row justify-content-center">
                       <h5>No Related Products found!</h5>
                     </div>
-                  </div>
+                </div>
                 @endforelse
 
             </div>
