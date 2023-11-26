@@ -37,6 +37,56 @@ Home Page
         </div>
     </div>
     <!-- slider-area end -->
+
+    <!-- product-area start -->
+    <div class="product-area product-area-2">
+        <div class="fluid-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Popular Products</h2>
+                        <img src="{{asset('frontend/')}}/assets/images/section-title.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <ul class="row">
+
+                @foreach ($popularProduct as $data)
+                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                    <div class="product-wrap">
+                        <div class="product-img">
+                            <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
+                            <div class="product-icon flex-style">
+                                <ul>
+                                    <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails" 
+                                        href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
+                            <p class="pull-left">${{ $data->selling_price }}
+
+                            </p>
+                            <ul class="pull-right d-flex">
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star-half-o"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+
+            </ul>
+        </div>
+    </div>
+    <!-- product-area end -->
+
     <!-- featured-area start -->
     {{-- @dd($featuredProduct) --}}
     <div class="featured-area featured-area2">
@@ -62,6 +112,7 @@ Home Page
         </div>
     </div>
     <!-- featured-area end -->
+
     <!-- start count-down-section -->
     <div class="count-down-area count-down-area-sub">
         <section class="count-down-section section-padding parallax" data-speed="7">
@@ -83,53 +134,7 @@ Home Page
         </section>
     </div>
     <!-- end count-down-section -->
-    <!-- product-area start -->
-    <div class="product-area product-area-2">
-        <div class="fluid-container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Popular Products</h2>
-                        <img src="{{asset('frontend/')}}/assets/images/section-title.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <ul class="row">
 
-                @foreach ($popularProduct as $data)
-                <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                    <div class="product-wrap">
-                        <div class="product-img">
-                            <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
-                            <div class="product-icon flex-style">
-                                <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
-                            <p class="pull-left">${{ $data->selling_price }}
-
-                            </p>
-                            <ul class="pull-right d-flex">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-
-            </ul>
-        </div>
-    </div>
-    <!-- product-area end -->
     <!-- product-area start -->
     <div class="product-area">
         <div class="fluid-container">
@@ -151,7 +156,7 @@ Home Page
                             <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
                             <div class="product-icon flex-style">
                                 <ul>
-                                    <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
+                                    <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
                                     <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
                                 </ul>
@@ -178,6 +183,7 @@ Home Page
         </div>
     </div>
     <!-- product-area end -->
+
     <!-- testmonial-area start -->
     <div class="testmonial-area testmonial-area2 bg-img-2 black-opacity">
         <div class="container">
@@ -227,20 +233,28 @@ Home Page
         </div>
     </div>
     <!-- testmonial-area end -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1">
+    
+    <!-- product details modal start  -->
+    <div class="modal fade" id="popularproductdetails" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="container">
+                    <div class="row justify-content-center">
+                      <h5 class="text-danger">Product Details</h5 class="text-red">
+                    </div>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <div class="modal-body d-flex">
                     <div class="product-single-img w-50">
-                        <img src="assets/images/product/product-details.jpg" alt="">
+                        <img id="preview" src="assets/images/product/product-details.jpg" alt="">
                     </div>
                     <div class="product-single-content w-50">
-                        <h3>Pure Nature Hohey</h3>
+                        <h3 id="productName"></h3>
                         <div class="rating-wrap fix">
-                            <span class="pull-left">$219.56</span>
+                            <span class="pull-left">$</span>
+                            <span id="price" class="pull-left">$</span>
                             <ul class="rating pull-right">
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
@@ -250,7 +264,7 @@ Home Page
                                 <li>(05 Customar Review)</li>
                             </ul>
                         </div>
-                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire denounce with righteous indignation</p>
+                        <p id="description"></p>
                         <ul class="input-style">
                             <li class="quantity cart-plus-minus">
                                 <input type="text" value="1" />
@@ -259,8 +273,8 @@ Home Page
                         </ul>
                         <ul class="cetagory">
                             <li>Categories:</li>
-                            <li><a href="#">Honey,</a></li>
-                            <li><a href="#">Olive Oil</a></li>
+                            <li><b><a id="categoryName" href="#"></a></b></li>
+                            
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>
@@ -275,5 +289,31 @@ Home Page
             </div>
         </div>
     </div>
+    <!-- product details modal end  -->
 
 @endsection
+
+@push('script')
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('body').on('click', '.edit', function() {
+                let cat_id = $(this).data('id');
+                let url="{{route('home.product.details.modal',':id')}}"
+                $.get(url.replace(':id',cat_id), function(productDetails) {
+                    // console.log(productDetails.category);
+                    $("#preview").attr('src',productDetails.thambnail)
+                    $('#productName').text(productDetails.name);
+                    $('#price').text(productDetails.selling_price);
+                    $('#description').text(productDetails.description);
+                    $('#categoryName').text(productDetails.category.category_name);
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX request failed: " + textStatus, errorThrown);
+                    // Handle the error, e.g., display an error message.
+                });
+            });
+        });
+    </script>
+
+@endpush

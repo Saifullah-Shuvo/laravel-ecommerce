@@ -138,7 +138,11 @@
                         
                                                 </tr>
                                             @empty
-                                                <h3 class="text-center">No categories data found! </h3>
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                      <h5>No categories data found!</h5>
+                                                    </div>
+                                                </div>
                                             @endforelse
                         
                                         </tbody>

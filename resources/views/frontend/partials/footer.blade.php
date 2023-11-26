@@ -6,11 +6,10 @@
                     <div class="col-lg-12 col-12">
                         <div class="footer-top-text text-center">
                             <ul>
-                                <li><a href="home.html">home</a></li>
-                                <li><a href="#">our story</a></li>
-                                <li><a href="#">feed shop</a></li>
-                                <li><a href="blog.html">how to eat blog</a></li>
-                                <li><a href="contact.html">contact</a></li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <li><a href="{{ route('home.about') }}">Our Story</a></li>
+                                <li><a href="{{ route('home.shop') }}">Shop Page</a></li>
+                                <li><a href="{{ route('home.contact') }}">contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -48,7 +47,10 @@
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <div class="footer-reserved">
                         <ul>
-                            <li>Copyright © 2019 Tohoney All rights reserved.</li>
+                            <li>Copyright © <script>document.write(new Date().getFullYear())</script> {{ config('app.name') }} 
+                                <br> All rights reserved.</li>
+                            
+                            
                         </ul>
                     </div>
                 </div>

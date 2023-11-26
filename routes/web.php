@@ -16,6 +16,7 @@ Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
 Route::get('/shop/{category_id}', [HomeController::class, 'categoryProduct'])->name('home.shop.category');
 
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('home.product.details');
+Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetailsModal'])->name('home.product.details.modal');
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');

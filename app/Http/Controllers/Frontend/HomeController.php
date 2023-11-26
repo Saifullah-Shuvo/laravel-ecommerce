@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,8 +24,14 @@ class HomeController extends Controller
         return view('frontend.sections.about',compact('popularProduct'));
     }
 
-    public function shop(){
-        $latestProduct = Product::where('status','=',1)->with('category')->latest()->get();
+    public function shop(Request $request){
+        $latestProduct = Product::where('status','=',1)->with('category')->latest()->paginate(8);
+        
+        if ($request->ajax()) {
+            $view = view('frontend.sections.data', compact('latestProduct'))->render();
+            return response()->json(['html' => $view]);
+        }
+
         $category = Category::where('status','=',1)->latest()->get();
         return view('frontend.sections.shop',compact('latestProduct','category'));
     }
@@ -35,9 +42,20 @@ class HomeController extends Controller
         return view('frontend.sections.shopCategory',compact('categoryProduct','category'));
     }
 
+    public function productDetailsModal($id){
+
+        $productDetails = Product::with('category')->findOrFail($id);
+        $productDetails->thambnail =asset('admins/productimage/' . $productDetails->thambnail);
+        // $data = [
+        //     'productDetails' => $productDetails,
+        // ];
+        return response()->json($productDetails);
+    }
+
     public function productDetails($id){
 
         $productDetails = Product::findOrFail($id);
+
         $productMultiImage = Product::with('product_images')->findOrFail($id);
         $productCategory = Product::with('category')->findOrFail($id);
 
