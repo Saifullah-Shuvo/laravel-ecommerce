@@ -60,7 +60,7 @@ Shop Page
                                     <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
                                     <div class="product-icon flex-style">
                                         <ul>
-                                            <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails" 
+                                            <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails"
                                                 href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
@@ -89,13 +89,10 @@ Shop Page
                             </div>
                         @endforelse
 
-                        <li class="col-12 text-center">
-                            <a class="loadmore-btn" href="javascript:void(0);">Load More</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
+            {{-- paginate links here  --}}
         </div>
     </div>
     <!-- product-area end -->
@@ -140,7 +137,7 @@ Shop Page
                         <ul class="cetagory">
                             <li>Categories:</li>
                             <li><b><a id="categoryName" href="#"></a></b></li>
-                            
+
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>

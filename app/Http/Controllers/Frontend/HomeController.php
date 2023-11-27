@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,7 +25,7 @@ class HomeController extends Controller
 
     public function shop(Request $request){
         $latestProduct = Product::where('status','=',1)->with('category')->latest()->paginate(8);
-        
+
         if ($request->ajax()) {
             $view = view('frontend.sections.data', compact('latestProduct'))->render();
             return response()->json(['html' => $view]);

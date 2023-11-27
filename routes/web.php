@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
@@ -83,6 +84,7 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
 
+    //slider crud
     Route::get('/slider/all', [SlierController::class, 'index'])->name('slider.all');
     Route::get('/slider/add', [SlierController::class, 'add'])->name('slider.add');
     Route::post('/slider/store', [SlierController::class, 'store'])->name('slider.store');
@@ -94,4 +96,20 @@ Route::middleware('auth:admin')->group(function () {
     //Slider status
     Route::get('/slider/status/enable/{id}',[SlierController::class, 'status_enable'])->name('slider.status.enable');
     Route::get('/slider/status/disable/{id}',[SlierController::class, 'status_disable'])->name('slider.status.disable');
+});
+
+Route::middleware('auth:admin')->group(function () {
+
+    //slider crud
+    Route::get('/blog/all', [BlogController::class, 'index'])->name('blog.all');
+    Route::get('/blog/add', [BlogController::class, 'add'])->name('blog.add');
+    Route::post('/blog/store', [BlogController::class, 'store'])->name('blog.store');
+
+    // Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    // Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
+    // Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+
+    // //blog status
+    // Route::get('/blog/status/enable/{id}',[BlogController::class, 'status_enable'])->name('blog.status.enable');
+    // Route::get('/blog/status/disable/{id}',[BlogController::class, 'status_disable'])->name('blog.status.disable');
 });

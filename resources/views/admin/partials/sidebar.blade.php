@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
-        
+
     </div>
 
     <div id="scrollbar">
@@ -29,7 +29,7 @@
                         <i class="mdi mdi-speedometer"></i> <span data-key="t-dashboards"><b>Dashboard</b></span>
                     </a>
                 </li> <!-- end Dashboard Menu -->
-                
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="mdi mdi-view-grid-plus-outline"></i> <span data-key="t-apps">Manage Customers</span>
@@ -39,7 +39,7 @@
                             <li class="nav-item">
                                 <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> All Customers </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
                                     2FA Varified
@@ -67,7 +67,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a href="apps-api-key.html" class="nav-link" data-key="t-api-key"> Active Customers</a>
                             </li>
@@ -138,14 +138,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarPages" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                    <a class="nav-link menu-link {{ Request::is('blog/*') ? 'active' : '' }} " href="{{ route('blog.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
                         <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Manage Blogs</span>
                     </a>
                 </li>
 
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Settings</span></li>
-                
+
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarUI" role="button" aria-expanded="false" aria-controls="sidebarUI">

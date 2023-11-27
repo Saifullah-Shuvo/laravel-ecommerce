@@ -49,13 +49,18 @@ Shop Page
 
                         @include('frontend.sections.data');
 
-                        <li class="col-12 text-center">
-                            <a class="load-more-data loadmore-btn" href="javascript:void(0);">Load More</a>
-                        </li>
                     </ul>
-
                 </div>
-
+            </div>
+            <div class="row justify-content-center" style="padding:20px;">
+                <button class="btn btn-primary btn-md my-2 load-more-data">Load More...</button>
+            </div>
+            <div class="auto-load text-center" style="display: none;">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span>Loading...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +106,7 @@ Shop Page
                         <ul class="cetagory">
                             <li>Categories:</li>
                             <li><b><a id="categoryName" href="#"></a></b></li>
-                            
+
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>
@@ -163,11 +168,13 @@ Shop Page
                 .done(function (response) {
                     console.log(response);
                     if (response.html == '') {
-                        $('.auto-load').html("No more posts available");
+                        $('.auto-load').html("<h4>No More Products Available</h4>");
+                        $(".load-more-data").hide(); // Hide the "Load More" button
                         return;
                     }
                     $('.auto-load').hide();
                     $("#data-wrapper").append("<div class='row'>" + response.html + "</div>");
+
                 })
                 .fail(function (jqXHR, ajaxOptions, thrownError) {
                     console.log('Server error occured');

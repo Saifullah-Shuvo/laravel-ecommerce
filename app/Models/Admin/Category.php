@@ -9,7 +9,7 @@ use App\Models\Admin\Product;
 class Category extends Model
 {
     protected $table = "categories";
-    
+
     protected $fillable = [
         'category_name',
         'category_image'
@@ -18,5 +18,10 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
     }
 }
