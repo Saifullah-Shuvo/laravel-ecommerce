@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,4 +23,11 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
+
 }

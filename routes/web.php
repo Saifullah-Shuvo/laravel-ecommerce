@@ -20,6 +20,7 @@ Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->
 Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetailsModal'])->name('home.product.details.modal');
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
+Route::get('/blog/details/{id}', [HomeController::class, 'blogDetails'])->name('home.blog.details');
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 
@@ -105,11 +106,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/blog/add', [BlogController::class, 'add'])->name('blog.add');
     Route::post('/blog/store', [BlogController::class, 'store'])->name('blog.store');
 
-    // Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
-    // Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
-    // Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+    Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
 
-    // //blog status
-    // Route::get('/blog/status/enable/{id}',[BlogController::class, 'status_enable'])->name('blog.status.enable');
-    // Route::get('/blog/status/disable/{id}',[BlogController::class, 'status_disable'])->name('blog.status.disable');
+    //blog status
+    Route::get('/blog/status/enable/{id}',[BlogController::class, 'status_enable'])->name('blog.status.enable');
+    Route::get('/blog/status/disable/{id}',[BlogController::class, 'status_disable'])->name('blog.status.disable');
 });

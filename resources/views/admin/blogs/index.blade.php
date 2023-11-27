@@ -88,7 +88,7 @@
                                                         class="rounded avatar-xs shadow">
                                                     </td>
                                                     <td> {{ Str::limit($blog->description, $limit = 15, $end = '...') }} </td>
-                                                    <td>{{ $blog->category_id }}</td>
+                                                    <td>{{ $blog->category->category_name }}</td>
                                                     <td>
                                                         @if ($blog->status == 1)
                                                         <span class="badge rounded-pill bg-success-subtle text-success">ENABLED</span>
@@ -97,7 +97,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $blog->created_at->format('Y-m-d h:i:s') }}</td>
-                                                    {{-- <td>
+                                                    <td>
                                                         <div class="btn-group">
                                                             <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
                                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,26 +105,26 @@
                                                             </button>
                                                             <div class="dropdown-menu">
 
-                                                                <a class="dropdown-item text-info edit" href="{{ route('slider.edit', ['id' => $slider->id]) }}">
+                                                                <a class="dropdown-item text-info edit" href="{{ route('blog.edit', ['id' => $blog->id]) }}">
                                                                         <i class="ri-pencil-fill"></i> Edit</a>
 
-                                                                    @if ($slider->status == 1)
+                                                                    @if ($blog->status == 1)
                                                                         <a class="dropdown-item text-danger"
-                                                                            href="{{ route('slider.status.disable', ['id' => $slider->id]) }}"><i
+                                                                            href="{{ route('blog.status.disable', ['id' => $blog->id]) }}"><i
                                                                                 class="bx bx-rotate-right"></i> Disable</a>
                                                                     @else
                                                                         <a class="dropdown-item text-success"
-                                                                            href="{{ route('slider.status.enable', ['id' => $slider->id]) }}"><i
+                                                                            href="{{ route('blog.status.enable', ['id' => $blog->id]) }}"><i
                                                                                 class="bx bx-rotate-right"></i> Enable</a>
                                                                     @endif
 
                                                                 <a class="dropdown-item text-danger" id="delete"
-                                                                    href="{{ route('slider.delete', ['id' => $slider->id]) }}"
+                                                                    href="{{ route('blog.delete', ['id' => $blog->id]) }}"
                                                                     onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
 
                                                             </div>
                                                         </div>
-                                                    </td> --}}
+                                                    </td>
 
                                                 </tr>
                                             @empty

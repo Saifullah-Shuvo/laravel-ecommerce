@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Blog;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
@@ -68,7 +69,16 @@ class HomeController extends Controller
     }
 
     public function blog(){
-        return view('frontend.sections.blog');
+        $blogs = Blog::where('status','=',1)->with('admin')->latest()->paginate(6);
+        // dd($blogs);
+        return view('frontend.sections.blog',compact('blogs'));
+    }
+
+    public function blogDetails($id){
+        $categories= Category::where('status','=',1)->latest()->get();
+        $latestBlogs = Blog::where('status','=',1)->latest()->take(4)->get();
+        $blogDetails = Blog::findOrFail($id);
+        return view('frontend.sections.blog_details',compact('blogDetails','latestBlogs','categories'));
     }
 
     public function contact(){

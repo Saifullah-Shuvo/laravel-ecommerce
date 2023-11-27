@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 
+@section('title')
+    Blog Details
+@endsection
+
 @section('panel')
 
     <!-- .breadcumb-area start -->
@@ -10,7 +14,7 @@
                     <div class="breadcumb-wrap text-center">
                         <h2>Blog Details</h2>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><span>Blog Details</span></li>
                         </ul>
                     </div>
@@ -25,18 +29,15 @@
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="blog-details-wrap">
-                        <img src="{{asset('frontend')}}/assets/images/blog/blog-details.jpg" alt="">
-                        <h3>We Can Ensure Your Comfortable Life</h3>
+                        <img src="{{asset('admins')}}/blogimages/{{ $blogDetails->image }}" alt="">
+                        <h3>{{ $blogDetails->title }}</h3>
                         <ul class="meta">
-                            <li>19 JAN 2019</li>
-                            <li>By Dr. John Darcy</li>
+                            <li>{{ \Carbon\Carbon::parse($blogDetails->created_at)->format('d M Y') }}</li>
+                            <li>By {{ $blogDetails->user_id }}</li>
                         </ul>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic</p>
-                        <p>typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-                        <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic</p>
-                        <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        
+                        <p>{{ $blogDetails->description }}</p>
+                        
                         <div class="share-wrap">
                             <div class="row">
                                 <div class="col-sm-7 ">
@@ -49,9 +50,9 @@
                                         <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-5 text-right">
+                                {{-- <div class="col-sm-5 text-right">
                                     <a href="javascript:void(0);">Next Post <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -155,53 +156,25 @@
                         <div class="widget widget_categories">
                             <h4 class="widget-title">Categories</h4>
                             <ul>
-                                <li><a href="#">Coconut Oil</a></li>
-                                <li><a href="#">Honey</a></li>
-                                <li><a href="#">Olive Oil</a></li>
-                                <li><a href="#">Nut Oil</a></li>
-                                <li><a href="#">Mustard Oil</a></li>
-                                <li><a href="#">Sunrise Oil</a></li>
+                                @foreach($categories as $data)
+                                <li><a href="#">{{ $data->category_name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="widget widget_recent_entries recent_post">
                             <h4 class="widget-title">Recent Post</h4>
                             <ul>
+                                @foreach($latestBlogs as $data)
                                 <li>
                                     <div class="post-img">
-                                        <img src="{{asset('frontend')}}/assets/images/post/1.jpg" alt="">
+                                        <img height="100" width="100" src="{{asset('admins')}}/blogimages/{{ $data->image }}" alt="">
                                     </div>
                                     <div class="post-content">
-                                        <a href="blog-details.html">Lorem Ipsum is simply dummy text of the </a>
-                                        <p>19 JAN 2019</p>
+                                        <a href="{{ route('home.blog.details',['id'=>$data->id]) }}"> {{ $data->title }} </a>
+                                        <p>{{ \Carbon\Carbon::parse($data->created_at)->format('d M Y') }}</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="post-img">
-                                        <img src="{{asset('frontend')}}/assets/images/post/2.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <a href="blog-details.html">Lorem Ipsum is simply dummy text of the </a>
-                                        <p>19 JAN 2019</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-img">
-                                        <img src="{{asset('frontend')}}/assets/images/post/3.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <a href="blog-details.html">Lorem Ipsum is simply dummy text of the </a>
-                                        <p>19 JAN 2019</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="post-img">
-                                        <img src="{{asset('frontend')}}/assets/images/post/4.jpg" alt="">
-                                    </div>
-                                    <div class="post-content">
-                                        <a href="blog-details.html">Lorem Ipsum is simply dummy text of the </a>
-                                        <p>19 JAN 2019</p>
-                                    </div>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </aside>

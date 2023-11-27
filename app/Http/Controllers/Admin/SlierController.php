@@ -77,7 +77,7 @@ class SlierController extends Controller
             $imageResize = new \Intervention\Image\ImageManager();
             $imageResize->make($image)->resize(1920,1000)->save('admins/sliderimage/'.$photoname);
             $sliders->image=$photoname;   // public/files/product/plus-point.jpg
-            }
+        }
 
         $sliders->save();
 
