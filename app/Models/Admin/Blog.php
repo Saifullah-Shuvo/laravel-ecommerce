@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\Admin;
+use App\Models\Frontend\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +28,10 @@ class Blog extends Model
     public function admin()
     {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 
 

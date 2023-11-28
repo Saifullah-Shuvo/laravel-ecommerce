@@ -68,8 +68,8 @@ Blog Page
 
                 <div class="col-12">
                     {{-- {{ $blogs->links() }} --}}
-                    <div class="pagination-wrapper text-center mb-30">
-                        {{ $blogs->links('vendor.pagination.custom') }}
+                    <div class="pagination-wrapper text-center mb-20">
+                        {{ $blogs->links('vendor.pagination.custom-1') }}
                     </div>
 
                 </div>

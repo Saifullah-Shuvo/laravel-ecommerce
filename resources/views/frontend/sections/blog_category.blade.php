@@ -64,10 +64,6 @@ Blog Category
                     </div>
                 </div>
                 @endforelse
-
-                <div class="col-12">
-
-                </div>
             </div>
         </div>
     </div>

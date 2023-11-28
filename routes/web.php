@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
+use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetail
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('/blog/details/{id}', [HomeController::class, 'blogDetails'])->name('home.blog.details');
 Route::get('/blog/category/{id}', [HomeController::class, 'blogCategory'])->name('home.blog.category');
+
+Route::post('/blog/comments', [CommentController::class, 'store'])->name('home.blog.comment');
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
