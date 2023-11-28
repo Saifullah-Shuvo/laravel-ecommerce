@@ -33,11 +33,11 @@
                         <h3>{{ $blogDetails->title }}</h3>
                         <ul class="meta">
                             <li>{{ \Carbon\Carbon::parse($blogDetails->created_at)->format('d M Y') }}</li>
-                            <li>By {{ $blogDetails->user_id }}</li>
+                            <li>By {{ $blogDetails->admin->name }}</li>
                         </ul>
-                        
+
                         <p>{{ $blogDetails->description }}</p>
-                        
+
                         <div class="share-wrap">
                             <div class="row">
                                 <div class="col-sm-7 ">
@@ -157,12 +157,12 @@
                             <h4 class="widget-title">Categories</h4>
                             <ul>
                                 @foreach($categories as $data)
-                                <li><a href="#">{{ $data->category_name }}</a></li>
+                                <li><a href="{{ route('home.blog.category',['id'=>$data->id]) }}">{{ $data->category_name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="widget widget_recent_entries recent_post">
-                            <h4 class="widget-title">Recent Post</h4>
+                            <h4 class="widget-title">Recent Posts</h4>
                             <ul>
                                 @foreach($latestBlogs as $data)
                                 <li>

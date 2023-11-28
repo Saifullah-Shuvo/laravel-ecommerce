@@ -21,6 +21,8 @@ Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetail
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('/blog/details/{id}', [HomeController::class, 'blogDetails'])->name('home.blog.details');
+Route::get('/blog/category/{id}', [HomeController::class, 'blogCategory'])->name('home.blog.category');
+
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 
@@ -101,7 +103,7 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
 
-    //slider crud
+    //blog crud
     Route::get('/blog/all', [BlogController::class, 'index'])->name('blog.all');
     Route::get('/blog/add', [BlogController::class, 'add'])->name('blog.add');
     Route::post('/blog/store', [BlogController::class, 'store'])->name('blog.store');

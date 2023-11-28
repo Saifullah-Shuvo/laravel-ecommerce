@@ -38,19 +38,19 @@
                 <div class="col-lg-3 col-md-8 col-sm-12">
                     <div class="footer-adress">
                         <ul>
-                            <li><a href="#"><span>Email:</span> domain@gmail.com</a></li>
-                            <li><a href="#"><span>Tel:</span> 0131234567</a></li>
-                            <li><a href="#"><span>Adress:</span> 52 Web Bangale , Adress line2 , ip:3105</a></li>
+                            <li><span>Email:</span> domain@gmail.com</li>
+                            <li><span>Tel:</span> 0131234567</li>
+                            <li><span>Adress:</span> 52 Web Bangale , Adress line2 , ip:3105</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <div class="footer-reserved">
                         <ul>
-                            <li>Copyright © <script>document.write(new Date().getFullYear())</script> {{ config('app.name') }} 
+                            <li>Copyright © <script>document.write(new Date().getFullYear())</script> <a href="{{ route('home') }}">{{ config('app.name') }}</a>
                                 <br> All rights reserved.</li>
-                            
-                            
+
+
                         </ul>
                     </div>
                 </div>

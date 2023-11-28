@@ -76,9 +76,15 @@ class HomeController extends Controller
 
     public function blogDetails($id){
         $categories= Category::where('status','=',1)->latest()->get();
-        $latestBlogs = Blog::where('status','=',1)->latest()->take(4)->get();
-        $blogDetails = Blog::findOrFail($id);
+        $latestBlogs = Blog::where('status','=',1)->latest()->take(5)->get();
+        $blogDetails = Blog::with('admin')->findOrFail($id);
         return view('frontend.sections.blog_details',compact('blogDetails','latestBlogs','categories'));
+    }
+
+    public function blogCategory($id){
+        $category = Category::with('blogs')->findOrFail($id);
+        // dd($category);
+        return view('frontend.sections.blog_category',compact('category'));
     }
 
     public function contact(){

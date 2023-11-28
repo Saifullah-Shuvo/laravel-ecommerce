@@ -32,7 +32,7 @@ class BlogController extends Controller
         $blogs->description = $request->description;
         $blogs->category_id = $request->category_id;
         $blogs->status = $request->status;
-        $blogs->user_id = $user;
+        $blogs->admin_id = $user;
 
                 // blog image store in public folder
         if ($request->image) {
@@ -64,13 +64,13 @@ class BlogController extends Controller
         ]);
 
         $blogs = Blog::findOrFail($id);
-        
+
         $user = auth()->user()->id;
         $blogs->title = $request->title;
         $blogs->description = $request->description;
         $blogs->category_id = $request->category_id;
         $blogs->status = $request->status;
-        $blogs->user_id = $user;
+        $blogs->admin_id = $user;
 
                 // blog image update in public folder
         if ($request->image) {
