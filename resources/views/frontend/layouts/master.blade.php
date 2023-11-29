@@ -30,6 +30,10 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="{{asset('frontend')}}/assets/css/responsive.css">
 
+    <!-- Alert css -->
+    <link href="{{asset('admins')}}/assets/css/sweetalert.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admins')}}/assets/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
     @stack('style-lib')
     <!-- modernizr css -->
     <script src="{{asset('frontend')}}/assets/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -45,6 +49,10 @@
     <script src="{{asset('frontend')}}/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap js -->
     <script src="{{asset('frontend')}}/assets/js/bootstrap.min.js"></script>
+
+    {{-- Alert js --}}
+    <script src="{{asset('admins')}}/assets/js/toastr.min.js"></script>
+    <script src="{{asset('admins')}}/assets/js/sweetalert.min.js"></script>
 
     @stack('script-lib')
 
@@ -70,6 +78,26 @@
     <script src="{{asset('frontend')}}/assets/js/jquery-ui.min.js"></script>
     <!-- main js -->
     <script src="{{asset('frontend')}}/assets/js/scripts.js"></script>
+
+    <script>
+        @if(Session::has('message'))
+          var type="{{Session::get('alert-type','info')}}"
+          switch(type){
+              case 'info':
+                   toastr.info("{{ Session::get('message') }}");
+                   break;
+              case 'success':
+                  toastr.success("{{ Session::get('message') }}");
+                  break;
+              case 'warning':
+                 toastr.warning("{{ Session::get('message') }}");
+                  break;
+              case 'error':
+                  toastr.error("{{ Session::get('message') }}");
+                  break;
+                }
+        @endif
+     </script>
 
     @stack('script')
 

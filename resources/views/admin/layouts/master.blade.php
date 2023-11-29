@@ -163,7 +163,7 @@
                  break;
                }
        @endif
-     </script>
+    </script>
 
     @stack('script')
 

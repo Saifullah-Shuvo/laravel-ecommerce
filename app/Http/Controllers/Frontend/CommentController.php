@@ -3,30 +3,30 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
+
 {
     public function store(Request $request){
         $request->validate([
-            'title' => 'required|min:5',
-            'description' => 'required|max:200',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required|min:5',
+            'email' => 'required|email',
+            'comment' => 'required|max:200',
         ]);
 
-        $blogs = new Blog();
+        $comments = new Comment();
+        $comments->blog_id = $request->blog_id;
+        $comments->name = $request->name;
+        $comments->email = $request->email;
+        $comments->comment = $request->comment;
         $user = auth()->user()->id;
-        $blogs->title = $request->title;
-        $blogs->description = $request->description;
-        $blogs->category_id = $request->category_id;
-        $blogs->status = $request->status;
-        $blogs->admin_id = $user;
+        $comments->user_id = $user;
 
-    
+        $comments->save();
 
-        $blogs->save();
-
-        $notification = array('message' => "Blogs Created Successfully!", 'alert-type' => 'success');
-        return redirect()->route('blog.all')->with($notification);
+        $notification = array('message' => "Comment Submitted Successfully!", 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 }

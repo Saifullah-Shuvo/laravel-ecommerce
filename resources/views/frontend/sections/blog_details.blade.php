@@ -26,6 +26,7 @@
     <!-- blog-details-area start-->
     <div class="blog-details-area ptb-100">
         <div class="container">
+            {{-- @dd($blogDetails); --}}
             <div class="row">
                 <div class="col-lg-9 col-12">
                     <div class="blog-details-wrap">
@@ -60,6 +61,7 @@
                             <ol class="comments">
                                 <li class="comment even thread-even depth-1">
 
+                                    @foreach ($comments as $data)
                                     <div class="comment-wrap">
                                         <div class="comment-theme">
                                             <div class="comment-image">
@@ -69,15 +71,18 @@
                                         <div class="comment-main-area">
                                             <div class="comment-wrapper">
                                                 <div class="sewl-comments-meta">
-                                                    <h4>Lily Justin </h4>
-                                                    <span>19 JAN 2019  at 2:30pm</span>
+                                                    <h4>{{ $data->name }} </h4>
+                                                    <span>
+                                                        {{ $data->created_at->format('d M Y \a\t g:ia') }}
+                                                    </span>
                                                 </div>
                                                 <div class="comment-area">
-                                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when</p>
+                                                    <p>{{ $data->comment }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
 
                                 </li>
                             </ol>
@@ -124,7 +129,7 @@
                             </form>
                             @else
                             <br> <br>
-                            <h3 id="reply-title" class="blog-title text-danger">you need to login to put a <span>comment.</span></h3>
+                            <h3 id="reply-title" class="blog-title text-danger">Need to login first to put a <span>comment.</span></h3>
                             <h5> Click <a class="text-info" href="{{ url('/login') }}">here</a> to login!</h5>
                             @endauth
                         </div>
