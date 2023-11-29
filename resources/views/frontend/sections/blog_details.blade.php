@@ -61,7 +61,7 @@
                             <ol class="comments">
                                 <li class="comment even thread-even depth-1">
 
-                                    @foreach ($comments as $data)
+                                    @foreach ($blogDetails->comments as $data)
                                     <div class="comment-wrap">
                                         <div class="comment-theme">
                                             <div class="comment-image">
