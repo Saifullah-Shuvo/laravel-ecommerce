@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- .breadcumb-area end -->
-    <!-- about-area start -->
+    <!-- faq-area start -->
     <div class="about-area ptb-100">
         <div class="container">
             <div class="row">
@@ -70,6 +70,6 @@
             </div>
         </div>
     </div>
-    <!-- about-area end -->
+    <!-- faq-area end -->
 
 @endsection

@@ -44,11 +44,12 @@
                                 <div class="col-sm-7 ">
                                     <ul class="socil-icon d-flex">
                                         <li>share it on :</li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://twitter.com/intent/tweet?text=my share text&amp;url={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ urlencode(url()->current()) }}&amp;title=my share text&amp;summary=dit is de linkedin summary" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="https://plus.google.com/share?url={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="https://www.instagram.com/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,7 +58,7 @@
 
                     <div class="comment-form-area">
                         <div class="comment-main">
-                            <h3 class="blog-title"><span>(03)</span>Comments:</h3>
+                            <h3 class="blog-title"><span>({{ count($blogDetails->comments) }})</span>Comments:</h3>
                             <ol class="comments">
                                 <li class="comment even thread-even depth-1">
 
@@ -130,7 +131,7 @@
                             @else
                             <br> <br>
                             <h3 id="reply-title" class="blog-title text-danger">Need to login first to put a <span>comment.</span></h3>
-                            <h5> Click <a class="text-info" href="{{ url('/login') }}">here</a> to login!</h5>
+                            <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_blank">here</a> to login!</h5>
                             @endauth
                         </div>
                     </div>
