@@ -7,7 +7,6 @@ use App\Models\Admin\Blog;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
-use App\Models\Frontend\Comment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -79,8 +78,6 @@ class HomeController extends Controller
         $categories= Category::where('status','=',1)->latest()->get();
         $latestBlogs = Blog::where('status','=',1)->latest()->take(5)->get();
         $blogDetails = Blog::with(['admin', 'comments'])->findOrFail($id);
-
-        // $comments = Comment::latest()->get();
         return view('frontend.sections.blog_details',compact('blogDetails','latestBlogs','categories'));
     }
 
