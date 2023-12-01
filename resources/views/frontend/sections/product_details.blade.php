@@ -5,7 +5,6 @@ Products Details
 @endsection
 
 @section('panel')
-
     <!-- .breadcumb-area start -->
     <div class="breadcumb-area bg-img-4 ptb-100">
         <div class="container">
@@ -23,7 +22,7 @@ Products Details
         </div>
     </div>
     <!-- .breadcumb-area end -->
-    {{-- @dd($relatedProducts) --}}
+    {{-- @dd($productDetails->reviews) --}}
     <!-- single-product-area start-->
     <div class="single-product-area ptb-100">
         <div class="container">
@@ -59,12 +58,14 @@ Products Details
                         <div class="rating-wrap fix">
                             <span class="pull-left">${{ $productDetails->selling_price }}</span>
                             <ul class="rating pull-right">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= round($averageRating))
+                                    <li><i class="fa fa-star"></i></li>
+                                    @else
+                                    <li><i class="fa fa-star-o"></i></li>
+                                    @endif
+                                @endfor
+                                <li>({{ count($productDetails->reviews) }} Customar Review)</li>
                             </ul>
                         </div>
                         <p>{{ $productDetails->description }}</p>
@@ -103,8 +104,7 @@ Products Details
                     <div class="tab-content">
                         <div class="tab-pane active" id="description">
                             <div class="description-wrap">
-                                <p>we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. </p>
-                                <p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. </p>
+                                <p> {{ $productDetails->description }} </p>
                             </div>
                         </div>
                         <div class="tab-pane" id="review">
@@ -112,57 +112,35 @@ Products Details
                                 <ul>
                                     <li class="review-items">
                                         <div class="review-img">
-                                            <img src="assets/images/comment/1.png" alt="">
+                                            <img src="{{asset('fronted')}}/assets/images/comment/1.png" alt="">
                                         </div>
-                                        <div class="review-content">
-                                            <h3><a href="#">GERALD BARNES</a></h3>
-                                            <span>27 Jun, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                        <div class="review-content mb-2">
+                                            @foreach ($productDetails->reviews as $data)
+
+                                            <h3>{{ $data->name }}</h3>
+                                            <span>
+                                                <p>{{ \Carbon\Carbon::parse($data->created_at)->format('j M, Y \a\t g:ia') }}</p>
+                                            </span>
+                                            <p>{{ $data->review_text}}</p>
                                             <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $data->review)
+                                                        <li><i class="fa fa-star"></i></li>
+                                                    @else
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    @endif
+                                                @endfor
                                             </ul>
-                                        </div>
-                                    </li>
-                                    <li class="review-items">
-                                        <div class="review-img">
-                                            <img src="assets/images/comment/2.png" alt="">
-                                        </div>
-                                        <div class="review-content">
-                                            <h3><a href="#">Olive Oil</a></h3>
-                                            <span>15 may, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star-half-o"></i></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="review-items">
-                                        <div class="review-img">
-                                            <img src="assets/images/comment/3.png" alt="">
-                                        </div>
-                                        <div class="review-content">
-                                            <h3><a href="#">Nature Honey</a></h3>
-                                            <span>14 janu, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
+                                            <hr>
+
+                                            @endforeach
                                         </div>
                                     </li>
                                 </ul>
                             </div>
+                        @auth
+                        <form action="{{ route('home.product.review') }}" method="POST">
+                        @csrf
                             <div class="add-review">
                                 <h4>Add A Review</h4>
                                 <div class="ratting-wrap">
@@ -181,42 +159,61 @@ Products Details
                                             <tr>
                                                 <td>How Many Stars?</td>
                                                 <td>
-                                                    <input type="radio" name="a" />
+                                                    <input value="1" type="radio" name="review"/>
                                                 </td>
                                                 <td>
-                                                    <input type="radio" name="a" />
+                                                    <input value="2" type="radio" name="review"/>
                                                 </td>
                                                 <td>
-                                                    <input type="radio" name="a" />
+                                                    <input value="3" type="radio" name="review"/>
                                                 </td>
                                                 <td>
-                                                    <input type="radio" name="a" />
+                                                    <input value="4" type="radio" name="review"/>
                                                 </td>
                                                 <td>
-                                                    <input type="radio" name="a" />
+                                                    <input value="5" type="radio" name="review"/>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                @error('review')
+                                    <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                @enderror
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <h4>Name:</h4>
-                                        <input type="text" placeholder="Your name here..." />
+                                        <input type="text" name="name" value="{{ Auth::user()->name }}" />
+                                        <input type="hidden" name="product_id" value="{{ $productDetails->id }}" />
                                     </div>
+                                    @error('name')
+                                        <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                    @enderror
                                     <div class="col-md-6 col-12">
                                         <h4>Email:</h4>
-                                        <input type="email" placeholder="Your Email here..." />
+                                        <input type="email" name="email" value="{{ Auth::user()->email }}" />
                                     </div>
+                                    @error('email')
+                                        <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                    @enderror
                                     <div class="col-12">
                                         <h4>Your Review:</h4>
-                                        <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                        <textarea name="review_text" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
                                     </div>
+                                    @error('review_text')
+                                        <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                                    @enderror
                                     <div class="col-12">
                                         <button class="btn-style">Submit</button>
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                        @else
+                        <br> <br>
+                        <h3 id="reply-title" class="blog-title text-danger">Need to login first to put a <span>review.</span></h3>
+                        <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_blank">here</a> to login!</h5>
+                        @endauth
                         </div>
                     </div>
                 </div>
@@ -262,7 +259,7 @@ Products Details
                 @empty
                 <div class="container">
                     <div class="row justify-content-center">
-                      <h5>No Related Products found!</h5>
+                        <h5>No Related Products found!</h5>
                     </div>
                 </div>
                 @endforelse

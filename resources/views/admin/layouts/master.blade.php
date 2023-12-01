@@ -146,23 +146,34 @@
 
 
    <script>
-       @if(Session::has('message'))
-         var type="{{Session::get('alert-type','info')}}"
-         switch(type){
-             case 'info':
-                  toastr.info("{{ Session::get('message') }}");
-                  break;
-             case 'success':
-                 toastr.success("{{ Session::get('message') }}");
-                 break;
-             case 'warning':
-                toastr.warning("{{ Session::get('message') }}");
-                 break;
-             case 'error':
-                 toastr.error("{{ Session::get('message') }}");
-                 break;
-               }
-       @endif
+        @if(Session::has('message'))
+            var type="{{Session::get('alert-type','info')}}"
+            switch(type){
+                case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+                }
+        @endif
+        // toastr.options = {
+        //     "closeButton": true,
+        //     "positionClass": "toast-top-right",
+        //     "timeOut": "5000",
+        // }
+        @if ($errors->any())
+        // Loop through each error and show it with Toastr
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}", "Error");
+            @endforeach
+        @endif
     </script>
 
     @stack('script')

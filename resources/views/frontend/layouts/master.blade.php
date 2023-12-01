@@ -97,6 +97,17 @@
                   break;
                 }
         @endif
+        // toastr.options = {
+        //     "closeButton": true,
+        //     "positionClass": "toast-top-right",
+        //     "timeOut": "5000",
+        // }
+        @if ($errors->any())
+        // Loop through each error and show it with Toastr
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}", "Error");
+            @endforeach
+        @endif
      </script>
 
     @stack('script')

@@ -75,8 +75,8 @@ Contact Page
             </div>
         </div>
     </div>
-
     <!-- faq-area end -->
+
     <div class="contact-area ptb-100">
         <div class="container">
             <div class="row">
@@ -89,7 +89,7 @@ Contact Page
                                 <div class="col-12 col-sm-6">
                                     <input type="text" placeholder="Name" id="fname" name="fname" value="{{ Auth::user()->name }}">
                                 </div>
-                                <div class="col-12  col-sm-6">
+                                <div class="col-12 col-sm-6">
                                     <input type="email" placeholder="Email" id="email" name="email" value="{{ Auth::user()->email }}">
                                 </div>
                                 <div class="col-12">

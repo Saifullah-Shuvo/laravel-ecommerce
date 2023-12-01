@@ -7,6 +7,7 @@ use App\Models\Admin\Blog;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -54,7 +55,27 @@ class HomeController extends Controller
 
     public function productDetails($id){
 
-        $productDetails = Product::findOrFail($id);
+        $productDetails = Product::with(['reviews' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+
+        // Assuming $productDetails->reviews is an array of review data
+        $reviews = $productDetails->reviews;
+        // Initialize counters
+        $totalRatings = 0;
+        $ratingsCount = 0;
+        // Iterate through reviews
+        foreach ($reviews as $review) {
+            // Check if the review has a 'rating' attribute
+            if (isset($review['review'])) {
+                // Increment the total ratings and count
+                $totalRatings += $review['review'];
+                $ratingsCount++;
+            }
+        }
+        // Calculate the average rating (if needed)
+        $averageRating = ($ratingsCount > 0) ? ($totalRatings / $ratingsCount) : 0;
+        // dd($averageRating);
 
         $productMultiImage = Product::with('product_images')->findOrFail($id);
         $productCategory = Product::with('category')->findOrFail($id);
@@ -64,8 +85,10 @@ class HomeController extends Controller
             ->limit(4)
             ->get();
 
+        $reviews = Review::with('user')->get();
+
         return view('frontend.sections.product_details',compact('productDetails',
-        'productMultiImage','productCategory','relatedProducts'));
+        'productMultiImage','productCategory','relatedProducts','totalRatings','averageRating'));
     }
 
     public function blog(){

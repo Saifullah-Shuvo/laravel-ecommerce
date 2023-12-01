@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SlierController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
         // Frontend Routes
@@ -19,6 +20,7 @@ Route::get('/shop/{category_id}', [HomeController::class, 'categoryProduct'])->n
 
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('home.product.details');
 Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetailsModal'])->name('home.product.details.modal');
+Route::post('/product/reviews', [ReviewController::class, 'store'])->name('home.product.review');
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
 Route::get('/blog/details/{id}', [HomeController::class, 'blogDetails'])->name('home.blog.details');

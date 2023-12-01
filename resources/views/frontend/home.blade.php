@@ -58,7 +58,7 @@ Home Page
                             <img src="{{asset('admins')}}/productimage/{{ $data->thambnail }}" alt="">
                             <div class="product-icon flex-style">
                                 <ul>
-                                    <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails" 
+                                    <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails"
                                         href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
                                     <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
@@ -233,7 +233,7 @@ Home Page
         </div>
     </div>
     <!-- testmonial-area end -->
-    
+
     <!-- product details modal start  -->
     <div class="modal fade" id="popularproductdetails" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -274,15 +274,16 @@ Home Page
                         <ul class="cetagory">
                             <li>Categories:</li>
                             <li><b><a id="categoryName" href="#"></a></b></li>
-                            
+
                         </ul>
                         <ul class="socil-icon">
                             <li>Share :</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/intent/tweet?text=my share text&amp;url={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ urlencode(url()->current()) }}&amp;title=my share text&amp;summary=dit is de linkedin summary" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://plus.google.com/share?url={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://www.instagram.com/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
                         </ul>
                     </div>
                 </div>
