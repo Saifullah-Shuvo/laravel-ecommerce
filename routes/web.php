@@ -30,6 +30,8 @@ Route::post('/blog/comments', [CommentController::class, 'store'])->name('home.b
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
+Route::post('/newsletter', [CommentController::class, 'newsletter'])->name('home.newsletter');
+
 
         // User Routes
 

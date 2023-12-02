@@ -42,9 +42,11 @@
 </head>
 
 <body>
-
+    
     @yield('content')
-
+    
+    {{-- moment jquery for countdown  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <!-- jquery latest version -->
     <script src="{{asset('frontend')}}/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap js -->

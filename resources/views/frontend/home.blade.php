@@ -4,6 +4,18 @@
 Home Page
 @endsection
 
+@push('style')
+    <style>
+        .countdown-item {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+@endpush
+
 @section('panel')
     {{-- @dd($featuredProduct) --}}
     <!-- slider-area start -->
@@ -75,7 +87,7 @@ Home Page
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
+                                <li><i class="fa fa-star"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -116,21 +128,32 @@ Home Page
     <!-- start count-down-section -->
     <div class="count-down-area count-down-area-sub">
         <section class="count-down-section section-padding parallax" data-speed="7">
+        
             <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-12 text-center">
-                        <h2 class="big">Deal Of the Day <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</span></h2>
-                    </div>
-                    <div class="col-12 col-lg-12 text-center">
-                        <div class="count-down-clock text-center">
-                            <div id="clock">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Special Deal</h5>
+                                {{-- <p class="card-text">Check out our exclusive deal for today!</p> --}}
+        
+                                <div class="count-down-clock text-center">
+                                    <div id="countdown-timer">
+                                        <div class="countdown-item" id="days"></div>
+                                        <div class="countdown-item" id="hours"></div>
+                                        <div class="countdown-item" id="minutes"></div>
+                                        <div class="countdown-item" id="seconds"></div>
+                                    </div>
+                                </div>
+        
+                                <a href="{{ route('home.shop') }}" class="btn btn-primary">Grab the Deal</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end row -->
             </div>
             <!-- end container -->
+
         </section>
     </div>
     <!-- end count-down-section -->
@@ -315,6 +338,38 @@ Home Page
                 });
             });
         });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+    // Set the end date and time of the deal
+    var dealEndDate = moment().add(1, 'days'); // Adjust the end date as needed
+
+    // Update the countdown every second
+    var countdownInterval = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+        var now = moment();
+        var timeDifference = dealEndDate.diff(now, 'seconds');
+
+        if (timeDifference <= 0) {
+            // Deal has ended, update UI accordingly
+            clearInterval(countdownInterval);
+            $('#countdown-timer').html('<p>Deal has ended!</p>');
+        } else {
+            // Deal is still ongoing, update countdown
+            var days = Math.floor(timeDifference / (24 * 60 * 60));
+            var hours = Math.floor((timeDifference % (24 * 60 * 60)) / (60 * 60));
+            var minutes = Math.floor((timeDifference % (60 * 60)) / 60);
+            var seconds = timeDifference % 60;
+
+            $('#days').text(days + 'd');
+            $('#hours').text(hours + 'h');
+            $('#minutes').text(minutes + 'm');
+            $('#seconds').text(seconds + 's');
+        }
+    }
+});
     </script>
 
 @endpush

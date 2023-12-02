@@ -29,4 +29,8 @@ class CommentController extends Controller
         $notification = array('message' => "Comment Submitted Successfully!", 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
+
+    public function newsletter(Request $request){
+        
+    }
 }

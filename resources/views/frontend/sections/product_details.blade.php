@@ -65,7 +65,7 @@ Products Details
                                     <li><i class="fa fa-star-o"></i></li>
                                     @endif
                                 @endfor
-                                <li>({{ count($productDetails->reviews) }} Customar Review)</li>
+                                <li>({{ count($productDetails->reviews) }} Customer Reviews)</li>
                             </ul>
                         </div>
                         <p>{{ $productDetails->description }}</p>
@@ -117,20 +117,26 @@ Products Details
                                         <div class="review-content mb-2">
                                             @foreach ($productDetails->reviews as $data)
 
+                                            <div class="d-flex justify-content-end">
+                                                <ul>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                    <li style="display: inline-block;">
+                                                        @if ($i <= $data->review)
+                                                            <i class="fa fa-star" style="color: red;"></i>
+                                                        @else
+                                                            <i class="fa fa-star-o" style="color: red;"></i>
+                                                        @endif
+                                                    </li>
+                                                    @endfor
+                                                </ul>
+                                            </div>
+
                                             <h3>{{ $data->name }}</h3>
                                             <span>
                                                 <p>{{ \Carbon\Carbon::parse($data->created_at)->format('j M, Y \a\t g:ia') }}</p>
                                             </span>
                                             <p>{{ $data->review_text}}</p>
-                                            <ul class="rating">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $data->review)
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    @else
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    @endif
-                                                @endfor
-                                            </ul>
+
                                             <hr>
 
                                             @endforeach

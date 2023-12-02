@@ -14,8 +14,10 @@ class HomeController extends Controller
 {
     public function index(){
         $slider = Slider::where('status','=',1)->latest()->get();
+
         $featuredProduct = Product::where('status','=',1)->where('featured','=',1)->latest()->get();
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
+
         $latestProduct = Product::where('status','=',1)->latest()->limit(8)->get();
         return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct'));
     }
@@ -84,8 +86,6 @@ class HomeController extends Controller
             ->where('id', '!=', $productDetails->id)
             ->limit(4)
             ->get();
-
-        $reviews = Review::with('user')->get();
 
         return view('frontend.sections.product_details',compact('productDetails',
         'productMultiImage','productCategory','relatedProducts','totalRatings','averageRating'));
