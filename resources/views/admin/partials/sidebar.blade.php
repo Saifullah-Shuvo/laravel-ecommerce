@@ -143,6 +143,28 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Request::is('system/*') ? 'active' : '' }}" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
+                        <i class="mdi mdi-grid-large"></i> <span data-key="t-tables">System</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarTables">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('faq.all') }}" class="nav-link" data-key="t-basic-tables">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('testimonial.all') }}" class="nav-link" data-key="t-grid-js">Testimonial</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="tables-listjs.html" class="nav-link" data-key="t-list-js">Cache</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="tables-datatables.html" class="nav-link" data-key="t-datatables">Datatables</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Settings</span></li>
 

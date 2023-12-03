@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MessageController;
@@ -125,4 +127,32 @@ Route::middleware('auth:admin')->group(function () {
     //blog status
     Route::get('/blog/status/enable/{id}',[BlogController::class, 'status_enable'])->name('blog.status.enable');
     Route::get('/blog/status/disable/{id}',[BlogController::class, 'status_disable'])->name('blog.status.disable');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('system/faq/all',[FaqController::class,'index'])->name('faq.all');
+    Route::get('system/faq/add', [FaqController::class, 'add'])->name('faq.add');
+    Route::post('system/faq/store',[FaqController::class,'store'])->name('faq.store');
+
+    Route::get('system/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
+    Route::post('system/faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
+    Route::get('system/faq/delete/{id}', [FaqController::class, 'destroy'])->name('faq.delete');
+
+    //faq status
+    Route::get('/system/faq/enable/{id}',[FaqController::class, 'status_enable'])->name('faq.status.enable');
+    Route::get('/system/faq/disable/{id}',[FaqController::class, 'status_disable'])->name('faq.status.disable');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('system/testimonial/all',[TestimonialController::class,'index'])->name('testimonial.all');
+    Route::get('system/testimonial/add', [TestimonialController::class, 'add'])->name('testimonial.add');
+    Route::post('system/testimonial/store',[testimonialController::class,'store'])->name('testimonial.store');
+
+    Route::get('system/testimonial/edit/{id}', [testimonialController::class, 'edit'])->name('testimonial.edit');
+    // Route::post('system/testimonial/update/{id}', [testimonialController::class, 'update'])->name('testimonial.update');
+    // Route::get('system/testimonial/delete/{id}', [testimonialController::class, 'destroy'])->name('testimonial.delete');
+
+    // //testimonial status
+    // Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
+    // Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
 });

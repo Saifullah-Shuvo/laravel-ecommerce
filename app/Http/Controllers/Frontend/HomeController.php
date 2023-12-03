@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Blog;
 use App\Models\Admin\Category;
+use App\Models\Admin\Faq;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
 use App\Models\Review;
@@ -110,6 +111,8 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        return view('frontend.sections.contact');
+        $faqs = Faq::where('status',1)->latest()->get();
+        return view('frontend.sections.contact',compact('faqs'));
     }
+
 }
