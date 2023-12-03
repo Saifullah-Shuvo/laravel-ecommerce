@@ -128,7 +128,7 @@ Home Page
     <!-- start count-down-section -->
     <div class="count-down-area count-down-area-sub">
         <section class="count-down-section section-padding parallax" data-speed="7">
-        
+
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6">
@@ -136,7 +136,7 @@ Home Page
                             <div class="card-body">
                                 <h5 class="card-title text-center">Special Deal</h5>
                                 {{-- <p class="card-text">Check out our exclusive deal for today!</p> --}}
-        
+
                                 <div class="count-down-clock text-center">
                                     <div id="countdown-timer">
                                         <div class="countdown-item" id="days"></div>
@@ -145,7 +145,7 @@ Home Page
                                         <div class="countdown-item" id="seconds"></div>
                                     </div>
                                 </div>
-        
+
                                 <a href="{{ route('home.shop') }}" class="btn btn-primary">Grab the Deal</a>
                             </div>
                         </div>

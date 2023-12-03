@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\MessageController;
+use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Frontend\ReviewController;
 use Illuminate\Support\Facades\Route;
 
         // Frontend Routes
@@ -29,8 +31,9 @@ Route::get('/blog/category/{id}', [HomeController::class, 'blogCategory'])->name
 Route::post('/blog/comments', [CommentController::class, 'store'])->name('home.blog.comment');
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact/message', [MessageController::class, 'message'])->name('home.contact.message');
 
-Route::post('/newsletter', [CommentController::class, 'newsletter'])->name('home.newsletter');
+Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.newsletter');
 
 
         // User Routes
