@@ -131,7 +131,7 @@
                             @else
                             <br> <br>
                             <h3 id="reply-title" class="blog-title text-danger">Need to login first to put a <span>comment.</span></h3>
-                            <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_blank">here</a> to login!</h5>
+                            <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_self">here</a> to login!</h5>
                             @endauth
                         </div>
                     </div>

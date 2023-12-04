@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
 
@@ -19,7 +20,7 @@ class AuthenticatedSessionController extends Controller
 
     public function create(): View
     {
-        Session::put('previousUrl', url()->previous());
+        Redirect::setIntendedUrl(url()->previous());
         return view('auth.login');
     }
 
@@ -46,6 +47,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(url()->previous());
     }
 }
+
+
+// https://www.youtube.com/watch?v=w6DexyuWszQ

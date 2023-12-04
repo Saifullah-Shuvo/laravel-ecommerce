@@ -45,8 +45,8 @@ class AuthenticatedSessionController extends Controller
 
         $notification=array('messege' => 'You are logged out!', 'alert-type' => 'info');
 
-        // return redirect('/')->with($notification);
+        return redirect('/')->with($notification);
 
-        return redirect()->route('admin.login')->with($notification);
+        // return redirect()->route('admin.login')->with($notification);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MessageController;
@@ -36,6 +37,14 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact')
 Route::post('/contact/message', [MessageController::class, 'message'])->name('home.contact.message');
 
 Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.newsletter');
+
+Route::group(['middleware' => 'auth'], function () {
+    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+    // Add other cart routes as needed
+});
+
 
 
         // User Routes

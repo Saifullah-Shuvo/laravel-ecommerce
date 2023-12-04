@@ -69,12 +69,22 @@ Products Details
                             </ul>
                         </div>
                         <p>{{ $productDetails->description }}</p>
+
+                        <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
                         <ul class="input-style">
                             <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
+                                <input type="text" name="quantity" value="1" />
+                                <input type="hidden" name="product_id" value="{{$productDetails->id}}" />
                             </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
+                            {{-- <li><a type="submit" href="cart.html">Add to Cart</a></li> --}}
+                            <li><button class="btn btn-danger" type="submit">Add to Cart</button></li>
+                            @error('quantity')
+                            <div class="error"><span class="text-danger">{{ $message }}</span></div>
+                            @enderror
                         </ul>
+                        </form>
+
                         <ul class="cetagory">
                             <li>Category Name:</li>
                             <li><b>{{ $productCategory->category->category_name}}</b></li>
@@ -95,19 +105,19 @@ Products Details
                 <div class="col-12">
                     <div class="single-product-menu">
                         <ul class="nav">
-                            <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
-                            <li><a data-toggle="tab" href="#review">Review</a></li>
+                            {{-- <li><a class="active" data-toggle="tab" href="#description">Description</a> </li> --}}
+                            <li><a class="active" data-toggle="tab" href="#review">Review</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="description">
+                        {{-- <div class="tab-pane active" id="description">
                             <div class="description-wrap">
                                 <p> {{ $productDetails->description }} </p>
                             </div>
-                        </div>
-                        <div class="tab-pane" id="review">
+                        </div> --}}
+                        <div class="tab-pane active" id="review">
                             <div class="review-wrap">
                                 <ul>
                                     <li class="review-items">
@@ -115,7 +125,7 @@ Products Details
                                             <img src="{{asset('fronted')}}/assets/images/comment/1.png" alt="">
                                         </div>
                                         <div class="review-content mb-2">
-                                            @foreach ($productDetails->reviews as $data)
+                                            @forelse ($productDetails->reviews as $data)
 
                                             <div class="d-flex justify-content-end">
                                                 <ul>
@@ -138,8 +148,13 @@ Products Details
                                             <p>{{ $data->review_text}}</p>
 
                                             <hr>
-
-                                            @endforeach
+                                            @empty
+                                            <div class="container">
+                                                <div class="row justify-content-center">
+                                                  <h5>No Review Yet!</h5>
+                                                </div>
+                                            </div>
+                                            @endforelse 
                                         </div>
                                     </li>
                                 </ul>
@@ -216,9 +231,9 @@ Products Details
                             </div>
                         </form>
                         @else
-                        <br> <br>
+                        <br>
                         <h3 id="reply-title" class="blog-title text-danger">Need to login first to put a <span>review.</span></h3>
-                        <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_blank">here</a> to login!</h5>
+                        <h5> Click <a class="text-info" href="{{ url('/login') }}" target="_self">here</a> to login!</h5>
                         @endauth
                         </div>
                     </div>
