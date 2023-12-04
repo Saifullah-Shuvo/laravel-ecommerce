@@ -149,10 +149,10 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('system/testimonial/store',[testimonialController::class,'store'])->name('testimonial.store');
 
     Route::get('system/testimonial/edit/{id}', [testimonialController::class, 'edit'])->name('testimonial.edit');
-    // Route::post('system/testimonial/update/{id}', [testimonialController::class, 'update'])->name('testimonial.update');
-    // Route::get('system/testimonial/delete/{id}', [testimonialController::class, 'destroy'])->name('testimonial.delete');
+    Route::post('system/testimonial/update/{id}', [testimonialController::class, 'update'])->name('testimonial.update');
+    Route::get('system/testimonial/delete/{id}', [testimonialController::class, 'destroy'])->name('testimonial.delete');
 
     // //testimonial status
-    // Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
-    // Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
+    Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
+    Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
 });

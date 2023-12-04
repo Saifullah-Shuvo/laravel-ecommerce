@@ -15,7 +15,7 @@
             </ol>
         </div>
     </div>
-    <form action="{{--{{route('testimonial.store')}}--}}" method="POST" enctype="multipart/form-data" id="image-upload">
+    <form action="{{ route('testimonial.update',['id'=>$testimonial->id]) }}" method="POST" enctype="multipart/form-data" id="image-upload">
         @csrf
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -23,21 +23,21 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Client's Name</label>
-                            <input type="text" name="name" class="form-control" id="product-title-input" value="" placeholder="Enter Name">
+                            <input type="text" name="name" class="form-control" id="product-title-input" value="{{ $testimonial->name }}">
                             @error('name')
                                 <div class="error"><span class="text-danger">{{ $message }}</span></div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Client's Designation</label>
-                            <input type="text" name="profession" class="form-control" id="product-title-input" value="" placeholder="Enter Profession">
+                            <input type="text" name="profession" class="form-control" id="product-title-input" value="{{ $testimonial->profession }}">
                             @error('profession')
                                 <div class="error"><span class="text-danger">{{ $message }}</span></div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="product-title-input">Company Name</label>
-                            <input type="text" name="company" class="form-control" id="product-title-input" value="" placeholder="Enter Comapany">
+                            <input type="text" name="company" class="form-control" id="product-title-input" value="{{ $testimonial->company }}">
                             @error('company')
                                 <div class="error"><span class="text-danger">{{ $message }}</span></div>
                             @enderror
@@ -47,7 +47,7 @@
 
                             <div id="ckeditor-classic">
                                 <div>
-                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea5" rows="5" placeholder="Enter Review Text"></textarea>
+                                    <textarea name="text" class="form-control" id="exampleFormControlTextarea5" rows="5">{{ $testimonial->text }}</textarea>
                                 </div>
                                 @error('text')
                                     <div class="error mt-1"><span class="text-danger">{{ $message }}</span></div>
@@ -71,6 +71,9 @@
                             <div class="col-xxl-12">
                                 <div>
                                     <input name="image" class="form-control" type="file" id="formFileMultiple">
+                                    <br>
+                                    <p class="text-muted">Thumbnail Image Preview</p>
+                                    <img class="rounded shadow" alt="Thambnai Image" width="300" src={{ asset('admins/testimonialimage/'.$testimonial->image) }}>
                                 </div>
                                 @error('image')
                                     <div class="error"><span class="text-danger">{{ $message }}</span></div>
@@ -91,8 +94,8 @@
                             <label for="choices-publish-status-input" class="form-label">Status</label>
 
                             <select class="form-select" name="status" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                <option value="1" selected>Published</option>
-                                <option value="0">Unpublished</option>
+                                <option value="1" {{ $testimonial->status == 1 ? 'selected' : '' }} >Published</option>
+                                <option value="0" {{ $testimonial->status == 0 ? 'selected' : '' }} >Unpublished</option>
                             </select>
                         </div>
                     </div>

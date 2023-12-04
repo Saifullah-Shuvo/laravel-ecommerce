@@ -110,7 +110,7 @@
                                                                 <a class="dropdown-item text-info edit" href="{{ route('testimonial.edit', ['id' => $testimonial->id]) }}">
                                                                         <i class="ri-pencil-fill"></i> Edit</a>
 
-                                                                    {{-- @if ($testimonial->status == 1)
+                                                                    @if ($testimonial->status == 1)
                                                                         <a class="dropdown-item text-danger"
                                                                             href="{{ route('testimonial.status.disable', ['id' => $testimonial->id]) }}"><i
                                                                                 class="bx bx-rotate-right"></i> Disable</a>
@@ -121,8 +121,8 @@
                                                                     @endif
 
                                                                 <a class="dropdown-item text-danger" id="delete"
-                                                                    href="{{ route('slider.delete', ['id' => $testimonial->id]) }}"
-                                                                    onclick=""><i class="ri-close-circle-fill"></i> Delete</a> --}}
+                                                                    href="{{ route('testimonial.delete', ['id' => $testimonial->id]) }}"
+                                                                    onclick=""><i class="ri-close-circle-fill"></i> Delete</a>
 
                                                             </div>
                                                         </div>

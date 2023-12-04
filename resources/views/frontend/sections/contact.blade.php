@@ -34,7 +34,7 @@ Contact Page
                 </div>
                 <div class="accordion" id="accordionExample">
 
-                    @foreach($faqs as $faq)
+                    @forelse($faqs as $faq)
                     <div class="card border-0">
                         <div class="card-header border-0 p-0 my-3">
                             <button class="btn btn-link text-left py-3 w-100 text-white" type="button" data-toggle="collapse" data-target="#faq{{ $faq->id }}" aria-expanded="true">
@@ -47,8 +47,13 @@ Contact Page
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                    
+                    @empty
+                    <div class="container">
+                        <div class="row justify-content-center">
+                          <h5>No FAQ Data Found!</h5>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

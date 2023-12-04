@@ -8,6 +8,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Faq;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
+use App\Models\Admin\Testimonial;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,11 @@ class HomeController extends Controller
 {
     public function index(){
         $slider = Slider::where('status','=',1)->latest()->get();
-
         $featuredProduct = Product::where('status','=',1)->where('featured','=',1)->latest()->get();
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
-
         $latestProduct = Product::where('status','=',1)->latest()->limit(8)->get();
-        return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct'));
+        $testimonials = Testimonial::where('status','=',1)->latest()->get();
+        return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct','testimonials'));
     }
 
     public function about(){
@@ -30,12 +30,10 @@ class HomeController extends Controller
 
     public function shop(Request $request){
         $latestProduct = Product::where('status','=',1)->with('category')->latest()->paginate(8);
-
         if ($request->ajax()) {
             $view = view('frontend.sections.data', compact('latestProduct'))->render();
             return response()->json(['html' => $view]);
         }
-
         $category = Category::where('status','=',1)->latest()->get();
         return view('frontend.sections.shop',compact('latestProduct','category'));
     }
@@ -47,7 +45,6 @@ class HomeController extends Controller
     }
 
     public function productDetailsModal($id){
-
         $productDetails = Product::with('category')->findOrFail($id);
         $productDetails->thambnail =asset('admins/productimage/' . $productDetails->thambnail);
         // $data = [

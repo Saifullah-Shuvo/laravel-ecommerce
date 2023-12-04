@@ -220,36 +220,24 @@ Home Page
             <div class="row">
                 <div class="col-md-10 offset-md-1 col-12">
                     <div class="testmonial-active owl-carousel">
+                        @forelse($testimonials as $testimonial)
                         <div class="test-items test-items2">
                             <div class="test-content">
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical LatinContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                <h2>Elizabeth Ayna</h2>
-                                <p>CEO of Woman Fedaration</p>
+                                <p>{{ $testimonial->text }}</p>
+                                <h2>{{ $testimonial->name }}</h2>
+                                <p>{{ $testimonial->profession }} at {{ $testimonial->company }}</p>
                             </div>
                             <div class="test-img2">
-                                <img src="{{asset('frontend/')}}/assets/images/test/1.png" alt="">
+                                <img src="{{asset('admins')}}/testimonialimage/{{ $testimonial->image }}" alt="">
                             </div>
                         </div>
-                        <div class="test-items test-items2">
-                            <div class="test-content">
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical LatinContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                <h2>Elizabeth Ayna</h2>
-                                <p>CEO of Woman Fedaration</p>
-                            </div>
-                            <div class="test-img2">
-                                <img src="{{asset('frontend/')}}/assets/images/test/1.png" alt="">
+                        @empty
+                        <div class="container">
+                            <div class="row justify-content-center">
+                              <h5>No Testimonial Data Found!</h5>
                             </div>
                         </div>
-                        <div class="test-items test-items2">
-                            <div class="test-content">
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical LatinContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p>
-                                <h2>Elizabeth Ayna</h2>
-                                <p>CEO of Woman Fedaration</p>
-                            </div>
-                            <div class="test-img2">
-                                <img src="{{asset('frontend/')}}/assets/images/test/1.png" alt="">
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
