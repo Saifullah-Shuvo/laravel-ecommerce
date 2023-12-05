@@ -72,9 +72,10 @@ Products Details
 
                         <form action="{{ route('cart.add') }}" method="POST">
                         @csrf
+                        @method('POST')
                         <ul class="input-style">
                             <li class="quantity cart-plus-minus">
-                                <input type="text" name="quantity" value="1" />
+                                <input type="number" name="quantity" value="1" />
                                 <input type="hidden" name="product_id" value="{{$productDetails->id}}" />
                             </li>
                             {{-- <li><a type="submit" href="cart.html">Add to Cart</a></li> --}}
@@ -154,7 +155,7 @@ Products Details
                                                   <h5>No Review Yet!</h5>
                                                 </div>
                                             </div>
-                                            @endforelse 
+                                            @endforelse
                                         </div>
                                     </li>
                                 </ul>

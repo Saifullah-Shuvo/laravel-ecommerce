@@ -16,6 +16,7 @@ class CartController extends Controller
             'product_id' => 'required|numeric',
         ]);
 
+        $cart = new Cart();
         // Get the authenticated user
         $user = Auth::user();
 
@@ -36,10 +37,10 @@ class CartController extends Controller
         }
 
         // Create a new cart item
-        $cart = new Cart();
         $cart->user_id = $user->id;
         $cart->product_id = $request->product_id;
         $cart->quantity = $request->quantity;
+        // dd($request->all());
         $cart->save();
 
         $notification = [

@@ -40,7 +40,7 @@ Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.n
 
 Route::group(['middleware' => 'auth'], function () {
     // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/add-to-cart', [CartController::class, 'add'])->name('cart.add');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
     // Add other cart routes as needed
 });

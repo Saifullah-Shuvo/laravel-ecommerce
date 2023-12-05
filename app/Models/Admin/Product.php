@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\Category;
 use App\Models\Admin\ProductImage;
+use App\Models\Frontend\Cart;
 use App\Models\Frontend\Review;
 
 class Product extends Model
@@ -43,6 +44,11 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }
 
