@@ -39,13 +39,11 @@ Route::post('/contact/message', [MessageController::class, 'message'])->name('ho
 Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.newsletter');
 
 Route::group(['middleware' => 'auth'], function () {
-    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart/all', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add-to-cart', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
-    // Add other cart routes as needed
 });
-
-
 
         // User Routes
 

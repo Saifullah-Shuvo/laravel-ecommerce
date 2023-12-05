@@ -70,84 +70,98 @@
                             </ul>
                         </nav>
                     </div>
+
                     <div class="col-md-4 col-lg-2 col-sm-5 col-4">
                         <ul class="search-cart-wrapper d-flex">
-                            <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>2</span></a>
-                                <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
-                                <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li class="{{--search-tigger--}}"><a href=""><i class="flaticon-search"></i></a></li>
+                            
+                            @auth
+                                <li>
+                                    <a href=""><i class="flaticon-like"></i> <span>1</span></a>
+
+                                    {{-- <ul class="cart-wrap dropdown_style">
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img src="assets/images/cart/1.jpg" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="cart.html">Pure Nature Product</a>
+                                                <span>QTY : 1</span>
+                                                <p>$35.00</p>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </li>
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img src="assets/images/cart/3.jpg" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="cart.html">Pure Nature Product</a>
+                                                <span>QTY : 1</span>
+                                                <p>$35.00</p>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </li>
+                                        <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                        <li>
+                                            <button>Check Out</button>
+                                        </li>
+                                    </ul> --}}
+                                </li>
+                                <li>
+                                    <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>1</span></a>
+                                    {{-- <ul class="cart-wrap dropdown_style">
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img src="assets/images/cart/1.jpg" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="cart.html">Pure Nature Product</a>
+                                                <span>QTY : 1</span>
+                                                <p>$35.00</p>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </li>
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img src="assets/images/cart/3.jpg" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="cart.html">Pure Nature Product</a>
+                                                <span>QTY : 1</span>
+                                                <p>$35.00</p>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </li>
+                                        <li class="cart-items">
+                                            <div class="cart-img">
+                                                <img src="assets/images/cart/2.jpg" alt="">
+                                            </div>
+                                            <div class="cart-content">
+                                                <a href="cart.html">Pure Nature Product</a>
+                                                <span>QTY : 1</span>
+                                                <p>$35.00</p>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </li>
+                                        <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                        <li>
+                                            <button>Check Out</button>
+                                        </li>
+                                    </ul> --}}
+                                </li>
+                            @else
+                                <li>
+                                    <a href=""><i class="flaticon-like"></i> <span>0</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>0</span></a>
+                                </li>
+                            @endauth
+
                         </ul>
                     </div>
+
                     <div class="col-md-1 col-sm-1 col-2 d-block d-lg-none">
                         <div class="responsive-menu-tigger">
                             <a href="javascript:void(0);">
@@ -165,37 +179,26 @@
                     <div class="row">
                         <div class="col-12 d-block d-lg-none">
                             <ul class="metismenu">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Shop </a>
-                                    <ul aria-expanded="false">
+                                <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
+                                <li class="{{ Route::is('home.about') ? 'active' : '' }}"><a href="{{ route('home.about') }}">About</a></li>
+                                <li class="{{ Route::is('home.shop') ? 'active' : '' }}">
+                                    <a href="{{ route('home.shop') }}">Shop Page</a>
+                                </li>
+                                {{-- <li>
+                                    <a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
+                                    <ul class="dropdown_style">
                                         <li><a href="shop.html">Shop Page</a></li>
                                         <li><a href="single-product.html">Product Details</a></li>
                                         <li><a href="cart.html">Shopping cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
                                     </ul>
+                                </li> --}}
+                                <li class="{{ Route::is('home.blog') ? 'active' : '' }}">
+                                    <a href="{{ route('home.blog')}}">Blogs</a>
                                 </li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Pages </a>
-                                    <ul aria-expanded="false">
-                                      <li><a href="about.html">About Page</a></li>
-                                      <li><a href="single-product.html">Product Details</a></li>
-                                      <li><a href="cart.html">Shopping cart</a></li>
-                                      <li><a href="checkout.html">Checkout</a></li>
-                                      <li><a href="wishlist.html">Wishlist</a></li>
-                                      <li><a href="faq.html">FAQ</a></li>
-                                    </ul>
-                                </li>
-                                <li class="sidemenu-items">
-                                    <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Blog</a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="{{ Route::is('home.contact') ? 'active' : '' }}"><a href="{{ route('home.contact')}}">Contact</a></li>
                             </ul>
                         </div>
                     </div>

@@ -72,11 +72,9 @@ Products Details
 
                         <form action="{{ route('cart.add') }}" method="POST">
                         @csrf
-                        @method('POST')
                         <ul class="input-style">
                             <li class="quantity cart-plus-minus">
                                 <input type="number" name="quantity" value="1" />
-                                <input type="hidden" name="product_id" value="{{$productDetails->id}}" />
                             </li>
                             {{-- <li><a type="submit" href="cart.html">Add to Cart</a></li> --}}
                             <li><button class="btn btn-danger" type="submit">Add to Cart</button></li>
@@ -84,6 +82,7 @@ Products Details
                             <div class="error"><span class="text-danger">{{ $message }}</span></div>
                             @enderror
                         </ul>
+                        <input type="hidden" name="product_id" value="{{$productDetails->id}}" />
                         </form>
 
                         <ul class="cetagory">

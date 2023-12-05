@@ -9,8 +9,10 @@ use App\Models\Admin\Faq;
 use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
 use App\Models\Admin\Testimonial;
+use App\Models\Frontend\Cart;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -20,6 +22,7 @@ class HomeController extends Controller
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
         $latestProduct = Product::where('status','=',1)->latest()->limit(8)->get();
         $testimonials = Testimonial::where('status','=',1)->latest()->get();
+        
         return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct','testimonials'));
     }
 

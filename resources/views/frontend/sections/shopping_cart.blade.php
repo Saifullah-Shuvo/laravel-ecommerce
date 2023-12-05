@@ -1,4 +1,7 @@
 @extends('frontend.layouts.app')
+@section('title')
+    Shopping Cart
+@endsection
 
 @section('panel')
 
@@ -10,7 +13,7 @@
                     <div class="breadcumb-wrap text-center">
                         <h2>Shopping Cart</h2>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="url('/')">Home</a></li>
                             <li><span>Shopping Cart</span></li>
                         </ul>
                     </div>
@@ -19,12 +22,14 @@
         </div>
     </div>
     <!-- .breadcumb-area end -->
+    {{-- @dd($cartItems->product); --}}
     <!-- cart-area start -->
     <div class="cart-area ptb-100">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="http://themepresss.com/tf/html/tohoney/cart">
+                    <form action="" method="POST">
+                        @csrf
                         <table class="table-responsive cart-wrap">
                             <thead>
                                 <tr>
@@ -37,46 +42,41 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $totalSum = 0;
+                                @endphp
+                                @forelse($cartItems as $data)
                                 <tr>
-                                    <td class="images"><img src="{{asset('frontend')}}/assets/images/cart/1.jpg" alt=""></td>
-                                    <td class="product"><a href="single-product.html">Neture Honey</a></td>
-                                    <td class="ptice">$139.00</td>
+                                    <td class="images"><img src="{{asset('admins')}}/productimage/{{ $data->product->thambnail }}" alt=""></td>
+                                    <td class="product"><a href="{{ route('home.product.details',['id'=> $data->product->id]) }}" target="_blank">{{ $data->product->name }}</a></td>
+                                    <td class="ptice">${{ $data->product->selling_price }}</td>
                                     <td class="quantity cart-plus-minus">
-                                        <input type="text" value="1" />
+                                        <input type="text" value="{{ $data->quantity }}" />
                                     </td>
-                                    <td class="total">$139.00</td>
-                                    <td class="remove"><i class="fa fa-times"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="images"><img src="{{asset('frontend')}}/assets/images/cart/2.jpg" alt=""></td>
-                                    <td class="product"><a href="single-product.html">Pure Olive Oil</a></td>
-                                    <td class="ptice">$684.47</td>
-                                    <td class="quantity cart-plus-minus">
-                                        <input type="text" value="1" />
+                                    <td class="total">${{ $data->product->selling_price * $data->quantity }}</td>
+                                    <td class="remove">
+                                        {{-- <i class="fa fa-times remove-icon" data-product-id="{{ $data->product->id }}"></i> --}}
+                                        <a href="{{ route('cart.remove',['id'=>$data->product->id]) }}"><i class="fa fa-times"></i></a>
                                     </td>
-                                    <td class="total">$684.47</td>
-                                    <td class="remove"><i class="fa fa-times"></i></td>
+                                    @php
+                                        $totalSum += $data->product->selling_price * $data->quantity;
+                                    @endphp
                                 </tr>
-                                <tr>
-                                    <td class="images"><img src="{{asset('frontend')}}/assets/images/cart/3.jpg" alt=""></td>
-                                    <td class="product"><a href="single-product.html">Pure Coconut Oil</a></td>
-                                    <td class="ptice">$145.80</td>
-                                    <td class="quantity cart-plus-minus">
-                                        <input type="text" value="1" />
-                                    </td>
-                                    <td class="total">$145.80</td>
-                                    <td class="remove"><i class="fa fa-times"></i></td>
-                                </tr>
+                                @empty
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                      <h5>No Cart Products Found!</h5>
+                                    </div>
+                                </div>
+                                @endforelse
+
                             </tbody>
                         </table>
                         <div class="row mt-60">
                             <div class="col-xl-4 col-lg-5 col-md-6 ">
                                 <div class="cartcupon-wrap">
                                     <ul class="d-flex">
-                                        <li>
-                                            <button>Update Cart</button>
-                                        </li>
-                                        <li><a href="shop.html">Continue Shopping</a></li>
+                                        <li><a href="{{ route('home.shop') }}">Back To Shopping Page</a></li>
                                     </ul>
                                     <h3>Cupon</h3>
                                     <p>Enter Your Cupon Code if You Have One</p>
@@ -90,8 +90,8 @@
                                 <div class="cart-total text-right">
                                     <h3>Cart Totals</h3>
                                     <ul>
-                                        <li><span class="pull-left">Subtotal </span>$380.00</li>
-                                        <li><span class="pull-left"> Total </span> $380.00</li>
+                                        <li><span class="pull-left">Subtotal </span>${{ $totalSum }}</li>
+                                        <li><span class="pull-left"> Total </span> ${{ $totalSum }}</li>
                                     </ul>
                                     <a href="checkout.html">Proceed to Checkout</a>
                                 </div>
@@ -105,3 +105,31 @@
     <!-- cart-area end -->
 
 @endsection
+
+@push('script')
+{{-- <script>
+    $(document).ready(function() {
+        $('.remove-icon').click(function() {
+            var productId = $(this).data('product-id');
+
+            // Make an AJAX request to the server to remove the item
+            $.ajax({
+                url: '/cart/remove/' + productId,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Handle success, e.g., update the UI to reflect the removal
+                    console.log(response.message);
+                    // You might want to refresh the page or update the cart UI dynamically
+                },
+                error: function(error) {
+                    console.log('Error removing item: ' + error);
+                }
+            });
+        });
+    });
+</script> --}}
+
+@endpush

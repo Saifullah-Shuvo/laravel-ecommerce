@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\Frontend\Review;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class ReviewController extends Controller
+// class Controller extends BaseController
+
+
+class ReviewController extends BaseController
 {
     public function store(Request $request){
         $request->validate([

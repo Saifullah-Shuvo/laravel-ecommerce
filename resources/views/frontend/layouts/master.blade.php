@@ -2,6 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{{ config('app.name') }} | @yield('title')</title>
@@ -48,6 +49,7 @@
     {{-- moment jquery for countdown  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <!-- jquery latest version -->
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
     <script src="{{asset('frontend')}}/assets/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap js -->
     <script src="{{asset('frontend')}}/assets/js/bootstrap.min.js"></script>
