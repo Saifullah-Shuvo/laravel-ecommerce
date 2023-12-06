@@ -74,81 +74,13 @@
                     <div class="col-md-4 col-lg-2 col-sm-5 col-4">
                         <ul class="search-cart-wrapper d-flex">
                             <li class="{{--search-tigger--}}"><a href=""><i class="flaticon-search"></i></a></li>
-                            
+
                             @auth
                                 <li>
                                     <a href=""><i class="flaticon-like"></i> <span>1</span></a>
-
-                                    {{-- <ul class="cart-wrap dropdown_style">
-                                        <li class="cart-items">
-                                            <div class="cart-img">
-                                                <img src="assets/images/cart/1.jpg" alt="">
-                                            </div>
-                                            <div class="cart-content">
-                                                <a href="cart.html">Pure Nature Product</a>
-                                                <span>QTY : 1</span>
-                                                <p>$35.00</p>
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </li>
-                                        <li class="cart-items">
-                                            <div class="cart-img">
-                                                <img src="assets/images/cart/3.jpg" alt="">
-                                            </div>
-                                            <div class="cart-content">
-                                                <a href="cart.html">Pure Nature Product</a>
-                                                <span>QTY : 1</span>
-                                                <p>$35.00</p>
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </li>
-                                        <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                        <li>
-                                            <button>Check Out</button>
-                                        </li>
-                                    </ul> --}}
                                 </li>
                                 <li>
                                     <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>1</span></a>
-                                    {{-- <ul class="cart-wrap dropdown_style">
-                                        <li class="cart-items">
-                                            <div class="cart-img">
-                                                <img src="assets/images/cart/1.jpg" alt="">
-                                            </div>
-                                            <div class="cart-content">
-                                                <a href="cart.html">Pure Nature Product</a>
-                                                <span>QTY : 1</span>
-                                                <p>$35.00</p>
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </li>
-                                        <li class="cart-items">
-                                            <div class="cart-img">
-                                                <img src="assets/images/cart/3.jpg" alt="">
-                                            </div>
-                                            <div class="cart-content">
-                                                <a href="cart.html">Pure Nature Product</a>
-                                                <span>QTY : 1</span>
-                                                <p>$35.00</p>
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </li>
-                                        <li class="cart-items">
-                                            <div class="cart-img">
-                                                <img src="assets/images/cart/2.jpg" alt="">
-                                            </div>
-                                            <div class="cart-content">
-                                                <a href="cart.html">Pure Nature Product</a>
-                                                <span>QTY : 1</span>
-                                                <p>$35.00</p>
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </li>
-                                        <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                        <li>
-                                            <button>Check Out</button>
-                                        </li>
-                                    </ul> --}}
                                 </li>
                             @else
                                 <li>

@@ -87,11 +87,11 @@ class CartController extends Controller
                 'message' => 'Product removed from the cart successfully!',
                 'alert-type' => 'success',
             ];
-    
+
             return redirect()->back()->with($notification);
             // return response()->json(['message' => 'Item removed successfully']);
         }
-        
+
     }
 
 }
