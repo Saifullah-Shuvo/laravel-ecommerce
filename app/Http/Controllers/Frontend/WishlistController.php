@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Frontend\Cart;
 use Illuminate\Http\Request;
+use App\Models\Frontend\Wishlist;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class WishlistController extends Controller
 {
+
     public function index()
     {
         // Get the authenticated user
         $user = Auth::user();
         // Get the cart items for the current user
-        $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+        $wishlistItems = Wishlist::where('user_id', $user->id)->with('product')->latest()->get();
         // Pass the cart items to the cart view
-        return view('frontend.sections.shopping_cart', compact('cartItems'));
+        return view('frontend.sections.wishlist', compact('wishlistItems'));
     }
 
     public function add(Request $request, $id)
     {
-        $cart = new Cart();
+        $wishlist = new Wishlist();
         // Get the authenticated user
         $user = Auth::user();
 
         // Check if the user is authenticated
         if (!$user) {
             $notification = [
-                'message' => 'You must be logged in to add items to the cart.',
+                'message' => 'You must be logged in to add items to the wishlist.',
                 'alert-type' => 'info',
             ];
             return redirect()->route('login')->with($notification);
         }
 
-        // Check if the same product is already in the user's cart
-        $existingCart = Cart::where('user_id', $user->id)
+        // Check if the same product is already in the user's wishlist
+        $existingwishlist = Wishlist::where('user_id', $user->id)
                             ->where('product_id', $request->id)
                             ->first();
 
-        if ($existingCart) {
-            if($request->quantity){
-                $existingCart->update(['quantity' => $existingCart->quantity + $request->quantity]);
-            }
+        if ($existingwishlist) {
+
             $notification = [
-                'message' => 'Product already in the cart!',
+                'message' => 'Product already in the wishlist!',
                 'alert-type' => 'info',
             ];
             return redirect()->back()->with($notification);
         }
 
-        // Create a new cart item
-        $cart->user_id = $user->id;
-        $cart->product_id = $request->id;
-        if($request->quantity){
-            $cart->quantity = $request->quantity;
-        }
-        $cart->save();
+        // Create a new wishlist item
+        $wishlist->user_id = $user->id;
+        $wishlist->product_id = $request->id;
+        $wishlist->save();
 
         $notification = [
-            'message' => 'Product added to the cart successfully!',
+            'message' => 'Product added to the wishlist successfully!',
             'alert-type' => 'success',
         ];
 
@@ -72,17 +68,17 @@ class CartController extends Controller
         $user = Auth::user();
 
         // Find the cart item by product ID and user ID
-        $cartItem = Cart::where('product_id', $id)
+        $Item = Wishlist::where('product_id', $id)
                         ->where('user_id', $user->id)
                         ->first();
 
         // Check if the cart item exists
-        if ($cartItem) {
+        if ($Item) {
             // Remove the cart item
-            $cartItem->delete();
+            $Item->delete();
 
             $notification = [
-                'message' => 'Product removed from the cart successfully!',
+                'message' => 'Product removed from the Wishlist successfully!',
                 'alert-type' => 'success',
             ];
 

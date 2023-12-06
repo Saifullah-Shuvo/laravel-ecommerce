@@ -22,7 +22,7 @@
         </div>
     </div>
     <!-- .breadcumb-area end -->
-    {{-- @dd($cartItems->product); --}}
+    {{-- @dd($cartItems->count()); --}}
     <!-- cart-area start -->
     <div class="cart-area ptb-100">
         <div class="container">
@@ -45,15 +45,21 @@
                                 @php
                                     $totalSum = 0;
                                 @endphp
+                                
                                 @forelse($cartItems as $data)
                                 <tr>
-                                    <td class="images"><img src="{{asset('admins')}}/productimage/{{ $data->product->thambnail }}" alt=""></td>
+                                    <td class="images"><img height="100" width="100" src="{{asset('admins')}}/productimage/{{ $data->product->thambnail }}" alt=""></td>
+                                    
                                     <td class="product"><a href="{{ route('home.product.details',['id'=> $data->product->id]) }}" target="_blank">{{ $data->product->name }}</a></td>
+                                    
                                     <td class="ptice">${{ $data->product->selling_price }}</td>
+
                                     <td class="quantity cart-plus-minus">
-                                        <input type="text" value="{{ $data->quantity }}" />
+                                        <input type="number" value="{{ $data->quantity }}" />
                                     </td>
+
                                     <td class="total">${{ $data->product->selling_price * $data->quantity }}</td>
+
                                     <td class="remove">
                                         {{-- <i class="fa fa-times remove-icon" data-product-id="{{ $data->product->id }}"></i> --}}
                                         <a href="{{ route('cart.remove',['id'=>$data->product->id]) }}"><i class="fa fa-times"></i></a>
@@ -131,5 +137,31 @@
         });
     });
 </script> --}}
+{{-- <script>
+    $(document).ready(function() {
+        $('.quantity input').on('input', function() {
+            var productId = $(this).data('product-id');
+            var newQuantity = $(this).val();
+
+            // Make an AJAX request to update the quantity
+            $.ajax({
+                url: '/update-cart-quantity/' + productId,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    quantity: newQuantity
+                },
+                success: function(response) {
+                    // Handle success, e.g., update the UI to reflect the new quantity
+                    console.log(response.message);
+                },
+                error: function(error) {
+                    console.log('Error updating quantity: ' + error);
+                }
+            });
+        });
+    });
+</script> --}}
+
 
 @endpush

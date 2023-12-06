@@ -62,8 +62,8 @@ Shop Page
                                         <ul>
                                             <li><a class="edit" data-id = "{{ $data->id }}" data-toggle="modal" data-target="#popularproductdetails"
                                                 href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+                                            <li><a href="{{ route('wishlist.add',['id'=>$data->id]) }}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="{{ route('cart.add',['id'=> $data->id]) }}"><i class="fa fa-shopping-bag"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

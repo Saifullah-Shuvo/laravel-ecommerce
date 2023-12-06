@@ -101,7 +101,10 @@ class HomeController extends Controller
     public function blogDetails($id){
         $categories= Category::where('status','=',1)->latest()->get();
         $latestBlogs = Blog::where('status','=',1)->latest()->take(5)->get();
-        $blogDetails = Blog::with(['admin', 'comments'])->findOrFail($id);
+        // $blogDetails = Blog::with(['admin', 'comments'])->findOrFail($id);
+        $blogDetails = Blog::with(['admin', 'comments' => function ($query) {
+            $query->latest()->get();
+        }])->findOrFail($id);
         return view('frontend.sections.blog_details',compact('blogDetails','latestBlogs','categories'));
     }
 

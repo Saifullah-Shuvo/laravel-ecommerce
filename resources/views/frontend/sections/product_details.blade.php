@@ -70,20 +70,9 @@ Products Details
                         </div>
                         <p>{{ $productDetails->description }}</p>
 
-                        <form action="{{ route('cart.add') }}" method="POST">
-                        @csrf
                         <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="number" name="quantity" value="1" />
-                            </li>
-                            {{-- <li><a type="submit" href="cart.html">Add to Cart</a></li> --}}
-                            <li><button class="btn btn-danger" type="submit">Add to Cart</button></li>
-                            @error('quantity')
-                            <div class="error"><span class="text-danger">{{ $message }}</span></div>
-                            @enderror
+                            <li><a href="{{ route('cart.add',['id'=>$productDetails->id]) }}">Add to Cart</a></li>
                         </ul>
-                        <input type="hidden" name="product_id" value="{{$productDetails->id}}" />
-                        </form>
 
                         <ul class="cetagory">
                             <li>Category Name:</li>
@@ -269,8 +258,8 @@ Products Details
                                 </div>
                                 <div class="col-5 text-right">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        <li><a href="cart.html"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="{{ route('cart.add',['id'=> $data->id]) }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="{{ route('wishlist.add',['id'=> $data->id]) }}"><i class="fa fa-heart"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

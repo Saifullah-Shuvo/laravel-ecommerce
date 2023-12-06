@@ -66,7 +66,7 @@
                                     <div class="comment-wrap">
                                         <div class="comment-theme">
                                             <div class="comment-image">
-                                                <img src="{{asset('frontend')}}/assets/images/comment/1.png" alt="Jhon">
+                                                <img width="70px" height="70px" src="{{asset('frontend')}}/assets/images/comment/1.jpg" alt="Jhon">
                                             </div>
                                         </div>
                                         <div class="comment-main-area">

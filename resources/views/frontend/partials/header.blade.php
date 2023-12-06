@@ -1,3 +1,22 @@
+@php
+    // Get the authenticated user
+    if($user = auth()->user()){
+    // Get the cart items for the current user
+    $cartItems = App\Models\Frontend\Cart::where('user_id', $user->id)->get();
+    }else{
+    $cartItems = 0;
+    }
+@endphp
+@php
+    // Get the authenticated user
+    if($user = auth()->user()){
+    // Get the cart items for the current user
+    $wishlistItems = App\Models\Frontend\Wishlist::where('user_id', $user->id)->get();
+    }else{
+    $wishlistItems = 0;
+    }
+@endphp
+
 <header class="header-area">
         <div class="header-top bg-2">
             <div class="fluid-container">
@@ -77,14 +96,14 @@
 
                             @auth
                                 <li>
-                                    <a href=""><i class="flaticon-like"></i> <span>1</span></a>
+                                    <a href="{{ route('wishlist.index') }}"><i class="flaticon-like"></i> <span>{{ $wishlistItems->count() }}</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>1</span></a>
+                                    <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>{{ $cartItems->count() }}</span></a>
                                 </li>
                             @else
                                 <li>
-                                    <a href=""><i class="flaticon-like"></i> <span>0</span></a>
+                                    <a href="{{ route('wishlist.index') }}"><i class="flaticon-like"></i> <span>0</span></a>
                                 </li>
                                 <li>
                                     <a href="{{ route('cart.index') }}"><i class="flaticon-shop"></i> <span>0</span></a>

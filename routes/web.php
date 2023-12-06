@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\MessageController;
 use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ReviewController;
+use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
 
         // Frontend Routes
@@ -40,8 +41,15 @@ Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.n
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/all', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add-to-cart', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart/add-to-cart/{id}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
+    // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/wishlist/all', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+    Route::get('/wishlist/remove/{id}', [WishlistController::class, 'removeItem'])->name('wishlist.remove');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 });
 
