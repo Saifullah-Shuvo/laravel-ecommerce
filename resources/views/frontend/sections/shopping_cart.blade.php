@@ -45,13 +45,13 @@
                                 @php
                                     $totalSum = 0;
                                 @endphp
-                                
+
                                 @forelse($cartItems as $data)
                                 <tr>
                                     <td class="images"><img height="100" width="100" src="{{asset('admins')}}/productimage/{{ $data->product->thambnail }}" alt=""></td>
-                                    
+
                                     <td class="product"><a href="{{ route('home.product.details',['id'=> $data->product->id]) }}" target="_blank">{{ $data->product->name }}</a></td>
-                                    
+
                                     <td class="ptice">${{ $data->product->selling_price }}</td>
 
                                     <td class="quantity cart-plus-minus">
@@ -99,7 +99,7 @@
                                         <li><span class="pull-left">Subtotal </span>${{ $totalSum }}</li>
                                         <li><span class="pull-left"> Total </span> ${{ $totalSum }}</li>
                                     </ul>
-                                    <a href="checkout.html">Proceed to Checkout</a>
+                                    <a href="">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>

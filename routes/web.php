@@ -53,6 +53,13 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    // Route::get('/wishlist/all', [WishlistController::class, 'index'])->name('wishlist.index');
+    // Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+    // Route::get('/wishlist/remove/{id}', [WishlistController::class, 'removeItem'])->name('wishlist.remove');
+    // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+});
+
         // User Routes
 
 Route::get('/dashboard', function () {
