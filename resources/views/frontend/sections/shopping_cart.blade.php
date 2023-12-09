@@ -111,11 +111,12 @@
                                         ?>
                                         <li><span class="pull-left">Discount </span>-${{ number_format($discountAmount, 2) }}</li>
                                         <li><span class="pull-left"> Total </span> ${{ number_format($discountedSubtotal, 2) }}</li>
+                                        @else
+                                        <li><span class="pull-left">Discount </span>-$0</li>
+                                        <li><span class="pull-left"> Total </span> ${{ number_format($totalSum, 2) }}</li>
                                         @endif
-                                        {{-- <li><span class="pull-left">Discount </span>-$0</li>
-                                        <li><span class="pull-left"> Total </span> ${{ number_format($totalSum, 2) }}</li> --}}
                                     </ul>
-                                    <a href="">Proceed to Checkout</a>
+                                    <a href="{{ route('show.checkout') }}">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>

@@ -120,8 +120,8 @@ class CartController extends Controller
                     }
 
                     // Store the applied coupon and discount amount in the session
-                    session(['applied_coupon' => $coupon, 'discount_amount' => $discountAmount]);
-                    // return view('frontend.sections.shopping_cart',compact('discountAmount'));
+                    session(['applied_coupon' => $coupon, 'discount_amount' => $discountAmount ]);
+                    // session()->forget('applied_coupon');
 
                     $notification = ['message' => 'Coupon Applied Successfully!', 'alert-type' => 'success'];
                     return redirect()->back()->with($notification);
@@ -134,5 +134,27 @@ class CartController extends Controller
                 return redirect()->back()->with($notification);
             }
         }
+
+        public function showCheckout()
+            {
+                // Retrieve applied coupon and discount amount from the session
+                $appliedCoupon = session('applied_coupon');
+                $discountAmount = session('discount_amount');
+
+                $user = Auth::user();
+                $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+                
+                $subtotal = 0;
+                foreach ($cartItems as $item) {
+                    $subtotal += $item->quantity * $item->product->selling_price;
+                }
+                
+                $totalPrice = $subtotal - $discountAmount;
+                // dd($totalPrice);
+
+                // return view('checkout', compact('appliedCoupon', 'discountAmount', 'productData', 'subtotal', 'totalPrice'));
+                return view('frontend.sections.checkout',compact('appliedCoupon','discountAmount','cartItems',
+                                'subtotal','totalPrice'));
+            }
 
 }

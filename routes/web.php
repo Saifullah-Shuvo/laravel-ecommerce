@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/apply-coupon', [CartController::class,'applyCoupon'])->name('apply.coupon');
+    Route::get('/checkout', [CartController::class, 'showCheckout'])->name('show.checkout');
 });
 
 Route::group(['middleware' => 'auth'], function () {
