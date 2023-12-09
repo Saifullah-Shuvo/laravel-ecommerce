@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Coupon;
 use App\Models\Frontend\Cart;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,5 +93,46 @@ class CartController extends Controller
         }
 
     }
+        //coupon apply
+        public function applyCoupon(Request $request)
+        {
+            $request->validate([
+                'coupon_code' => 'required|string',
+                'totalSum' => 'required|numeric',
+            ]);
+
+            $totalSum = $request->input('totalSum');
+            $coupon = Coupon::where('status', 1)->where('code', $request->coupon_code)->first();
+
+            if ($coupon) {
+                $expiryDate = Carbon::parse($coupon->expiry_date);
+                $currentDate = Carbon::now();
+
+                if ($currentDate->lte($expiryDate)) {
+                    $discountAmount = 0;
+
+                    if ($coupon->discount_type === 'percentage') {
+                        // Calculate discount based on percentage
+                        $discountAmount = $totalSum * ($coupon->discount_value / 100);
+                    } elseif ($coupon->discount_type === 'fixed') {
+                        // Use fixed discount value
+                        $discountAmount = $coupon->discount_value;
+                    }
+
+                    // Store the applied coupon and discount amount in the session
+                    session(['applied_coupon' => $coupon, 'discount_amount' => $discountAmount]);
+                    // return view('frontend.sections.shopping_cart',compact('discountAmount'));
+
+                    $notification = ['message' => 'Coupon Applied Successfully!', 'alert-type' => 'success'];
+                    return redirect()->back()->with($notification);
+                } else {
+                    $notification = ['message' => 'Coupon has expired!', 'alert-type' => 'error'];
+                    return redirect()->back()->with($notification);
+                }
+            } else {
+                $notification = ['message' => 'Invalid Coupon Code!', 'alert-type' => 'error'];
+                return redirect()->back()->with($notification);
+            }
+        }
 
 }

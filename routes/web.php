@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
@@ -44,19 +45,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/add-to-cart/{id}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('cart.remove');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/apply-coupon', [CartController::class,'applyCoupon'])->name('apply.coupon');
 });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/wishlist/all', [WishlistController::class, 'index'])->name('wishlist.index');
     Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
     Route::get('/wishlist/remove/{id}', [WishlistController::class, 'removeItem'])->name('wishlist.remove');
-    // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
-});
-
-Route::group(['middleware' => 'auth'], function () {
-    // Route::get('/wishlist/all', [WishlistController::class, 'index'])->name('wishlist.index');
-    // Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
-    // Route::get('/wishlist/remove/{id}', [WishlistController::class, 'removeItem'])->name('wishlist.remove');
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 });
 
@@ -174,7 +169,22 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('system/testimonial/update/{id}', [testimonialController::class, 'update'])->name('testimonial.update');
     Route::get('system/testimonial/delete/{id}', [testimonialController::class, 'destroy'])->name('testimonial.delete');
 
-    // //testimonial status
+    // testimonial status
     Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
     Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('system/coupon/all',[CouponController::class,'index'])->name('coupon.all');
+    Route::get('system/coupon/add', [CouponController::class, 'add'])->name('coupon.add');
+    Route::post('system/coupon/store',[CouponController::class,'store'])->name('coupon.store');
+
+    Route::get('system/coupon/edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+    Route::post('system/coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+    Route::get('system/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
+
+    // coupon status
+    Route::get('/system/coupon/enable/{id}',[CouponController::class, 'status_enable'])->name('coupon.status.enable');
+    Route::get('/system/coupon/disable/{id}',[CouponController::class, 'status_disable'])->name('coupon.status.disable');
+
 });

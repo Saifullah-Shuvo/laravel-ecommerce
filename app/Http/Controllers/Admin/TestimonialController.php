@@ -106,7 +106,7 @@ class TestimonialController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    // Slider status
+    // Testimonial status
     public function status_enable($id)
     {
         $data = Testimonial::find($id);

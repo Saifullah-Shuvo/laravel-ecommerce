@@ -28,8 +28,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="" method="POST">
-                        @csrf
+                    {{-- <form action="" method="POST"> --}}
+                        {{-- @csrf --}}
                         <table class="table-responsive cart-wrap">
                             <thead>
                                 <tr>
@@ -87,23 +87,39 @@
                                     <h3>Cupon</h3>
                                     <p>Enter Your Cupon Code if You Have One</p>
                                     <div class="cupon-wrap">
-                                        <input type="text" placeholder="Cupon Code">
-                                        <button>Apply Cupon</button>
+                                        <form action="{{ route('apply.coupon') }}" method="POST">
+                                        @csrf
+                                            <input type="text" name="coupon_code" id="coupon_code" required>
+                                            <input type="hidden" name="totalSum" value="{{ $totalSum }}">
+                                            <button type="submit">Apply Coupon</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
                                 <div class="cart-total text-right">
                                     <h3>Cart Totals</h3>
                                     <ul>
-                                        <li><span class="pull-left">Subtotal </span>${{ $totalSum }}</li>
-                                        <li><span class="pull-left"> Total </span> ${{ $totalSum }}</li>
+                                        <li><span class="pull-left">Subtotal </span>${{ number_format($totalSum, 2) }}</li>
+                                        @if(session()->has('applied_coupon') && session()->has('discount_amount'))
+                                        <?php
+                                            $appliedCoupon = session('applied_coupon');
+                                            $discountAmount = session('discount_amount');
+                                            $discountedSubtotal = $totalSum - $discountAmount;
+                                        ?>
+                                        <li><span class="pull-left">Discount </span>-${{ number_format($discountAmount, 2) }}</li>
+                                        <li><span class="pull-left"> Total </span> ${{ number_format($discountedSubtotal, 2) }}</li>
+                                        @endif
+                                        {{-- <li><span class="pull-left">Discount </span>-$0</li>
+                                        <li><span class="pull-left"> Total </span> ${{ number_format($totalSum, 2) }}</li> --}}
                                     </ul>
                                     <a href="">Proceed to Checkout</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>
             </div>
         </div>
@@ -113,30 +129,7 @@
 @endsection
 
 @push('script')
-{{-- <script>
-    $(document).ready(function() {
-        $('.remove-icon').click(function() {
-            var productId = $(this).data('product-id');
 
-            // Make an AJAX request to the server to remove the item
-            $.ajax({
-                url: '/cart/remove/' + productId,
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    // Handle success, e.g., update the UI to reflect the removal
-                    console.log(response.message);
-                    // You might want to refresh the page or update the cart UI dynamically
-                },
-                error: function(error) {
-                    console.log('Error removing item: ' + error);
-                }
-            });
-        });
-    });
-</script> --}}
 {{-- <script>
     $(document).ready(function() {
         $('.quantity input').on('input', function() {
