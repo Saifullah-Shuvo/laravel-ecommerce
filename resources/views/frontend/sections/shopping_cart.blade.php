@@ -97,7 +97,6 @@
                                 </div>
                             </div>
 
-
                             <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
                                 <div class="cart-total text-right">
                                     <h3>Cart Totals</h3>
@@ -156,6 +155,5 @@
         });
     });
 </script> --}}
-
 
 @endpush
