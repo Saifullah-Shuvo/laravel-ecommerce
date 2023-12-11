@@ -55,10 +55,10 @@
                                     <td class="ptice">${{ $data->product->selling_price }}</td>
 
                                     <td class="quantity cart-plus-minus">
-                                        <input type="number" value="{{ $data->quantity }}" />
+                                        <input type="number" class="quantity-input" min="1" value="{{ $data->quantity }}" />
                                     </td>
 
-                                    <td class="total">${{ $data->product->selling_price * $data->quantity }}</td>
+                                    <td class="total total-price">${{ $data->product->selling_price * $data->quantity }}</td>
 
                                     <td class="remove">
                                         {{-- <i class="fa fa-times remove-icon" data-product-id="{{ $data->product->id }}"></i> --}}
@@ -132,28 +132,38 @@
 
 {{-- <script>
     $(document).ready(function() {
-        $('.quantity input').on('input', function() {
-            var productId = $(this).data('product-id');
-            var newQuantity = $(this).val();
+        // Listen for changes in quantity input fields
+        $('.quantity-input').on('input', function() {
+            updateTotalPrice($(this));
+        });
 
-            // Make an AJAX request to update the quantity
+        // Function to update total price based on quantity
+        function updateTotalPrice(input) {
+            var quantity = input.val();
+            var price = parseFloat(input.closest('.cart-item').find('.product-price').text().replace('$', ''));
+            var totalPrice = quantity * price;
+            input.closest('.cart-item').find('.total-price').text('Total: $' + totalPrice.toFixed(2));
+
+            // You may want to update the total price in the database using AJAX
+            // Example: sendAjaxRequestToUpdateQuantity(productId, quantity);
+        }
+
+        // Example AJAX function
+        function sendAjaxRequestToUpdateQuantity(productId, quantity) {
             $.ajax({
-                url: '/update-cart-quantity/' + productId,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    quantity: newQuantity
-                },
+                url: '/update-quantity',
+                method: 'POST',
+                data: { productId: productId, quantity: quantity },
                 success: function(response) {
-                    // Handle success, e.g., update the UI to reflect the new quantity
-                    console.log(response.message);
+                    console.log('Quantity updated successfully');
                 },
                 error: function(error) {
-                    console.log('Error updating quantity: ' + error);
+                    console.error('Error updating quantity:', error);
                 }
             });
-        });
+        }
     });
 </script> --}}
+
 
 @endpush

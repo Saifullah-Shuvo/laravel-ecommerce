@@ -25,57 +25,55 @@
     <!-- checkout-area start -->
     <div class="checkout-area ptb-100">
         <div class="container">
+        <form action="" method="POST">
+        @csrf
             <div class="row">
                 <div class="col-lg-8">
                     <div class="checkout-form form-style">
                         <h3>Billing Details</h3>
-                        <form action="http://themepresss.com/tf/html/tohoney/checkout">
-                            <div class="row">
-                                <div class="col-sm-6 col-12">
-                                    <p>First Name *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Last Name *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <p>Compani Name</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Email Address *</p>
-                                    <input type="email">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Phone No. *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <p>Country *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <p>Your Address *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Postcode/ZIP</p>
-                                    <input type="email">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Town/City *</p>
-                                    <input type="text">
-                                </div>
-
-                                <div class="col-12">
-                                    <p>Order Notes </p>
-                                    <textarea name="massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-12">
+                                <p>First Name *</p>
+                                <input type="text" name="first_name" value="{{ auth()->user()->name }}" required>
                             </div>
-                        </form>
+                            <div class="col-sm-6 col-12">
+                                <p>Last Name *</p>
+                                <input type="text" name="last_name" placeholder="Enter last name" required>
+                            </div>
+
+                            <div class="col-sm-6 col-12">
+                                <p>Email Address *</p>
+                                <input type="email" name="email" value="{{ auth()->user()->email}}" required>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <p>Phone No. *</p>
+                                <input type="text" name="phone_number" placeholder="Enter phone number" required>
+                            </div>
+                            <div class="col-12">
+                                <p>Country *</p>
+                                <input type="text" name="country" placeholder="Enter country" required>
+                            </div>
+                            <div class="col-12">
+                                <p>Your Address *</p>
+                                <input type="text" name="address" placeholder="Enter Address" required>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <p>Postcode/ZIP</p>
+                                <input type="text" name="zip_code" placeholder="Enter zip code" required>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <p>Town/City *</p>
+                                <input type="text" name="city" placeholder="Enter town" required>
+                            </div>
+
+                            <div class="col-12">
+                                <p>Order Notes </p>
+                                <textarea name="order_notes" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="order-area">
                         <h3>Your Order</h3>
@@ -96,26 +94,27 @@
                         </ul>
                         <ul class="payment-method">
                             <li>
-                                <input id="bank" type="checkbox">
+                                <input name="payment_type" type="checkbox" value="bank_transfer">
                                 <label for="bank">Direct Bank Transfer</label>
                             </li>
                             <li>
-                                <input id="paypal" type="checkbox">
+                                <input name="payment_type" type="checkbox" value="paypal">
                                 <label for="paypal">Paypal</label>
                             </li>
                             <li>
-                                <input id="card" type="checkbox">
+                                <input name="payment_type" type="checkbox" value="credit_card">
                                 <label for="card">Credit Card</label>
                             </li>
                             <li>
-                                <input id="delivery" type="checkbox">
+                                <input name="payment_type" type="checkbox" value="cash_on_delivery">
                                 <label for="delivery">Cash on Delivery</label>
                             </li>
                         </ul>
-                        <button>Place Order</button>
+                        <button type="submit">Place Order</button>
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
     <!-- checkout-area end -->
