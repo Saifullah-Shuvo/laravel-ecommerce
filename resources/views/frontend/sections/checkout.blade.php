@@ -94,15 +94,15 @@
                         </ul>
                         <ul class="payment-method">
                             <li>
-                                <input name="payment_type" type="checkbox" value="bank_transfer">
+                                <input name="payment_type" type="checkbox" value="bank_transfer" disabled>
                                 <label for="bank">Direct Bank Transfer</label>
                             </li>
                             <li>
-                                <input name="payment_type" type="checkbox" value="paypal">
+                                <input name="payment_type" type="checkbox" value="paypal" disabled>
                                 <label for="paypal">Paypal</label>
                             </li>
                             <li>
-                                <input name="payment_type" type="checkbox" value="credit_card">
+                                <input name="payment_type" type="checkbox" value="credit_card" disabled>
                                 <label for="card">Credit Card</label>
                             </li>
                             <li>
