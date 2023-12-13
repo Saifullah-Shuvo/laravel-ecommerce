@@ -25,7 +25,7 @@
     <!-- checkout-area start -->
     <div class="checkout-area ptb-100">
         <div class="container">
-        <form action="" method="POST">
+        <form action="{{ route('order.place') }}" method="POST">
         @csrf
             <div class="row">
                 <div class="col-lg-8">
@@ -85,11 +85,11 @@
                             @endforeach
 
                             <li>Subtotal <span class="pull-right"><strong>{{ number_format($subtotal,2)  }}</strong></span></li>
-                            
+
                             @if(isset($appliedCoupon))
                             <li>Discount: Coupon({{ $appliedCoupon->code }}) <span class="pull-right">{{ number_format(-$discountAmount, 2) }}</span></li>
                             @endif
-                            
+
                             <li>Total<span class="pull-right">${{ number_format($totalPrice,2) }}</span></li>
                         </ul>
                         <ul class="payment-method">

@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/apply-coupon', [CartController::class,'applyCoupon'])->name('apply.coupon');
     Route::get('/checkout', [CartController::class, 'showCheckout'])->name('show.checkout');
+    Route::post('/order/place', [CartController::class, 'orderPlace'])->name('order.place');
 });
 
 Route::group(['middleware' => 'auth'], function () {
