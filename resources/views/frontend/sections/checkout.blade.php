@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-sm-6 col-12">
                                 <p>Phone No. *</p>
-                                <input type="text" name="phone_number" placeholder="Enter phone number" required>
+                                <input type="number" name="phone_number" placeholder="Enter phone number" required>
                             </div>
                             <div class="col-12">
                                 <p>Country *</p>

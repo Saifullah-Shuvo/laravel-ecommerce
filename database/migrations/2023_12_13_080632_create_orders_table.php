@@ -17,22 +17,19 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->nullable();
-            $table->integer('phone_number')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('country')->nullable();
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('city')->nullable();
             $table->string('order_notes')->nullable();
             $table->integer('subtotal')->nullable();
-            $table->integer('coupon_code')->nullable();
+            $table->string('coupon_code')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('total')->nullable();
-            $table->integer('payment_type')->nullable();
+            $table->string('payment_type')->nullable();
             $table->integer('order_id')->nullable();
             $table->integer('status')->default(0);
-            $table->timestamp('order_date')->nullable();
-            $table->timestamp('order_month')->nullable();
-            $table->timestamp('order_year')->nullable();
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Coupon;
 use App\Models\Frontend\Cart;
 use App\Models\Frontend\Order;
+use App\Models\Frontend\OrderDetails;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -136,70 +137,6 @@ class CartController extends Controller
             }
         }
 
-        // public function showCheckout()
-        // {
-        //     // Retrieve applied coupon and discount amount from the session
-        //     $appliedCoupon = session('applied_coupon');
-        //     $discountAmount = session('discount_amount');
-
-        //     session()->put('applied_coupon', 'appliedCoupon');
-        //     session()->put('discount_amount', 'discountAmount');
-        //     session()->put('subtotal', 'subtotal');
-        //     session()->put('totalPrice', 'totalPrice');
-
-        //     $user = Auth::user();
-        //     $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
-
-        //     $subtotal = 0;
-        //     foreach ($cartItems as $item) {
-        //         $subtotal += $item->quantity * $item->product->selling_price;
-        //     }
-
-        //     $totalPrice = $subtotal - $discountAmount;
-        //     // dd($totalPrice);
-
-        //     // return view('checkout', compact('appliedCoupon', 'discountAmount', 'productData', 'subtotal', 'totalPrice'));
-        //     return view('frontend.sections.checkout',compact('appliedCoupon','discountAmount','cartItems',
-        //                     'subtotal','totalPrice'));
-        // }
-
-        // public function orderPlace(Request $request){
-
-        //     $orders = new Order();
-        //     $user = Auth::user();
-
-        //     $appliedCoupon = session()->get('applied_coupon');
-        //     $discountAmount = session()->get('discount_amount');
-        //     $subtotal = session()->get('subtotal');
-        //     $totalPrice = session()->get('totalPrice');
-
-        //     $orders->user_id = $user->id;
-        //     $orders->first_name = $request->first_name;
-        //     $orders->last_name = $request->last_name;
-        //     $orders->email = $request->email;
-        //     $orders->phone_number = $request->phone_number;
-        //     $orders->country = $request->country;
-        //     $orders->address = $request->address;
-        //     $orders->zip_code = $request->zip_code;
-        //     $orders->city = $request->city;
-        //     $orders->order_notes = $request->order_notes;
-        //     $orders->payment_type = $request->payment_type;
-        //     $orders->status = 0;
-        //     $orders->order_id = rand(10000,90000);
-
-        //     $orders->subtotal = $subtotal;
-        //     $orders->coupon_code = $appliedCoupon;
-        //     $orders->discountAmount = $discountAmount;
-        //     $orders->totalPrice = $totalPrice;
-
-        //     $orders->order_date = date('d-m-Y');
-        //     $orders->order_month = date('F');
-        //     $orders->order_year = date('Y');
-
-        //     dd($orders);
-
-        // }
-
         public function showCheckout()
         {
             // Retrieve applied coupon and discount amount from the session
@@ -250,27 +187,39 @@ class CartController extends Controller
             $orders->order_id = rand(10000, 90000);
 
             $orders->subtotal = $subtotal;
-            $orders->coupon_code = $appliedCoupon;
-            $orders->discountAmount = $discountAmount;
-            $orders->totalPrice = $totalPrice;
-
-            $orders->order_date = now()->format('d-m-Y');
-            $orders->order_month = now()->format('F');
-            $orders->order_year = now()->format('Y');
-
-            dd($orders);
+            
+            if ($request->session()->has('applied_coupon') && $request->session()->has('discount_amount')) {
+                $orders->coupon_code = $appliedCoupon->code;
+                $orders->discount = $discountAmount;
+            }
+            
+            $orders->total = $totalPrice;
 
             $orders->save();
+
+            $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+            // dd($orders);
+            foreach ($cartItems as $data) {
+                $orderDetails = new OrderDetails(); // Create a new instance for each item
+                $orderDetails->order_id = $orders->id;
+                $orderDetails->product_id = $data->product_id;
+                $orderDetails->product_name = $data->product->name;
+                $orderDetails->quantity = $data->quantity;
+                $orderDetails->selling_price = $data->product->selling_price;
+                $orderDetails->total_price = $data->quantity * $data->product->selling_price;
+                $orderDetails->save();
+            }
+
+            // Delete cart items after placing the order
+            Cart::where('user_id', $user->id)->delete();
 
             // Clear session values after placing the order
             session()->forget(['applied_coupon', 'discount_amount', 'subtotal', 'totalPrice']);
 
             // Redirect or return response as needed
-            return redirect()->back();
+            $notification = ['message' => 'Order Placed Successfully!', 'alert-type' => 'success'];
+            return redirect()->route('home')->with($notification);
         }
-
-
-
 
 
 }
