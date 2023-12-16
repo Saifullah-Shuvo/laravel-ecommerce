@@ -11,16 +11,14 @@
                 class="footer-link fw-bolder">{{ config('app.name') }}</a>
         </div>
         <div>
-            <a href="https://ecom.com/license/" class="footer-link me-4"
-                target="_blank">License</a>
-            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                Themes</a>
 
-            <a href="https://ecom.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank" class="footer-link me-4">Documentation</a>
-
-            <a href="https://ecom.com/support"
-                target="_blank" class="footer-link me-4">Support</a>
+            <a href="{{ route('home.about') }}" class="footer-link me-4"
+                target="_blank">About</a>
+            <a href="{{ route('home.shop') }}" class="footer-link me-4"
+                target="_blank">Shop Page</a>
+            <a href="{{ route('home.contact') }}" class="footer-link me-4"
+                target="_blank">Contact Us</a>
+            
         </div>
     </div>
 </footer>
