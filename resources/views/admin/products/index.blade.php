@@ -6,6 +6,9 @@
 
 @section('panel')
     {{-- @dd($products) --}}
+    @php
+    use Illuminate\Support\Str;
+    @endphp
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
         <h4 class="mb-sm-0">Products List</h4>
 
@@ -118,7 +121,7 @@
                                                         </div>
                                                     </td>
                                                     <td><a href="#" class="fw-semibold">{{ $product->code }}</a></td>
-                                                    <td>{{ $product->name }}</td>
+                                                    <td>{{ Str::limit($product->name, $limit = 25, $end = '...') }}</td>
                                                     <td><img src=" {{ asset('admins/productimage/' . $product->thambnail) }}"
                                                             alt="" class="rounded avatar-xs shadow"></td>
                                                     <td>{{ $product->created_at->format('Y-m-d h:i:s') }}</td>

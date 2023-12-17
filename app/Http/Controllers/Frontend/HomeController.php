@@ -20,7 +20,7 @@ class HomeController extends Controller
         $slider = Slider::where('status','=',1)->latest()->get();
         $featuredProduct = Product::where('status','=',1)->where('featured','=',1)->latest()->get();
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
-        $latestProduct = Product::where('status','=',1)->latest()->limit(8)->get();
+        $latestProduct = Product::where('status','=',1)->latest()->limit(12)->get();
         $testimonials = Testimonial::where('status','=',1)->latest()->get();
         
         return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct','testimonials'));

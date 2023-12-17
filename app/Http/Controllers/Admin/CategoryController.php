@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'category_name' => 'required|min:2',
-            'category_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         $categories = new Category();
         $categories->category_name = $request->category_name;
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function update(Request $request){
         $request->validate([
             'category_name' => 'required|min:2',
-            'category_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $category = Category::where('id',$request->id)->first();

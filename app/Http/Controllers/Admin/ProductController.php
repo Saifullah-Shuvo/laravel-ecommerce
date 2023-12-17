@@ -28,8 +28,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|min:2',
-            'description' => 'required|max:200',
-            'thambnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required',
+            'thambnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $products = new Product();
@@ -91,8 +91,8 @@ class ProductController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'required|min:2',
-            'description' => 'required|max:200',
-            'thambnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required',
+            'thambnail' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $imageName = '';

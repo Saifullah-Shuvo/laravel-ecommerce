@@ -21,7 +21,7 @@ class SlierController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required|min:5',
-            'description' => 'required|max:200',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -54,7 +54,7 @@ class SlierController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|min:5',
-            'description' => 'required|max:200',
+            'description' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
