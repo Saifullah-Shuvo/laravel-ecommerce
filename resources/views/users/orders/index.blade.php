@@ -5,51 +5,6 @@
 @endsection
 
 @section('panel')
-    <!-- First row -->
-    <div class="row">
-        <div class="col-lg-12 col-md-12 order-1">
-            <div class="row">
-
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-primary text-white mb-3">
-                        <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Total Order</span>
-                            <h3 class="card-title text-white mb-2">10</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-danger text-white mb-3">
-                        <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Canceled Order</span>
-                            <h3 class="card-title text-white mb-2">2</h3>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 order-1">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-success text-white mb-3">
-                        <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Completed Order</span>
-                            <h3 class="card-title text-white mb-2">8</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-info text-white mb-3">
-                        <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Returned Order</span>
-                            <h3 class="card-title text-white mb-2">0</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="card">
         <h5 class="card-header text-center">Recent Orders</h5>

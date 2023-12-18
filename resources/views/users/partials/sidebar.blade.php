@@ -67,7 +67,7 @@
 
         <!-- Layouts -->
         <li class="menu-item">
-            <a href="" class="menu-link">
+            <a href="{{ route('order.all') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">My Orders</div>
             </a>

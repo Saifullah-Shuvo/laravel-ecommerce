@@ -22,8 +22,8 @@ class BlogController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required|min:5',
-            'description' => 'required|max:200',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|max:400',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $blogs = new Blog();
@@ -59,8 +59,8 @@ class BlogController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|min:5',
-            'description' => 'required|max:200',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|max:400',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $blogs = Blog::findOrFail($id);

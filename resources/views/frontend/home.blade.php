@@ -134,7 +134,7 @@ Home Page
                     <div class="col-12 col-md-8 col-lg-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-center">Special Deal</h5>
+                                <h5 class="card-title text-center">Hot Deals</h5>
                                 {{-- <p class="card-text">Check out our exclusive deal for today!</p> --}}
 
                                 <div class="count-down-clock text-center">
@@ -146,7 +146,7 @@ Home Page
                                     </div>
                                 </div>
 
-                                <a href="{{ route('home.shop') }}" class="btn btn-primary">Grab the Deal</a>
+                                <a href="{{ route('hot.deals') }}" class="btn btn-primary">Grab the Deals</a>
                             </div>
                         </div>
                     </div>
