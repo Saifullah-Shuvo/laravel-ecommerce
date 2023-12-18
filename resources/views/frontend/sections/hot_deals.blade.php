@@ -1,20 +1,21 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-About
+Hot Deals
 @endsection
 
 @section('panel')
+    {{-- @dd($latestProduct->category) --}}
     <!-- .breadcumb-area start -->
     <div class="breadcumb-area bg-img-4 ptb-100">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcumb-wrap text-center">
-                        <h2>About us</h2>
+                        <h2>Hot Deals</h2>
                         <ul>
-                            <li><a href="{{url('/')}}">Home</a></li>
-                            <li><span>About</span></li>
+                            <li><a href="{{ route('home')}} ">Home</a></li>
+                            <li><span>Hot Deals</span></li>
                         </ul>
                     </div>
                 </div>
@@ -23,47 +24,20 @@ About
     </div>
     <!-- .breadcumb-area end -->
 
-    <!-- about-area start -->
-    <div class="about-area ptb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="about-wrap text-center">
-                        <h3>Welcome Our Story! </h3>
-                        <p class="mb-0">In the heart of a bustling city, Nick's laptop, a faithful companion of many endeavors, was showing signs of wear. Seeking a technological upgrade, he discovered S-TECH, a gateway to innovation.
-
-                            Navigating through the curated selection of laptops, Nick found himself immersed in a world where possibilities unfolded at every click. From ultrathin designs to powerhouse performance, each option teased the prospect of a seamless user experience and enhanced productivity.
-                            
-                            As he ventured into the realm of computer accessories, a symphony of efficiency echoed through mechanical keyboards, ergonomic mice beckoned precision, and futuristic chargers promised to match his dynamic lifestyle. Each accessory became a testament to S-TECH's commitment to elevating the overall user experience.
-                            
-                            The phone section revealed a convergence of sleek design and groundbreaking features. From cameras that captured breathtaking moments to multitasking juggernauts, the smartphones were not just devices but gateways to a connected world.
-                            
-                            With a swift and secure checkout, Nick sealed his tech odyssey. The confirmation email echoed the assurance that his chosen companions for the digital frontier were en route. Anticipation peaked as he unboxed his treasures, each device a catalyst for a new chapter.
-                            
-                            Empowered by S-TECH, Nick embraced a future where innovation met ambition. The journey had been more than a shopping spree; it was a narrative of empowerment, where technology seamlessly integrated into one's life elevated not just tasks but entire experiences.
-                            
-                            Armed with his new tech companions, Nick ventured forth into a digital realm, ready to script a story of innovation and success. Each click, keystroke, and interaction became a step toward a brighter, more connected tomorrow, all made possible by S-TECH.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- about-area end -->
-
-   <!-- product-area start -->
+       <!-- product-area start -->
    <div class="product-area product-area-2">
     <div class="fluid-container">
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
-                    <h2>Popular Products</h2>
+                    <h2>Grab the hot deals..!</h2>
                     <img src="{{asset('frontend/')}}/assets/images/section-title.png" alt="">
                 </div>
             </div>
         </div>
         <ul class="row">
 
-            @foreach ($popularProduct as $data)
+            @foreach ($hotDeals as $data)
             <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
                 <div class="product-wrap">
                     <div class="product-img">

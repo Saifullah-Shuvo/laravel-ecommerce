@@ -41,6 +41,11 @@ class HomeController extends Controller
         return view('frontend.sections.shop',compact('latestProduct','category'));
     }
 
+    public function hotDeals(){
+        $hotDeals = Product::where('status','=',1)->where('hot_deal','=',1)->latest()->get();
+        return view('frontend.sections.hot_deals',compact('hotDeals'));
+    }
+
     public function categoryProduct($category_id){
         $category = Category::where('status','=',1)->latest()->get();
         $categoryProduct = Category::where('status','=',1)->with('products')->findOrFail($category_id);

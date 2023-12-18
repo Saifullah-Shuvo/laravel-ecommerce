@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\User\OrderController;
 use Illuminate\Support\Facades\Route;
 
         // Frontend Routes
@@ -24,6 +25,7 @@ Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 
 Route::get('/shop', [HomeController::class, 'shop'])->name('home.shop');
 Route::get('/shop/{category_id}', [HomeController::class, 'categoryProduct'])->name('home.shop.category');
+Route::get('/hot/deals', [HomeController::class, 'hotDeals'])->name('hot.deals');
 
 Route::get('/product/details/{id}', [HomeController::class, 'productDetails'])->name('home.product.details');
 Route::get('/product/details/modal/{id}', [HomeController::class, 'productDetailsModal'])->name('home.product.details.modal');
@@ -67,6 +69,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/orders/all', [OrderController::class, 'allOders'])->name('order.all');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
