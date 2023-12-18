@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DetailsController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlierController;
@@ -174,19 +175,22 @@ Route::middleware('auth:admin')->group(function(){
     // testimonial status
     Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
     Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
+
+    // ___details
+    Route::get('system/details/all',[DetailsController::class,'index'])->name('details.all');
+    Route::post('system/details/update/{id}',[DetailsController::class,'update'])->name('details.update');
 });
 
 Route::middleware('auth:admin')->group(function(){
-    Route::get('system/coupon/all',[CouponController::class,'index'])->name('coupon.all');
-    Route::get('system/coupon/add', [CouponController::class, 'add'])->name('coupon.add');
-    Route::post('system/coupon/store',[CouponController::class,'store'])->name('coupon.store');
+    Route::get('coupon/all',[CouponController::class,'index'])->name('coupon.all');
+    Route::get('coupon/add', [CouponController::class, 'add'])->name('coupon.add');
+    Route::post('coupon/store',[CouponController::class,'store'])->name('coupon.store');
 
-    Route::get('system/coupon/edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
-    Route::post('system/coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
-    Route::get('system/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
+    Route::get('coupon/edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+    Route::post('coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+    Route::get('coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
 
     // coupon status
-    Route::get('/system/coupon/enable/{id}',[CouponController::class, 'status_enable'])->name('coupon.status.enable');
-    Route::get('/system/coupon/disable/{id}',[CouponController::class, 'status_disable'])->name('coupon.status.disable');
-
+    Route::get('coupon/enable/{id}',[CouponController::class, 'status_enable'])->name('coupon.status.enable');
+    Route::get('coupon/disable/{id}',[CouponController::class, 'status_disable'])->name('coupon.status.disable');
 });

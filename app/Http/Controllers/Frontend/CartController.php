@@ -40,11 +40,11 @@ class CartController extends Controller
 
         // Check if the same product is already in the user's cart
         $existingCart = Cart::where('user_id', $user->id)
-                            ->where('product_id', $request->id)
-                            ->first();
+            ->where('product_id', $request->id)
+            ->first();
 
         if ($existingCart) {
-            if($request->quantity){
+            if ($request->quantity) {
                 $existingCart->update(['quantity' => $existingCart->quantity + $request->quantity]);
             }
             $notification = [
@@ -57,7 +57,7 @@ class CartController extends Controller
         // Create a new cart item
         $cart->user_id = $user->id;
         $cart->product_id = $request->id;
-        if($request->quantity){
+        if ($request->quantity) {
             $cart->quantity = $request->quantity;
         }
         $cart->save();
@@ -77,8 +77,8 @@ class CartController extends Controller
 
         // Find the cart item by product ID and user ID
         $cartItem = Cart::where('product_id', $id)
-                        ->where('user_id', $user->id)
-                        ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         // Check if the cart item exists
         if ($cartItem) {
@@ -93,133 +93,130 @@ class CartController extends Controller
             return redirect()->back()->with($notification);
             // return response()->json(['message' => 'Item removed successfully']);
         }
-
     }
-        //coupon apply
-        public function applyCoupon(Request $request)
-        {
-            $request->validate([
-                'coupon_code' => 'required|string',
-                'totalSum' => 'required|numeric',
-            ]);
+    //coupon apply
+    public function applyCoupon(Request $request)
+    {
+        $request->validate([
+            'coupon_code' => 'required|string',
+            'totalSum' => 'required|numeric',
+        ]);
 
-            $totalSum = $request->input('totalSum');
-            $coupon = Coupon::where('status', 1)->where('code', $request->coupon_code)->first();
+        $totalSum = $request->input('totalSum');
+        $coupon = Coupon::where('status', 1)->where('code', $request->coupon_code)->first();
 
-            if ($coupon) {
-                $expiryDate = Carbon::parse($coupon->expiry_date);
-                $currentDate = Carbon::now();
+        if ($coupon) {
+            $expiryDate = Carbon::parse($coupon->expiry_date);
+            $currentDate = Carbon::now();
 
-                if ($currentDate->lte($expiryDate)) {
-                    $discountAmount = 0;
+            if ($currentDate->lte($expiryDate)) {
+                $discountAmount = 0;
 
-                    if ($coupon->discount_type === 'percentage') {
-                        // Calculate discount based on percentage
-                        $discountAmount = $totalSum * ($coupon->discount_value / 100);
-                    } elseif ($coupon->discount_type === 'fixed') {
-                        // Use fixed discount value
-                        $discountAmount = $coupon->discount_value;
-                    }
-
-                    // Store the applied coupon and discount amount in the session
-                    session(['applied_coupon' => $coupon, 'discount_amount' => $discountAmount ]);
-                    // session()->forget('applied_coupon');
-
-                    $notification = ['message' => 'Coupon Applied Successfully!', 'alert-type' => 'success'];
-                    return redirect()->back()->with($notification);
-                } else {
-                    $notification = ['message' => 'Coupon has expired!', 'alert-type' => 'error'];
-                    return redirect()->back()->with($notification);
+                if ($coupon->discount_type === 'percentage') {
+                    // Calculate discount based on percentage
+                    $discountAmount = $totalSum * ($coupon->discount_value / 100);
+                } elseif ($coupon->discount_type === 'fixed') {
+                    // Use fixed discount value
+                    $discountAmount = $coupon->discount_value;
                 }
+
+                // Store the applied coupon and discount amount in the session
+                session(['applied_coupon' => $coupon, 'discount_amount' => $discountAmount]);
+                // session()->forget('applied_coupon');
+
+                $notification = ['message' => 'Coupon Applied Successfully!', 'alert-type' => 'success'];
+                return redirect()->back()->with($notification);
             } else {
-                $notification = ['message' => 'Invalid Coupon Code!', 'alert-type' => 'error'];
+                $notification = ['message' => 'Coupon has expired!', 'alert-type' => 'error'];
                 return redirect()->back()->with($notification);
             }
+        } else {
+            $notification = ['message' => 'Invalid Coupon Code!', 'alert-type' => 'error'];
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    public function showCheckout()
+    {
+        // Retrieve applied coupon and discount amount from the session
+        $appliedCoupon = session('applied_coupon');
+        $discountAmount = session('discount_amount');
+
+        $user = Auth::user();
+        $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+
+        $subtotal = 0;
+        foreach ($cartItems as $item) {
+            $subtotal += $item->quantity * $item->product->selling_price;
         }
 
-        public function showCheckout()
-        {
-            // Retrieve applied coupon and discount amount from the session
-            $appliedCoupon = session('applied_coupon');
-            $discountAmount = session('discount_amount');
+        $totalPrice = $subtotal - $discountAmount;
 
-            $user = Auth::user();
-            $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+        // Store values in the session
+        session()->put('applied_coupon', $appliedCoupon);
+        session()->put('discount_amount', $discountAmount);
+        session()->put('subtotal', $subtotal);
+        session()->put('totalPrice', $totalPrice);
 
-            $subtotal = 0;
-            foreach ($cartItems as $item) {
-                $subtotal += $item->quantity * $item->product->selling_price;
-            }
+        return view('frontend.sections.checkout', compact('appliedCoupon', 'discountAmount', 'cartItems', 'subtotal', 'totalPrice'));
+    }
 
-            $totalPrice = $subtotal - $discountAmount;
+    public function orderPlace(Request $request)
+    {
+        $orders = new Order();
+        $user = Auth::user();
 
-            // Store values in the session
-            session()->put('applied_coupon', $appliedCoupon);
-            session()->put('discount_amount', $discountAmount);
-            session()->put('subtotal', $subtotal);
-            session()->put('totalPrice', $totalPrice);
+        $appliedCoupon = session()->get('applied_coupon');
+        $discountAmount = session()->get('discount_amount');
+        $subtotal = session()->get('subtotal');
+        $totalPrice = session()->get('totalPrice');
 
-            return view('frontend.sections.checkout', compact('appliedCoupon', 'discountAmount', 'cartItems', 'subtotal', 'totalPrice'));
+        $orders->user_id = $user->id;
+        $orders->first_name = $request->first_name;
+        $orders->last_name = $request->last_name;
+        $orders->email = $request->email;
+        $orders->phone_number = $request->phone_number;
+        $orders->country = $request->country;
+        $orders->address = $request->address;
+        $orders->zip_code = $request->zip_code;
+        $orders->city = $request->city;
+        $orders->order_notes = $request->order_notes;
+        $orders->payment_type = $request->payment_type;
+        $orders->status = 0;
+        $orders->order_id = rand(10000, 90000);
+
+        $orders->subtotal = $subtotal;
+
+        if ($request->session()->has('applied_coupon') && $request->session()->has('discount_amount')) {
+            $orders->coupon_code = $appliedCoupon->code;
+            $orders->discount = $discountAmount;
         }
 
-        public function orderPlace(Request $request)
-        {
-            $orders = new Order();
-            $user = Auth::user();
+        $orders->total = $totalPrice;
 
-            $appliedCoupon = session()->get('applied_coupon');
-            $discountAmount = session()->get('discount_amount');
-            $subtotal = session()->get('subtotal');
-            $totalPrice = session()->get('totalPrice');
+        $orders->save();
 
-            $orders->user_id = $user->id;
-            $orders->first_name = $request->first_name;
-            $orders->last_name = $request->last_name;
-            $orders->email = $request->email;
-            $orders->phone_number = $request->phone_number;
-            $orders->country = $request->country;
-            $orders->address = $request->address;
-            $orders->zip_code = $request->zip_code;
-            $orders->city = $request->city;
-            $orders->order_notes = $request->order_notes;
-            $orders->payment_type = $request->payment_type;
-            $orders->status = 0;
-            $orders->order_id = rand(10000, 90000);
-
-            $orders->subtotal = $subtotal;
-            
-            if ($request->session()->has('applied_coupon') && $request->session()->has('discount_amount')) {
-                $orders->coupon_code = $appliedCoupon->code;
-                $orders->discount = $discountAmount;
-            }
-            
-            $orders->total = $totalPrice;
-
-            $orders->save();
-
-            $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
-            // dd($orders);
-            foreach ($cartItems as $data) {
-                $orderDetails = new OrderDetails(); // Create a new instance for each item
-                $orderDetails->order_id = $orders->id;
-                $orderDetails->product_id = $data->product_id;
-                $orderDetails->product_name = $data->product->name;
-                $orderDetails->quantity = $data->quantity;
-                $orderDetails->selling_price = $data->product->selling_price;
-                $orderDetails->total_price = $data->quantity * $data->product->selling_price;
-                $orderDetails->save();
-            }
-
-            // Delete cart items after placing the order
-            Cart::where('user_id', $user->id)->delete();
-
-            // Clear session values after placing the order
-            session()->forget(['applied_coupon', 'discount_amount', 'subtotal', 'totalPrice']);
-
-            // Redirect or return response as needed
-            $notification = ['message' => 'Order Placed Successfully!', 'alert-type' => 'success'];
-            return redirect()->route('home')->with($notification);
+        $cartItems = Cart::where('user_id', $user->id)->with('product')->latest()->get();
+        // dd($orders);
+        foreach ($cartItems as $data) {
+            $orderDetails = new OrderDetails(); // Create a new instance for each item
+            $orderDetails->order_id = $orders->id;
+            $orderDetails->product_id = $data->product_id;
+            $orderDetails->product_name = $data->product->name;
+            $orderDetails->quantity = $data->quantity;
+            $orderDetails->selling_price = $data->product->selling_price;
+            $orderDetails->total_price = $data->quantity * $data->product->selling_price;
+            $orderDetails->save();
         }
 
+        // Delete cart items after placing the order
+        Cart::where('user_id', $user->id)->delete();
 
+        // Clear session values after placing the order
+        session()->forget(['applied_coupon', 'discount_amount', 'subtotal', 'totalPrice']);
+
+        // Redirect or return response as needed
+        $notification = ['message' => 'Order Placed Successfully!', 'alert-type' => 'success'];
+        return redirect()->route('home')->with($notification);
+    }
 }

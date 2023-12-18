@@ -14,7 +14,7 @@ Contact Page
                 <div class="breadcumb-wrap text-center">
                     <h2>Contact Us</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
                         <li><span>Contact</span></li>
                     </ul>
                 </div>

@@ -45,14 +45,15 @@
   text-decoration: none;
 }
 .card-header .btn.btn-link {
-  background: red;
+  background: rgb(46, 44, 44);
   color: #fff;
 
 }
 .card-header .btn.btn-link.collapsed {
-  background: #ddd;
-  color: #444!important;
+  background: #222020;
+  color: #fff!important;
 }
+
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
@@ -858,9 +859,11 @@ header-area start
 .slide-inner8 {
     background: url(../images/slider/4.jpg);
 }
+
 .slide-inner6 {
     background: url(../images/slider/6.html);
 }
+
 .slide-inner{
     position: absolute;
     width: 100%;

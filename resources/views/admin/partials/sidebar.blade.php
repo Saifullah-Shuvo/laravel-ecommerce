@@ -132,6 +132,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{ Request::is('coupon/*') ? 'active' : '' }} " href="{{ route('coupon.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Coupons</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('slider/*') ? 'active' : '' }} " href="{{ route('slider.all') }}" role="button" aria-expanded="false" aria-controls="sidebarAuth">
                         <i class="mdi mdi-account-circle-outline"></i> <span data-key="t-authentication">Manage Sliders</span>
                     </a>
@@ -150,16 +156,13 @@
                     <div class="collapse menu-dropdown" id="sidebarTables">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('coupon.all') }}" class="nav-link" data-key="t-list-js">Coupon</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ route('faq.all') }}" class="nav-link" data-key="t-basic-tables">FAQ</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('testimonial.all') }}" class="nav-link" data-key="t-grid-js">Testimonial</a>
                             </li>
                             <li class="nav-item">
-                                <a href="tables-datatables.html" class="nav-link" data-key="t-datatables">Datatables</a>
+                                <a href="{{ route('details.all') }}" class="nav-link" data-key="t-datatables">Details</a>
                             </li>
                         </ul>
                     </div>
