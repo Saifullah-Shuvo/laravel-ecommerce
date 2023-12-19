@@ -4,11 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Frontend\Cart;
+use App\Models\Frontend\Review;
 use App\Models\Frontend\Comment;
+use App\Models\Frontend\Wishlist;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -60,6 +63,6 @@ class User extends Authenticatable
 
     public function wishlist()
     {
-        return $this->hasMany(Cart::class);
+        return $this->hasMany(Wishlist::class);
     }
 }

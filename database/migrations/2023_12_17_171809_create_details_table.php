@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('google_plus')->nullable();
             $table->string('short_details')->nullable();
             $table->string('about_details')->nullable();
+            $table->string('google_map')->nullable();
             $table->timestamps();
         });
     }

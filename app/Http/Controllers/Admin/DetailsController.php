@@ -26,6 +26,7 @@ class DetailsController extends Controller
             'google_plus' => 'required',
             'short_details' => 'required',
             'about_details' => 'required',
+            'google_map' => 'required',
         ]);
 
         $details = Details::findOrFail($id);
@@ -40,6 +41,7 @@ class DetailsController extends Controller
         $details->google_plus = $request->google_plus;
         $details->short_details = $request->short_details;
         $details->about_details = $request->about_details;
+        $details->google_map = $request->google_map;
 
         $details->save();
 

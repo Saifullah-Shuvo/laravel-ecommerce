@@ -21,10 +21,10 @@
             </div>
         </div>
     </div>
-    @foreach ($details as $data)
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
+                @forelse ($details as $data)
                 <div class="col-lg-2 col-md-3 col-sm-12">
                     <div class="footer-icon">
                         <ul class="d-flex">
@@ -49,6 +49,13 @@
                         </ul>
                     </div>
                 </div>
+                @empty
+                <div class="container">
+                    <div class="row justify-content-center">
+                      <h5>No Footer Data Found!</h5>
+                    </div>
+                </div>
+                @endforelse
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <div class="footer-reserved">
                         <ul>
@@ -60,5 +67,4 @@
             </div>
         </div>
     </div>
-    @endforeach
 </div>

@@ -22,6 +22,10 @@
         rel="stylesheet" />
 
     @stack('style-lib')
+    {{-- Alert Css --}}
+    <link href="{{ asset('admins') }}/assets/css/sweetalert.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admins') }}/assets/css/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('users') }}/assets/vendor/fonts/boxicons.css" />
@@ -43,9 +47,9 @@
     <!-- Helpers -->
     <script src="{{ asset('users') }}/assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('user') }}/assets/js/config.js"></script>
+    <!-- Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!-- Config: Mandatory theme config file contains global vars & default theme options, Set your preferred theme option in this file. -->
+    <script src="{{ asset('users') }}/assets/js/config.js"></script>
 
     @stack('style')
 
@@ -74,28 +78,101 @@
 
     @stack('script-lib')
 
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('users') }}/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="{{ asset('users') }}/assets/vendor/libs/popper/popper.js"></script>
-    <script src="{{ asset('users') }}/assets/vendor/js/bootstrap.js"></script>
-    <script src="{{ asset('users') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<!-- build:js assets/vendor/js/core.js -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="{{ asset('users') }}/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="{{ asset('users') }}/assets/vendor/libs/popper/popper.js"></script>
+<script src="{{ asset('users') }}/assets/vendor/js/bootstrap.js"></script>
+<script src="{{ asset('users') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="{{ asset('users') }}/assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+<script src="{{ asset('users') }}/assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('users') }}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Vendors JS -->
+<script src="{{ asset('users') }}/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('users') }}/assets/js/main.js"></script>
+<!-- Main JS -->
+<script src="{{ asset('users') }}/assets/js/main.js"></script>
 
-    <!-- Page JS -->
-    <script src="{{ asset('users') }}/assets/js/dashboards-analytics.js"></script>
+<!-- Page JS -->
+<script src="{{ asset('users') }}/assets/js/dashboards-analytics.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+{{-- Alert js --}}
+<script src="{{ asset('admins') }}/assets/js/toastr.min.js"></script>
+<script src="{{ asset('admins') }}/assets/js/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
-    @stack('script')
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+    $(document).on("click", "#delete", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+        swal({
+            title: "Do you Want to delete?",
+            text: "Once Delete, This will be Permanently Delete!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = link;
+            } else {
+                swal("Safe Data!");
+            }
+        });
+    });
+
+    $(document).on("click", "#userlogout", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+        swal({
+            title: "Do you Want to logout?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location.href = link;
+            } else {
+                swal("Not Logout!");
+            }
+        });
+    });
+
+    @if(Session::has('message'))
+        var type="{{Session::get('alert-type','info')}}"
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}", "Error");
+        @endforeach
+    @endif
+</script>
+
+@stack('script')
+
     
 </body>
 

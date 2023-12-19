@@ -5,9 +5,9 @@
 @endsection
 
 @section('panel')
-
+    
     <div class="card">
-        <h5 class="card-header text-center">Recent Orders</h5>
+        <h5 class="card-header text-center">All Orders</h5>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead>
@@ -21,12 +21,15 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
+                    @forelse($orders as $key => $data)
                     <tr>
-                        <td>1</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>45654</strong></td>
-                        <td>Cash On Delivery</td>
-                        <td>130000</td>
-                        <td><span class="badge bg-label-primary me-1">Active</span></td>
+                        <td>{{ $key +1 }}</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $data->order_id }}</strong></td>
+                        <td>{{ $data->payment_type }}</td>
+                        <td>{{ $data->total }}</td>
+                        @if($data->status == 0)
+                        <td><span class="badge bg-label-primary me-1">Pending</span></td>
+                        @endif
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -41,7 +44,14 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    @empty 
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <h5>No Orders Data Found!</h5>
+                        </div>
+                    </div>
+                    @endforelse
+                    {{-- <tr>
                         <td>2</td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>45654</strong></td>
                         <td>Cash On Delivery</td>
@@ -103,7 +113,7 @@
                                 </div>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>

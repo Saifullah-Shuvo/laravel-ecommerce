@@ -216,7 +216,7 @@ class CartController extends Controller
         session()->forget(['applied_coupon', 'discount_amount', 'subtotal', 'totalPrice']);
 
         // Redirect or return response as needed
-        $notification = ['message' => 'Order Placed Successfully!', 'alert-type' => 'success'];
-        return redirect()->route('home')->with($notification);
+        // $notification = ['message' => 'Order Placed Successfully!', 'alert-type' => 'success'];
+        return redirect()->route('order.all');
     }
 }

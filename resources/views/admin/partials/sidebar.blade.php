@@ -168,6 +168,18 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Request::is('subscriber/*') ? 'active' : '' }} " href="{{ route('subscriber.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Subscribers</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{ Request::is('message/*') ? 'active' : '' }} " href="{{ route('message.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
+                        <i class="mdi mdi-chart-donut"></i> <span data-key="t-pages">Messages</span>
+                    </a>
+                </li>
+
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Settings</span></li>
 

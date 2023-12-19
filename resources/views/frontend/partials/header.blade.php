@@ -28,10 +28,16 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <ul class="d-flex header-contact">
-                            @foreach($details as $data)
+                            @forelse($details as $data)
                             <li><i class="fa fa-phone"></i> +88 {{ $data->main_phone }}</li>
                             <li><i class="fa fa-envelope"></i>{{ $data->main_email }}</li>
-                            @endforeach
+                            @empty 
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                  <h5>No Contact Data Found!</h5>
+                                </div>
+                            </div>
+                            @endforelse
                         </ul>
                     </div>
                     <div class="col-md-6 col-12">

@@ -60,7 +60,7 @@ Contact Page
     </div>
 </div>
 <!-- faq-area end -->
-
+@forelse ($details as $data)
 <div class="contact-area ptb-100">
     <div class="container">
         <div class="row">
@@ -101,7 +101,6 @@ Contact Page
                     </form>
                 </div>
             </div>
-            @forelse ($details as $data)
             <div class="col-lg-4 col-12">
                 <div class="contact-wrap">
                     <ul>
@@ -126,13 +125,7 @@ Contact Page
                     </ul>
                 </div>
             </div>
-            @empty
-            <div class="container">
-                <div class="row justify-content-center">
-                  <h5>No Address Data Found!</h5>
-                </div>
-            </div>
-            @endforelse
+            
         </div>
     </div>
 </div>
@@ -141,8 +134,15 @@ Contact Page
 <!-- map-area start -->
 <div class="google-map">
     <div class="contact-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4172711859983!2d90.38319271131536!3d23.874817883898302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0a52e81845b%3A0xa1c5a240675d1c27!2sTHESOFTKING%20Limited!5e0!3m2!1sen!2sbd!4v1701351549405!5m2!1sen!2sbd" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        {!! $data->google_map !!}
     </div>
 </div>
+@empty
+    <div class="container">
+        <div class="row justify-content-center">
+            <h5>No Address Data Found!</h5>
+        </div>
+    </div>
+@endforelse
 
 @endsection
