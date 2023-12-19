@@ -7,7 +7,7 @@
                 document.write(new Date().getFullYear());
             </script>
             , made with ❤️ by
-            <a href="https://ecom.com" target="_blank"
+            <a href="{{ route('home') }}" target="_self"
                 class="footer-link fw-bolder">{{ config('app.name') }}</a>
         </div>
         <div>
@@ -18,7 +18,7 @@
                 target="_blank">Shop Page</a>
             <a href="{{ route('home.contact') }}" class="footer-link me-4"
                 target="_blank">Contact Us</a>
-            
+
         </div>
     </div>
 </footer>

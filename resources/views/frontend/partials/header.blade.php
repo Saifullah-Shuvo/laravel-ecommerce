@@ -17,14 +17,21 @@
     }
 @endphp
 
+@php
+    // Get About Details
+    $details = App\Models\Frontend\Details::get();
+@endphp
+
 <header class="header-area">
         <div class="header-top bg-2">
             <div class="fluid-container">
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <ul class="d-flex header-contact">
-                            <li><i class="fa fa-phone"></i> +01 123 456 789</li>
-                            <li><i class="fa fa-envelope"></i> youremail@gmail.com</li>
+                            @foreach($details as $data)
+                            <li><i class="fa fa-phone"></i> +88 {{ $data->main_phone }}</li>
+                            <li><i class="fa fa-envelope"></i>{{ $data->main_email }}</li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-md-6 col-12">

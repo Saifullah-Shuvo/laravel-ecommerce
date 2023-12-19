@@ -10,6 +10,7 @@ use App\Models\Admin\Product;
 use App\Models\Admin\Slider;
 use App\Models\Admin\Testimonial;
 use App\Models\Frontend\Cart;
+use App\Models\Frontend\Details;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +23,14 @@ class HomeController extends Controller
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
         $latestProduct = Product::where('status','=',1)->latest()->limit(12)->get();
         $testimonials = Testimonial::where('status','=',1)->latest()->get();
-        
+
         return view('frontend.home',compact('slider','featuredProduct','popularProduct','latestProduct','testimonials'));
     }
 
     public function about(){
+        $details = Details::get();
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();
-        return view('frontend.sections.about',compact('popularProduct'));
+        return view('frontend.sections.about',compact('popularProduct','details'));
     }
 
     public function shop(Request $request){
@@ -119,8 +121,9 @@ class HomeController extends Controller
     }
 
     public function contact(){
+        $details = Details::get();
         $faqs = Faq::where('status',1)->latest()->get();
-        return view('frontend.sections.contact',compact('faqs'));
+        return view('frontend.sections.contact',compact('faqs','details'));
     }
 
 }

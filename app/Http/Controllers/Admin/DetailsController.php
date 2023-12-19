@@ -25,6 +25,7 @@ class DetailsController extends Controller
             'linkedIn' => 'required',
             'google_plus' => 'required',
             'short_details' => 'required',
+            'about_details' => 'required',
         ]);
 
         $details = Details::findOrFail($id);
@@ -38,8 +39,10 @@ class DetailsController extends Controller
         $details->linkedIn = $request->linkedIn;
         $details->google_plus = $request->google_plus;
         $details->short_details = $request->short_details;
+        $details->about_details = $request->about_details;
 
         $details->save();
+
         $notification = array('message' => "Details Updated!", 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }

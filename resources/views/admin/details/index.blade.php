@@ -99,6 +99,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div>
+                            <label>About Details</label>
+
+                            <div id="ckeditor-classic">
+                                <div>
+                                    <textarea name="about_details" class="form-control" id="exampleFormControlTextarea5" rows="10"
+                                    placeholder="Enter Review Text">{{ $data->about_details }}</textarea>
+                                </div>
+                                @error('about_details')
+                                    <div class="error mt-1"><span class="text-danger">{{ $message }}</span></div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- end card -->

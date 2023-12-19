@@ -101,30 +101,38 @@ Contact Page
                     </form>
                 </div>
             </div>
+            @forelse ($details as $data)
             <div class="col-lg-4 col-12">
                 <div class="contact-wrap">
                     <ul>
                         <li>
                             <i class="fa fa-home"></i> Address:
-                            <p>1234, Contrary to popular Sed ut perspiciatis unde 1234</p>
+                            <p>{{ $data->adderess }}</p>
                         </li>
                         <li>
                             <i class="fa fa-phone"></i> Email address:
                             <p>
-                                <span>info@yoursite.com </span>
-                                <span>info@yoursite.com </span>
+                                <span> {{ $data->main_email }} </span>
+                                <span> {{ $data->alternative_email }} </span>
                             </p>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i> phone number:
                             <p>
-                                <span>+0123456789</span>
-                                <span>+1234567890</span>
+                                <span>{{ $data->main_phone }}</span>
+                                <span>{{ $data->alternative_phone }}</span>
                             </p>
                         </li>
                     </ul>
                 </div>
             </div>
+            @empty
+            <div class="container">
+                <div class="row justify-content-center">
+                  <h5>No Address Data Found!</h5>
+                </div>
+            </div>
+            @endforelse
         </div>
     </div>
 </div>

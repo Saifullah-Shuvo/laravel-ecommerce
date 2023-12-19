@@ -1,3 +1,7 @@
+@php
+    // Get About Details
+    $details = App\Models\Frontend\Details::get();
+@endphp
 <div class="footer-area">
     <div class="footer-top">
         <div class="container">
@@ -17,30 +21,31 @@
             </div>
         </div>
     </div>
+    @foreach ($details as $data)
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-12">
                     <div class="footer-icon">
                         <ul class="d-flex">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="{{$data->facebook}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{$data->tweeter}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="{{$data->linkedIn}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="{{$data->google_plus}}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-8 col-sm-12">
                     <div class="footer-content">
-                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure righteous indignation and dislike</p>
+                        <p>{{ $data->short_details }}</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-8 col-sm-12">
                     <div class="footer-adress">
                         <ul>
-                            <li><span>Email:</span> domain@gmail.com</li>
-                            <li><span>Tel:</span> 0131234567</li>
-                            <li><span>Adress:</span> 52 Web Bangale , Adress line2 , ip:3105</li>
+                            <li><span>Email:</span> {{ $data->main_email }}</li>
+                            <li><span>Tel:</span> {{ $data->main_phone }}</li>
+                            <li><span>Adress:</span> {{ $data->adderess }}</li>
                         </ul>
                     </div>
                 </div>
@@ -49,12 +54,11 @@
                         <ul>
                             <li>Copyright © <script>document.write(new Date().getFullYear())</script> <a href="{{ route('home') }}">{{ config('app.name') }}</a>
                                 <br> All rights reserved.</li>
-
-
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 </div>
