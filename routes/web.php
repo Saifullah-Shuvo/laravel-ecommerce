@@ -5,10 +5,8 @@ use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MessageController;
 use App\Http\Controllers\Frontend\SubscriberController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\WishlistController;
-use App\Http\Controllers\User\OrderController;
 use Illuminate\Support\Facades\Route;
 
         // Frontend Routes
@@ -52,24 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
 });
 
-        // User Routes
 
-Route::get('user/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware('auth')->group(function () {
-    Route::get('/orders/all', [OrderController::class, 'allOders'])->name('order.all');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
+require __DIR__.'/user.php';
 require __DIR__.'/admin.php';
 

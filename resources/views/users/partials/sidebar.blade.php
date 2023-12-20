@@ -91,23 +91,23 @@
         {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pages</span>
         </li> --}}
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item {{ Request::is('wishlist/user/*') ? 'active' : '' }}">
+            <a href="{{ route('user.wishlist.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">My Wishlists</div>
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link">
+        <li class="menu-item {{ Request::is('cartlist/user/*') ? 'active' : '' }}">
+            <a href="{{ route('user.cartlist.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
                 <div data-i18n="Extended UI">My Carts</div>
             </a>
         </li>
 
         <li class="menu-item">
-            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank" class="menu-link">
+            <a href=""
+                target="_self" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div data-i18n="Support">Support Tickets</div>
             </a>
@@ -121,8 +121,8 @@
         </li>
 
         <li class="menu-item">
-            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank" class="menu-link">
+            <a href="javascript:void(0);"
+                target="_self" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Documentation">Change Password</div>
             </a>
