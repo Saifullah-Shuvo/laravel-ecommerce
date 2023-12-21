@@ -39,13 +39,13 @@
                             @if($data->status == 0)
                                 <span class="badge rounded-pill bg-primary">pending</span>
                             @elseif($data->status == 1)
-                                <span class="badge rounded-pill bg-success">confirmed</span>
+                                <span class="badge rounded-pill bg-secondary">confirmed</span>
                             @elseif($data->status == 2)
-                                <span class="badge rounded-pill bg-success">shipped</span>
+                                <span class="badge rounded-pill bg-info">shipped</span>
                             @elseif($data->status == 3)
                                 <span class="badge rounded-pill bg-success">delivered</span>
                             @elseif($data->status == 4)
-                                <span class="badge rounded-pill bg-success">cancelled</span>
+                                <span class="badge rounded-pill bg-danger">cancelled</span>
                             @endif
                         </td>
                         <td>
@@ -67,69 +67,7 @@
                         </div>
                     </div>
                     @endforelse
-                    {{-- <tr>
-                        <td>2</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>45654</strong></td>
-                        <td>Cash On Delivery</td>
-                        <td>160000</td>
-                        <td><span class="badge bg-label-success me-1">Completed</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="bx bx-edit-alt me-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                        Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>45654</strong></td>
-                        <td>Cash On Delivery</td>
-                        <td>40000</td>
-                        <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="bx bx-edit-alt me-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                        Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>45654</strong></td>
-                        <td>Cash On Delivery</td>
-                        <td>180000</td>
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                        <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="bx bx-edit-alt me-2"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-2"></i>
-                                        Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr> --}}
+                    
                 </tbody>
             </table>
         </div>

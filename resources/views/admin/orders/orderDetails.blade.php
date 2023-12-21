@@ -1,15 +1,26 @@
-@extends('users.layouts.app')
+@extends('admin.layouts.app')
 
 @section('title')
     Order Details
 @endsection
 
 @section('panel')
-    {{-- @dd($orderDetails); --}}
-    <div class="d-flex justify-content-end">
-        <a href="{{ route('order.all') }}" class="btn btn-primary mb-2">Back</a>
+    
+    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <h4 class="mb-sm-0">Order Details </h4>
+
+        <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="{{ route('home')}} ">{{ config('app.name') }}</a></li>
+                <li class="breadcrumb-item active">Order Details</li>
+            </ol>
+        </div>
     </div>
 
+    {{-- <div class="d-flex justify-content-end">
+        <a href="{{ route('admin.order.all') }}" class="btn btn-primary mb-2">Back</a>
+    </div> --}}
+    
     <div class="card">
 
         <h5 class="card-header text-center">Order Details</h5> 
@@ -113,4 +124,5 @@
             </div>
         </div>
     </div>
+    <!-- end row -->
 @endsection

@@ -1,16 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\SlierController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DetailsController;
-use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\SlierController;
-use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubscriberController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TestimonialController;
 
 
         // Admins Routes
@@ -20,6 +22,22 @@ Route::get('/admin/dashboard', function () {
 })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
 require __DIR__.'/adminauth.php';
+
+Route::middleware('auth:admin')->group(function(){
+    //___all Users
+    Route::get('/user/all',[UserController::class, 'allUsers'])->name('users.all');
+});
+
+//_____orders routes
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/orders/admin/all', [OrderController::class, 'allOders'])->name('admin.order.all');
+    Route::get('/orders/admin/details/{id}', [OrderController::class, 'details'])->name('admin.order.details');
+    Route::get('/orders/admin/pending', [OrderController::class, 'pending'])->name('admin.order.pending');
+    Route::get('/orders/admin/confirmed', [OrderController::class, 'confirmed'])->name('admin.order.confirmed');
+    Route::get('/orders/admin/shipped', [OrderController::class, 'shipped'])->name('admin.order.shipped');
+    Route::get('/orders/admin/delivered', [OrderController::class, 'delivered'])->name('admin.order.delivered');
+    Route::get('/orders/admin/cancelled', [OrderController::class, 'cancelled'])->name('admin.order.cancelled');
+});
 
 Route::middleware('auth:admin')->group(function () {
 

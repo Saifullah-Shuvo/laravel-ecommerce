@@ -31,13 +31,13 @@
                 </li> <!-- end Dashboard Menu -->
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
+                    <a class="nav-link menu-link {{ Request::is('user/*') ? 'active' : '' }}" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
                         <i class="mdi mdi-view-grid-plus-outline"></i> <span data-key="t-apps">Manage Customers</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarApps">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> All Customers </a>
+                                <a href="{{ route('users.all') }}" class="nav-link" data-key="t-calendar"> All Customers </a>
                             </li>
 
                             <li class="nav-item">
@@ -76,28 +76,28 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link {{ Request::is('orders/*') ? 'active' : '' }}" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="mdi mdi-view-carousel-outline"></i> <span data-key="t-layouts">Manage Orders</span> <span class="badge badge-pill bg-danger" data-key="t-hot">New</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="layouts-horizontal.html" class="nav-link" target="_blank" data-key="t-horizontal">All Orders</a>
+                                <a href="{{ route('admin.order.all') }}" class="nav-link" target="_self" data-key="t-horizontal">All Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a href="layouts-detached.html" class="nav-link" target="_blank" data-key="t-detached">Pending Orders</a>
+                                <a href="{{ route('admin.order.pending') }}" class="nav-link" target="_self" data-key="t-detached">Pending Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a href="layouts-two-column.html" class="nav-link" target="_blank" data-key="t-two-column">Confirmed Orders</a>
+                                <a href="{{ route('admin.order.confirmed') }}" class="nav-link" target="_self" data-key="t-two-column">Confirmed Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a href="layouts-vertical-hovered.html" class="nav-link" target="_blank" data-key="t-hovered">Shipped Orders</a>
+                                <a href="{{ route('admin.order.shipped') }}" class="nav-link" target="_self" data-key="t-hovered">Shipped Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a href="layouts-vertical-hovered.html" class="nav-link" target="_blank" data-key="t-hovered">Delivered Orders</a>
+                                <a href="{{ route('admin.order.delivered') }}" class="nav-link" target="_self" data-key="t-hovered">Delivered Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a href="layouts-vertical-hovered.html" class="nav-link" target="_blank" data-key="t-hovered">Cancelled Orders</a>
+                                <a href="{{ route('admin.order.cancelled') }}" class="nav-link" target="_self" data-key="t-hovered">Cancelled Orders</a>
                             </li>
                         </ul>
                     </div>
