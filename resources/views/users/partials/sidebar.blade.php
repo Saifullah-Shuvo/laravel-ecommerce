@@ -71,26 +71,8 @@
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">My Orders</div>
             </a>
-
-            {{-- <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Without menu</div>
-                    </a>
-                </li>
-            </ul> --}}
         </li>
 
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Track Orders</div>
-            </a>
-        </li>
-
-        {{-- <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Pages</span>
-        </li> --}}
         <li class="menu-item {{ Request::is('wishlist/user/*') ? 'active' : '' }}">
             <a href="{{ route('user.wishlist.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -106,33 +88,21 @@
         </li>
 
         <li class="menu-item">
-            <a href=""
-                target="_self" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support Tickets</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="icons-boxicons.html" class="menu-link">
+            <a href="{{ route('profile.edit') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
-                <div data-i18n="Boxicons">Profile</div>
+                <div data-i18n="Boxicons">My Profile</div>
             </a>
         </li>
 
         <li class="menu-item">
-            <a href="javascript:void(0);"
-                target="_self" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Change Password</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Logout</div>
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a href="{{route('logout')}}" class="menu-link" onclick="event.preventDefault();
+                    this.closest('form').submit();">
+                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                    <div data-i18n="Authentications">Logout</div>
+                </a>
+            </form>
         </li>
 
     </ul>

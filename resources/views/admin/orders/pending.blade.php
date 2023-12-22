@@ -46,7 +46,7 @@
                                                     <td> {{ $data->first_name }} </td>
                                                     <td> <b>{{ $data->total }}</b> </td>
                                                     <td>{{ $data->created_at->format('Y-m-d h:i:s') }}</td>
-                                                    <td> 
+                                                    <td>
                                                         @if($data->status == 0)
                                                             <span class="badge rounded-pill bg-primary">Pending</span>
                                                         @elseif($data->status == 1)
@@ -57,7 +57,7 @@
                                                             <span class="badge rounded-pill bg-success">Delivered</span>
                                                         @elseif($data->status == 4)
                                                             <span class="badge rounded-pill bg-danger">Cancelled</span>
-                                                        @endif     
+                                                        @endif
                                                     </td>
                                                     <td data-column-id="action" class="gridjs-td">
                                                         <span>
@@ -68,15 +68,24 @@
                                                                         class="ri-more-fill"></i></button>
                                                                 <ul class="dropdown-menu dropdown-menu-end"
                                                                     style="">
+                                                                    <li><a class="dropdown-item text-secondary"
+                                                                        href="{{ route('order.confirm',['id'=>$data->id]) }}"><i
+                                                                            class="ri-donut-chart-line align-bottom me-2 text-muted"></i>
+                                                                        Confirm</a></li>
+                                                                    <li><a class="dropdown-item text-danger"
+                                                                            href="{{ route('order.cancel',['id'=>$data->id]) }}"><i
+                                                                                class="ri-copyright-line align-bottom me-2 text-muted"></i>
+                                                                            Cancel</a></li>
                                                                     <li><a class="dropdown-item"
-                                                                            href="{{ route('admin.order.details',['id'=>$data->id]) }}"><i
-                                                                                class="ri-feedback-line align-bottom me-2 text-muted"></i>
-                                                                            Details</a></li>
+                                                                        href="{{ route('admin.order.details',['id'=>$data->id]) }}"><i
+                                                                            class="ri-feedback-line align-bottom me-2 text-muted"></i>
+                                                                        Details</a></li>
+
                                                                 </ul>
                                                             </div>
                                                         </span>
                                                     </td>
-                                                    
+
                                                 </tr>
                                             @empty
                                                 <h3 class="text-center">No Orders data found! </h3>

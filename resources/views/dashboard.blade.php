@@ -8,17 +8,19 @@
     @php
         $user = auth()->user();
         $allOrders = App\Models\Frontend\Order::where('user_id', $user->id)->get();
-        $pendingOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 0)->get();
-        $canceledOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 4)->get();
-        $completedOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 3)->get();
         $orders = App\Models\Frontend\Order::where('user_id', $user->id)->latest()->take(5)->get();
+        $pendingOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 0)->get();
+        $confirmedOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 1)->get();
+        $shippedOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 2)->get();
+        $completedOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 3)->get();
+        $canceledOrders = App\Models\Frontend\Order::where('user_id', $user->id)->where('status', 4)->get();
     @endphp
     <!-- First row -->
     <div class="row">
         <div class="col-lg-12 col-md-12 order-1">
             <div class="row">
 
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
                     <div class="card bg-primary text-white mb-3">
                         <div class="card-body">
                             <span class="fw-semibold d-block mb-1">Total Order</span>
@@ -26,11 +28,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-danger text-white mb-3">
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
+                    <div class="card bg-primary text-white mb-3">
                         <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Canceled Order</span>
-                            <h3 class="card-title text-white mb-2">{{ count($canceledOrders) }}</h3>
+                            <span class="fw-semibold d-block mb-1">Pending Order</span>
+                            <h3 class="card-title text-white mb-2">{{ count($pendingOrders) }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
+                    <div class="card bg-secondary text-white mb-3">
+                        <div class="card-body">
+                            <span class="fw-semibold d-block mb-1">Confirmed Order</span>
+                            <h3 class="card-title text-white mb-2">{{ count($confirmedOrders) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -39,19 +49,27 @@
         </div>
         <div class="col-lg-12 col-md-12 order-1">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
+                    <div class="card bg-info text-white mb-3">
+                        <div class="card-body">
+                            <span class="fw-semibold d-block mb-1">Shipped Order</span>
+                            <h3 class="card-title text-white mb-2">{{ count($shippedOrders) }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
                     <div class="card bg-success text-white mb-3">
                         <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Completed Order</span>
+                            <span class="fw-semibold d-block mb-1">Delivered Order</span>
                             <h3 class="card-title text-white mb-2">{{ count($completedOrders) }}</h3>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card bg-info text-white mb-3">
+                <div class="col-lg-4 col-md-6 col-4 mb-4">
+                    <div class="card bg-danger text-white mb-3">
                         <div class="card-body">
-                            <span class="fw-semibold d-block mb-1">Pending Order</span>
-                            <h3 class="card-title text-white mb-2">{{ count($pendingOrders) }}</h3>
+                            <span class="fw-semibold d-block mb-1">Cancelled Order</span>
+                            <h3 class="card-title text-white mb-2">{{ count($canceledOrders) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -92,13 +110,13 @@
                             @if($data->status == 0)
                                 <span class="badge rounded-pill bg-primary">pending</span>
                             @elseif($data->status == 1)
-                                <span class="badge rounded-pill bg-success">confirmed</span>
+                                <span class="badge rounded-pill bg-secondary">confirmed</span>
                             @elseif($data->status == 2)
-                                <span class="badge rounded-pill bg-success">shipped</span>
+                                <span class="badge rounded-pill bg-info">shipped</span>
                             @elseif($data->status == 3)
                                 <span class="badge rounded-pill bg-success">delivered</span>
                             @elseif($data->status == 4)
-                                <span class="badge rounded-pill bg-success">cancelled</span>
+                                <span class="badge rounded-pill bg-danger">cancelled</span>
                             @endif
                         </td>
                         <td>
@@ -113,7 +131,7 @@
                             </div>
                         </td>
                     </tr>
-                    @empty 
+                    @empty
                     <div class="container">
                         <div class="row justify-content-center">
                             <h5>No Orders Data Found!</h5>

@@ -39,38 +39,6 @@
                             <li class="nav-item">
                                 <a href="{{ route('users.all') }}" class="nav-link" data-key="t-calendar"> All Customers </a>
                             </li>
-
-                            <li class="nav-item">
-                                <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
-                                    2FA Varified
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarEmail">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="apps-mailbox.html" class="nav-link" data-key="t-mailbox"> Email Verified </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#sidebaremailTemplates" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebaremailTemplates" data-key="t-email-templates">
-                                                KYC Verified
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebaremailTemplates">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-basic.html" class="nav-link" data-key="t-basic-action"> Phone Number Verified </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-ecommerce.html" class="nav-link" data-key="t-ecommerce-action"> So on. </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="apps-api-key.html" class="nav-link" data-key="t-api-key"> Active Customers</a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -150,25 +118,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link {{ Request::is('system/*') ? 'active' : '' }}" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
-                        <i class="mdi mdi-grid-large"></i> <span data-key="t-tables">System</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarTables">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('faq.all') }}" class="nav-link" data-key="t-basic-tables">FAQ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('testimonial.all') }}" class="nav-link" data-key="t-grid-js">Testimonial</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('details.all') }}" class="nav-link" data-key="t-datatables">Details</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('subscriber/*') ? 'active' : '' }} " href="{{ route('subscriber.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
                         <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Subscribers</span>
                     </a>
@@ -191,112 +140,40 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarAdvanceUI" role="button" aria-expanded="false" aria-controls="sidebarAdvanceUI">
-                        <i class="mdi mdi-layers-triple-outline"></i> <span data-key="t-advance-ui">System configuration</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarForms" role="button" aria-expanded="false" aria-controls="sidebarForms">
                         <i class="mdi mdi-form-select"></i> <span data-key="t-forms">Logo & Favicon</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
+                    <a class="nav-link menu-link {{ Request::is('system/*') ? 'active' : '' }}" href="#sidebarTables" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarTables">
                         <i class="mdi mdi-grid-large"></i> <span data-key="t-tables">System</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarTables">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="tables-basic.html" class="nav-link" data-key="t-basic-tables">Application</a>
+                                <a href="{{ route('faq.all') }}" class="nav-link" data-key="t-basic-tables">FAQ</a>
                             </li>
                             <li class="nav-item">
-                                <a href="tables-gridjs.html" class="nav-link" data-key="t-grid-js">Server</a>
+                                <a href="{{ route('testimonial.all') }}" class="nav-link" data-key="t-grid-js">Testimonial</a>
                             </li>
                             <li class="nav-item">
-                                <a href="tables-listjs.html" class="nav-link" data-key="t-list-js">Cache</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="tables-datatables.html" class="nav-link" data-key="t-datatables">Datatables</a>
+                                <a href="{{ route('details.all') }}" class="nav-link" data-key="t-datatables">Details</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarCharts" role="button" aria-expanded="false" aria-controls="sidebarCharts">
-                        <i class="mdi mdi-chart-donut"></i> <span data-key="t-charts">Extensions</span>
+                    {{-- <a class="dropdown-item" id="logout" href="{{route('admin.logout')}}" onclick="event.preventDefault(); --}}
+                        {{-- this.closest('form').submit();"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Log Out</span></a> --}}
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                    <a class="nav-link menu-link" id="logout" href="{{route('admin.logout')}}" onclick="event.preventDefault();
+                    this.closest('form').submit();" role="button" aria-expanded="false" aria-controls="sidebarIcons">
+                        <i class="mdi mdi-logout"></i> <span data-key="t-icons">Logout</span>
                     </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarIcons" role="button" aria-expanded="false" aria-controls="sidebarIcons">
-                        <i class="mdi mdi-android-studio"></i> <span data-key="t-icons">Language</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarMaps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMaps">
-                        <i class="mdi mdi-map-marker-outline"></i> <span data-key="t-maps">SEO Manager</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarMaps">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="maps-google.html" class="nav-link" data-key="t-google">
-                                    Google
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="maps-vector.html" class="nav-link" data-key="t-vector">
-                                    Vector
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="maps-leaflet.html" class="nav-link" data-key="t-leaflet">
-                                    Leaflet
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarMultilevel" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarMultilevel">
-                        <i class="mdi mdi-share-variant-outline"></i> <span data-key="t-multi-level">Notification Setting</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarMultilevel">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-level-1.1"> Level 1.1 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#sidebarAccount" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAccount" data-key="t-level-1.2"> Level 1.2
-                                </a>
-                                <div class="collapse menu-dropdown" id="sidebarAccount">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link" data-key="t-level-2.1"> Level 2.1 </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#sidebarCrm" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCrm" data-key="t-level-2.2"> Level 2.2
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebarCrm">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="#" class="nav-link" data-key="t-level-3.1"> Level 3.1 </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="#" class="nav-link" data-key="t-level-3.2"> Level 3.2 </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    </form>
                 </li>
 
             </ul>

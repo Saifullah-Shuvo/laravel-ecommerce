@@ -37,6 +37,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/orders/admin/shipped', [OrderController::class, 'shipped'])->name('admin.order.shipped');
     Route::get('/orders/admin/delivered', [OrderController::class, 'delivered'])->name('admin.order.delivered');
     Route::get('/orders/admin/cancelled', [OrderController::class, 'cancelled'])->name('admin.order.cancelled');
+
+    Route::get('/order/confirm/{id}',[OrderController::class, 'orderConfirm'])->name('order.confirm');
+    Route::get('/order/ship/{id}',[OrderController::class, 'orderShip'])->name('order.ship');
+    Route::get('/order/deliver/{id}',[OrderController::class, 'orderDeliver'])->name('order.deliver');
+    Route::get('/order/cancel/{id}',[OrderController::class, 'orderCancel'])->name('order.cancel');
 });
 
 Route::middleware('auth:admin')->group(function () {
@@ -78,7 +83,7 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
 
-    //slider crud
+    // ______slider crud
     Route::get('/slider/all', [SlierController::class, 'index'])->name('slider.all');
     Route::get('/slider/add', [SlierController::class, 'add'])->name('slider.add');
     Route::post('/slider/store', [SlierController::class, 'store'])->name('slider.store');
@@ -87,14 +92,14 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/slider/update/{id}', [SlierController::class, 'update'])->name('slider.update');
     Route::get('/slider/delete/{id}', [SlierController::class, 'destroy'])->name('slider.delete');
 
-    //Slider status
+    // _____Slider status
     Route::get('/slider/status/enable/{id}',[SlierController::class, 'status_enable'])->name('slider.status.enable');
     Route::get('/slider/status/disable/{id}',[SlierController::class, 'status_disable'])->name('slider.status.disable');
 });
 
 Route::middleware('auth:admin')->group(function () {
 
-    //blog crud
+    // _____blog crud
     Route::get('/blog/all', [BlogController::class, 'index'])->name('blog.all');
     Route::get('/blog/add', [BlogController::class, 'add'])->name('blog.add');
     Route::post('/blog/store', [BlogController::class, 'store'])->name('blog.store');
@@ -103,7 +108,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
 
-    //blog status
+    // _____blog status
     Route::get('/blog/status/enable/{id}',[BlogController::class, 'status_enable'])->name('blog.status.enable');
     Route::get('/blog/status/disable/{id}',[BlogController::class, 'status_disable'])->name('blog.status.disable');
 });
@@ -117,7 +122,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('system/faq/update/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::get('system/faq/delete/{id}', [FaqController::class, 'destroy'])->name('faq.delete');
 
-    //faq status
+    // _____faq status
     Route::get('/system/faq/enable/{id}',[FaqController::class, 'status_enable'])->name('faq.status.enable');
     Route::get('/system/faq/disable/{id}',[FaqController::class, 'status_disable'])->name('faq.status.disable');
 });
@@ -131,7 +136,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('system/testimonial/update/{id}', [testimonialController::class, 'update'])->name('testimonial.update');
     Route::get('system/testimonial/delete/{id}', [testimonialController::class, 'destroy'])->name('testimonial.delete');
 
-    // testimonial status
+    // ____testimonial status
     Route::get('/system/testimonial/enable/{id}',[testimonialController::class, 'status_enable'])->name('testimonial.status.enable');
     Route::get('/system/testimonial/disable/{id}',[testimonialController::class, 'status_disable'])->name('testimonial.status.disable');
 
@@ -149,7 +154,7 @@ Route::middleware('auth:admin')->group(function(){
     Route::post('coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
     Route::get('coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
 
-    // coupon status
+    // _____coupon status
     Route::get('coupon/enable/{id}',[CouponController::class, 'status_enable'])->name('coupon.status.enable');
     Route::get('coupon/disable/{id}',[CouponController::class, 'status_disable'])->name('coupon.status.disable');
 });

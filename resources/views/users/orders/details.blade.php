@@ -5,14 +5,10 @@
 @endsection
 
 @section('panel')
-    {{-- @dd($orderDetails); --}}
-    <div class="d-flex justify-content-end">
-        <a href="{{ route('order.all') }}" class="btn btn-primary mb-2">Back</a>
-    </div>
 
     <div class="card">
 
-        <h5 class="card-header text-center">Order Details</h5> 
+        <h5 class="card-header text-center">Order Details</h5>
         <div class="row">
 
             <div class="col-md-6">
@@ -23,7 +19,7 @@
                         <li class="list-group-item">Payment Type: <b>{{ $orderDetails->payment_type }}</b></li>
                         <li class="list-group-item">Order Date: <b>{{ $orderDetails->created_at }}</b></li>
                         <li class="list-group-item">
-                            Order Status: 
+                            Order Status:
                             @if($orderDetails->status == 0)
                                 <span class="badge rounded-pill bg-primary">Pending</span>
                             @elseif($orderDetails->status == 1)
@@ -36,8 +32,6 @@
                                 <span class="badge rounded-pill bg-danger">Cancelled</span>
                             @endif
                         </li>
-                        {{-- <li class="list-group-item">Order Status: <b>{{ $orderDetails->status == 0 ? <span class="badge rounded-pill bg-primary">pending</span> }}</b></li> --}}
-                    
                     </ul>
                 </div>
             </div>
@@ -53,7 +47,7 @@
                         <li class="list-group-item">City & Zip: <b>{{ $orderDetails->city }} ,
                                 {{ $orderDetails->zip_code }}</b></li>
                         <li class="list-group-item">
-                            Payment Status: 
+                            Payment Status:
                             @if($orderDetails->payment_type == 'cash_on_delivery')
                                 <span class="badge rounded-pill bg-primary">Pending</span>
                             @else
