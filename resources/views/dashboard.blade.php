@@ -21,7 +21,7 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 col-4 mb-4">
-                    <div class="card bg-primary text-white mb-3">
+                    <div class="card bg-dark text-white mb-3">
                         <div class="card-body">
                             <span class="fw-semibold d-block mb-1">Total Order</span>
                             <h3 class="card-title text-white mb-2">{{ count($allOrders) }}</h3>

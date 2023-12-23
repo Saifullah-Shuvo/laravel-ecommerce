@@ -72,7 +72,7 @@ Shop Page
             <div class="modal-content">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <h5 class="text-danger">Product Details</h5 class="text-red">
+                      <h5 class="text-danger">Product Details</h5 class="text-red">
                     </div>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -85,26 +85,15 @@ Shop Page
                     <div class="product-single-content w-50">
                         <h3 id="productName"></h3>
                         <div class="rating-wrap fix">
-                            <span class="pull-left">$</span>
-                            <span id="price" class="pull-left">$</span>
-                            <ul class="rating pull-right">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
-                            </ul>
+                            <h6>
+                                <span class="pull-left">Price :   </span>
+                                <span id="price" style="color: red" class="pull-left">  </span>
+                            </h6>
                         </div>
                         <p id="description"></p>
-                        <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
-                        </ul>
+
                         <ul class="cetagory">
-                            <li>Categories:</li>
+                            <li>Category:</li>
                             <li><b><a id="categoryName" href="#"></a></b></li>
 
                         </ul>

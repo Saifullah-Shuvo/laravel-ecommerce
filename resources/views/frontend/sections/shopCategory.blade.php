@@ -69,15 +69,8 @@ Shop Page
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
-                                    <p class="pull-left">${{ $data->selling_price }}
-                                    </p>
-                                    <ul class="pull-right d-flex">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
+                                    <p class="pull-left"><span style="color: red">#{{ $data->code }}</span> </p>
+                                    <p class="pull-right"> Price: <b>{{ $data->selling_price }}</b> </p>
                                 </div>
                             </div>
                         </li>
@@ -116,26 +109,15 @@ Shop Page
                     <div class="product-single-content w-50">
                         <h3 id="productName"></h3>
                         <div class="rating-wrap fix">
-                            <span class="pull-left">$</span>
-                            <span id="price" class="pull-left">$</span>
-                            <ul class="rating pull-right">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
-                            </ul>
+                            <h6>
+                                <span class="pull-left">Price :   </span>
+                                <span id="price" style="color: red" class="pull-left">  </span>
+                            </h6>
                         </div>
                         <p id="description"></p>
-                        <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
-                        </ul>
+
                         <ul class="cetagory">
-                            <li>Categories:</li>
+                            <li>Category:</li>
                             <li><b><a id="categoryName" href="#"></a></b></li>
 
                         </ul>

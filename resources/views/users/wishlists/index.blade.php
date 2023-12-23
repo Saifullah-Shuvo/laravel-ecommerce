@@ -6,7 +6,7 @@
 
 @section('panel')
     <div class="d-flex justify-content-end">
-        <a href="{{ route('cart.index') }}" class="btn btn-primary mb-2">Go to Cart Page</a>
+        <a href="{{ route('wishlist.index') }}" class="btn btn-primary mb-2">Go to Wishlist Page</a>
     </div>
     <div class="card">
         <h4 class="card-header text-center">Wishlists</h4>

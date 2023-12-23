@@ -101,13 +101,13 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('coupon/*') ? 'active' : '' }} " href="{{ route('coupon.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
-                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Coupons</span>
+                        <i class="ri-anticlockwise-line"></i> <span data-key="t-pages">Coupons</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('slider/*') ? 'active' : '' }} " href="{{ route('slider.all') }}" role="button" aria-expanded="false" aria-controls="sidebarAuth">
-                        <i class="mdi mdi-account-circle-outline"></i> <span data-key="t-authentication">Manage Sliders</span>
+                        <i class="ri-message-line"></i> <span data-key="t-authentication">Manage Sliders</span>
                     </a>
                 </li>
 
@@ -119,7 +119,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{ Request::is('subscriber/*') ? 'active' : '' }} " href="{{ route('subscriber.all') }}" role="button" aria-expanded="false" aria-controls="sidebarPages">
-                        <i class="mdi mdi-sticker-text-outline"></i> <span data-key="t-pages">Subscribers</span>
+                        <i class="mdi mdi-account-circle-outline"></i> <span data-key="t-pages">Subscribers</span>
                     </a>
                 </li>
 

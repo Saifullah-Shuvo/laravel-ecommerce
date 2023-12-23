@@ -15,16 +15,8 @@
         </div>
         <div class="product-content">
             <h3><a href="{{ route('home.product.details',['id'=>$data->id]) }}">{{ $data->name }}</a></h3>
-            <p class="pull-left">${{ $data->selling_price }}
-
-            </p>
-            <ul class="pull-right d-flex">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-half-o"></i></li>
-            </ul>
+            <p class="pull-left"><span style="color: red">#{{ $data->code }}</span> </p>
+            <p class="pull-right"> Price: <b>{{ $data->selling_price }}</b> </p>
         </div>
     </div>
 </li>
