@@ -33,7 +33,8 @@
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Created At</th>
-                                                
+                                                <th scope="col">Remove</th>
+
 
                                             </tr>
                                         </thead>
@@ -45,7 +46,12 @@
                                                     <td> {{ $data->name }} </td>
                                                     <td> {{ $data->email }} </td>
                                                     <td>{{ $data->created_at->format('Y-m-d h:i:s') }}</td>
-                                                    
+                                                    <td>
+                                                        <a class="dropdown-item text-danger" id="delete"
+                                                            href="{{ route('users.delete',['id'=>$data->id]) }}"
+                                                            onclick=""><i class="ri-close-circle-fill"></i> Remove</a>
+                                                </td>
+
                                                 </tr>
                                             @empty
                                                 <h3 class="text-center">No Users data found! </h3>

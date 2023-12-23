@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\TestimonialController;
 
 
-        // Admins Routes
+    //______Admins Routes
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
@@ -26,6 +26,7 @@ require __DIR__.'/adminauth.php';
 Route::middleware('auth:admin')->group(function(){
     //___all Users
     Route::get('/user/all',[UserController::class, 'allUsers'])->name('users.all');
+    Route::get('/user/delete/{id}',[UserController::class, 'deleteUsers'])->name('users.delete');
 });
 
 //_____orders routes

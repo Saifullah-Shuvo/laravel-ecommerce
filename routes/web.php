@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MessageController;
 use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\Frontend\ReviewController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact')
 Route::post('/contact/message', [MessageController::class, 'message'])->name('home.contact.message');
 
 Route::post('/newsletter', [SubscriberController::class, 'store'])->name('home.newsletter');
+
+Route::get('/search', [SearchController::class, 'globalSearch'])->name('search.global');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/cart/all', [CartController::class, 'index'])->name('cart.index');

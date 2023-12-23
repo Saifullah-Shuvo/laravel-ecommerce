@@ -13,4 +13,11 @@ class UserController extends Controller
         $users = User::latest()->paginate(15);
         return view('admin.users.allUsers',compact('users','usercount'));
     }
+
+    public function deleteUsers($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+        $notification = array('message' => "User Deleted!", 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
 }

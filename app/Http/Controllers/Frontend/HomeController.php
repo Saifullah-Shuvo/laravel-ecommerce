@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index(){
+
         $slider = Slider::where('status','=',1)->latest()->get();
         $featuredProduct = Product::where('status','=',1)->where('featured','=',1)->latest()->get();
         $popularProduct = Product::where('status','=',1)->where('popular_product','=',1)->latest()->take(4)->get();

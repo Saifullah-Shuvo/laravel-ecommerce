@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 // User Routes
 
-Route::get('user/dashboard', function () {
+Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
